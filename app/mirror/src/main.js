@@ -6,13 +6,15 @@ import router from './router'
 import iView from 'iview';
 import 'iview/dist/styles/iview.css';
 import axios from 'axios'
-import * as commenMotheds from "./assets/commen";
+import  commenMotheds from "./assets/commen";
+import {store} from './store/store.js'
+import vuescroll from 'vuescroll';
 // 配置默认根路径
 axios.defaults.baseURL = ""
 
 // 配置Vue原型 (在任何组件中都可以正常使用axios)
 Vue.prototype.$http = axios
-
+axios.defaults.baseURL='http://localhost:8080/'
 Vue.config.productionTip = false
 
 // 全局守卫
@@ -29,10 +31,17 @@ Vue.config.productionTip = false
 //   }
 // })
 Vue.use(iView);
+Vue.use(vuescroll); // install the vuescroll first
+Vue.prototype.$vuescrollConfig = {
+  bar: {
+    background: '#000'
+  }
+};
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
   router,
+  store,
   components: { App },
   template: '<App/>'
 })

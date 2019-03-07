@@ -90,7 +90,8 @@ module.exports = {
                 data: userInfo
             });
             ctx.cookies.set('userInfo', JSON.stringify({
-                _id: userInfo._id
+                _id: userInfo._id,
+                mobile:userInfo.mobile
             }), {
                     maxAge: 2 * 60 * 60 * 1000,   // cookie有效时长
                     httpOnly: false,  // 是否只用于http请求中获取

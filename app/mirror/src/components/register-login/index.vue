@@ -95,7 +95,7 @@
 </template>
 
 <script>
-import * as commenMotheds from "../../assets/commen";
+import  commenMotheds from "../../assets/commen";
 export default {
   name: "RegiterLogin",
   data() {
@@ -111,6 +111,7 @@ export default {
       }
     };
   },
+ 
   methods: {
     loginSubmit() {
       const mobileReg = /^[1][3,4,5,7,8][0-9]{9}$/;
@@ -129,6 +130,8 @@ export default {
             let data = commenMotheds.parserDataToJson(res.data);
             if (data.code === 200) {
               this.$Message.success("登录成功");
+               this.$store.dispatch("setUser",this.Login.mobile)
+              this.$router.push('/overview/kanban');
             } else {
               this.$Message.error(data.message);
             }

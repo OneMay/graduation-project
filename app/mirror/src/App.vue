@@ -5,12 +5,29 @@
 </template>
 
 <script>
+import commenMotheds from './assets/commen'
 export default {
-  name: 'App'
+  name: 'App',
+  data() {
+    return {
+      username:null
+    }
+
+  },
+   created: function () {
+     let userInfo="";
+     if(userInfo=commenMotheds.getCookie('userInfo')){
+       this.username = commenMotheds.parserDataToJson(userInfo).mobile;
+       this.$store.dispatch("setUser",this.username)
+     }else{
+       this.username=null;
+       this.$store.dispatch("setUser",this.username)
+     }
+  }
 }
 </script>
 
-<style>
+<style lang="less">
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -23,5 +40,23 @@ export default {
 html,body{
   width:100%;
   height:100%;
+}
+.clearfix::after{
+    content: " ";
+    display: table;
+    height: 0;
+    clear: both;
+}
+.clearfix{
+zoom: 1;
+}
+.width(@px){
+  width: calc(100% - @px);
+}
+
+.content-width-right{
+   .width(240px);
+   float:right;
+   margin-top: 60px;
 }
 </style>
