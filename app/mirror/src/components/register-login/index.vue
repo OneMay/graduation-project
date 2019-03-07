@@ -24,6 +24,7 @@
                     v-model="Login.mobile"
                     placeholder="输入11位手机号"
                     :autofocus="true"
+                     @on-keyup.enter="loginSubmit"
                   >
                     <Icon type="ios-call" slot="prepend"></Icon>
                   </Input>
@@ -34,6 +35,7 @@
                     v-model="Login.password"
                     placeholder="输入6位以上的字母+数字密码"
                     :autofocus="false"
+                     @on-keyup.enter="loginSubmit"
                   >
                     <Icon type="md-lock" slot="prepend"></Icon>
                   </Input>
@@ -61,6 +63,7 @@
                     v-model="Register.mobile"
                     placeholder="输入11位手机号"
                     style="text-align:center"
+                    @on-keyup.enter="registerSubmit"
                   >
                     <Icon type="ios-call" slot="prepend"></Icon>
                   </Input>
@@ -70,6 +73,7 @@
                     type="password"
                     v-model="Register.password"
                     placeholder="输入6位以上的字母+数字密码"
+                     @on-keyup.enter="registerSubmit"
                   >
                     <Icon type="md-lock" slot="prepend"></Icon>
                   </Input>
@@ -95,7 +99,7 @@
 </template>
 
 <script>
-import  commenMotheds from "../../assets/commen";
+import  Fetcher from "../../assets/fetcher";
 export default {
   name: "RegiterLogin",
   data() {
@@ -113,7 +117,7 @@ export default {
   },
  
   methods: {
-    loginSubmit() {
+    async loginSubmit() {
       const mobileReg = /^[1][3,4,5,7,8][0-9]{9}$/;
       const passwordReg = /(?![0-9]+$)(?![a-zA-Z]+$)[\da-zA-Z]{6,}/;
       if (
@@ -124,26 +128,19 @@ export default {
           mobile: this.Login.mobile,
           password: this.Login.password
         };
-        this.$http
-          .post("api/user/login", params)
-          .then(res => {
-            let data = commenMotheds.parserDataToJson(res.data);
-            if (data.code === 200) {
+        let data = await Fetcher.login(this,params);
+        if (data.code === 200) {
               this.$Message.success("登录成功");
                this.$store.dispatch("setUser",this.Login.mobile)
               this.$router.push('/overview/kanban');
             } else {
               this.$Message.error(data.message);
             }
-          })
-          .catch(err => {
-            console.log(err);
-          });
-      } else {
+       } else {
         this.$Message.error("手机号或者密码输入有问题");
-      }
+       }
     },
-    registerSubmit() {
+    async registerSubmit() {
       const mobileReg = /^[1][3,4,5,7,8][0-9]{9}$/;
       const passwordReg = /(?![0-9]+$)(?![a-zA-Z]+$)[\da-zA-Z]{6,}/;
       if (
@@ -154,19 +151,12 @@ export default {
           mobile: this.Register.mobile,
           password: this.Register.password
         };
-        this.$http
-          .post("api/user/add", params)
-          .then(res => {
-            let data = commenMotheds.parserDataToJson(res.data);
-            if (data.code === 200) {
+        let data = await Fetcher.register(this,params);
+        if (data.code === 200) {
               this.$Message.success("注册成功");
             } else {
               this.$Message.error(data.message);
             }
-          })
-          .catch(err => {
-            console.log(err);
-          });
       } else {
         this.$Message.error("手机号或者密码输入有问题");
       }

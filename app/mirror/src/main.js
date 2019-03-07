@@ -17,19 +17,7 @@ Vue.prototype.$http = axios
 axios.defaults.baseURL='http://localhost:8080/'
 Vue.config.productionTip = false
 
-// 全局守卫
-// router.beforeEach((to, from, next) => {
-//   if (to.path === '/registerAndLogin') {
-//     next();
-//   } else {
-//     if (!commenMotheds.getCookie('userInfo')) {
-//       alert("还没有登录,请先登录!");
-//       next('/registerAndLogin');
-//     }else{
-//       next()
-//     }
-//   }
-// })
+
 Vue.use(iView);
 Vue.use(vuescroll); // install the vuescroll first
 Vue.prototype.$vuescrollConfig = {
@@ -37,6 +25,15 @@ Vue.prototype.$vuescrollConfig = {
     background: '#000'
   }
 };
+// 全局守卫
+router.beforeEach((to, from, next) => {
+  iView.LoadingBar.start();
+  next();
+});
+
+router.afterEach(route => {
+  iView.LoadingBar.finish();
+});
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

@@ -57,7 +57,7 @@
   </div>
 </template>
 <script>
-import commenMotheds from './../../../assets/commen'
+import Fetcher from './../../../assets/fetcher'
 export default {
   data() {
     return {
@@ -81,22 +81,15 @@ export default {
     };
   },
   methods: {
-      logout(){
-          this.$http
-          .post("api/user/logout")
-          .then(res => {
-            let data = commenMotheds.parserDataToJson(res.data);
-            if (data.code === 200) {
+      async logout(){
+          let data = await Fetcher.logout(this);
+          if (data.code === 200) {
               this.$Message.success("退出成功");
               this.$store.dispatch("setUser",null);
               this.$router.push('/registerAndLogin');
             } else {
               this.$Message.error(data.message);
             }
-          })
-          .catch(err => {
-            console.log(err);
-          });
       }
   },
   created() {
