@@ -97,7 +97,6 @@ module.exports = {
                     httpOnly: false,  // 是否只用于http请求中获取
                     overwrite: true
                 });
-
             ctx.body = responseData;
             resolve(next())
             return;
@@ -124,6 +123,10 @@ module.exports = {
                 data:null
             })
             ctx.cookies.set('userInfo', null, {
+                'httpOnly': false,
+                'path': '/'
+            });
+            ctx.cookies.set('teamEn', null, {
                 'httpOnly': false,
                 'path': '/'
             });

@@ -8,13 +8,21 @@
       class="sidebar"
     >
       <img id="mirror" src="../../../../static/images/icon.png" title="魔镜" />
-      <vue-scroll :ops="ops">
+      <Submenu name="team">
+        <template slot="title">
+          <Icon type="ios-hammer" />
+          团队管理
+        </template>
+        <MenuItem name="iteam" to="/team/iteam">我的团队</MenuItem>
+        <MenuItem name="creatteam" to="/team/creatteam">创建团队</MenuItem>
+      </Submenu>
+      <vue-scroll :ops="ops" v-if="this.$store.getters.getTeam">
         <Submenu name="overview">
           <template slot="title">
             <Icon type="ios-eye-outline" />
             我的概览
           </template>
-          <MenuItem name="kanban" to="/overview/kanban">数据看板</MenuItem>
+          <MenuItem name="kanban" to="/overview/kanban">数据概况</MenuItem>
         </Submenu>
         <Submenu name="behavior">
           <template slot="title">
@@ -38,6 +46,15 @@
     <Header class="layout-header">
       <Menu mode="horizontal" theme="light" active-name="1">
         <div class="layout-logo">魔镜-精细化运营工具</div>
+        <div class="layout-logo layout-team">
+          当前团队：{{ this.$store.getters.getTeam }}
+          <!-- <router-link :to="'/team/iteam'" >
+              <span class="ivu-team">切换团队</span>
+            </router-link> -->
+          <a href="/team/iteam">
+            <span class="ivu-team">切换团队</span>
+          </a>
+        </div>
         <div class="layout-nav">
           <Dropdown
             trigger="click"
@@ -48,16 +65,19 @@
               <span id="userName">{{ mobile }}</span>
             </a>
             <DropdownMenu slot="list" class="DropdownMenu">
-              <DropdownItem ><span @click="logout">退出</span></DropdownItem>
+              <DropdownItem><span @click="logout">退出</span></DropdownItem>
             </DropdownMenu>
           </Dropdown>
         </div>
       </Menu>
     </Header>
+    <div class="meta-title content-width-right">
+      {{this.$route.meta.title}}
+    </div>
   </div>
 </template>
 <script>
-import Fetcher from './../../../assets/fetcher'
+import Fetcher from "./../../../assets/fetcher";
 export default {
   data() {
     return {
@@ -73,27 +93,28 @@ export default {
           background: "#80869280"
         }
       },
-      mobile: "15928221807",
+      mobile: "",
       menu: {
-        activeName: "kanban",
+        activeName: "",
         activeopenNames: []
       }
     };
   },
   methods: {
-      async logout(){
-          let data = await Fetcher.logout(this);
-          if (data.code === 200) {
-              this.$Message.success("退出成功");
-              this.$store.dispatch("setUser",null);
-              this.$router.push('/registerAndLogin');
-            } else {
-              this.$Message.error(data.message);
-            }
+    async logout() {
+      let data = await Fetcher.logout(this);
+      if (data.code === 200) {
+        this.$Message.success("退出成功");
+        this.$store.dispatch("setUser", null);
+        this.$store.dispatch("setTeam", "");
+        this.$router.push("/registerAndLogin");
+      } else {
+        this.$Message.error(data.message);
       }
+    }
   },
   created() {
-      this.mobile=this.$store.getters.getUser;
+    this.mobile = this.$store.getters.getUser;
   },
   mounted() {
     this.menu = {
@@ -111,8 +132,27 @@ export default {
 #mirror {
   width: 20%;
 }
-.DropdownMenu{
-    width:130px;
+.meta-title {
+  font-size: 24px;
+  color: #000;
+  text-align: left;
+  padding: 10px;
+  margin-top: 60px;
+}
+.ivu-team {
+  height: 30px;
+  display: inline-block;
+  background: #3ad0d7;
+  line-height: 30px;
+  border-radius: 5px;
+  color: #fff;
+}
+.layout-team {
+  position: absolute;
+  right: 220px;
+}
+.DropdownMenu {
+  width: 130px;
 }
 .sidebar {
   z-index: 1020;
@@ -136,7 +176,7 @@ export default {
   right: 0;
   padding: 0;
   height: auto;
-  z-index:999;
+  z-index: 999;
   background: #fff;
   box-shadow: 0 1px 1px 0 rgba(166, 166, 166, 0.2);
   transition: margin-left 0.2s ease;

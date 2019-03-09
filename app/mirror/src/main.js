@@ -9,9 +9,8 @@ import axios from 'axios'
 import  commenMotheds from "./assets/commen";
 import {store} from './store/store.js'
 import vuescroll from 'vuescroll';
-// 配置默认根路径
-axios.defaults.baseURL = ""
-
+import ECharts from 'vue-echarts'
+import 'echarts'
 // 配置Vue原型 (在任何组件中都可以正常使用axios)
 Vue.prototype.$http = axios
 axios.defaults.baseURL='http://localhost:8080/'
@@ -28,12 +27,16 @@ Vue.prototype.$vuescrollConfig = {
 // 全局守卫
 router.beforeEach((to, from, next) => {
   iView.LoadingBar.start();
+  if (to.meta.title) {
+    document.title = to.meta.title
+  }
   next();
 });
 
 router.afterEach(route => {
   iView.LoadingBar.finish();
 });
+Vue.component('v-chart', ECharts)
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

@@ -15,13 +15,19 @@ export default {
 
   },
    created: function () {
-     let userInfo="";
+     let userInfo="",teamEn="";
      if(userInfo=commenMotheds.getCookie('userInfo')){
        this.username = commenMotheds.parserDataToJson(userInfo).mobile;
        this.$store.dispatch("setUser",this.username)
      }else{
        this.username=null;
        this.$store.dispatch("setUser",this.username)
+     }
+     if(teamEn=commenMotheds.getCookie('teamEn')){
+       this.$store.dispatch("setTeam",teamEn)
+     }else{
+       teamEn="";
+       this.$store.dispatch("setTeam",teamEn)
      }
   }
 }
@@ -57,6 +63,10 @@ zoom: 1;
 .content-width-right{
    .width(240px);
    float:right;
-   margin-top: 60px;
+   margin-top: 0px;
+}
+.content-flex{
+  display: flex;
+    flex-wrap: wrap;
 }
 </style>

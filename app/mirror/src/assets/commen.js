@@ -22,6 +22,30 @@ export default {
       }
     }
     return "";
+  },
+  setCookie(name, value) {
+    const Days = 30;
+    let exp = new Date();
+    exp.setTime(exp.getTime() + Days * 24 * 60 * 60 * 1000);
+    document.cookie = name + "=" + escape(value) + ";expires=" + exp.toGMTString() + ";path=/";
+  },
+  //强制保留几位位小数
+  toDecimal(num, pos) {
+    let f = parseFloat(num);
+    if (isNaN(f)) {
+      return false;
+    }
+    f = Math.round(num * 10 * pos) / (10 * pos);
+    let s = f.toString();
+    let rs = s.indexOf('.');
+    if (rs < 0) {
+      rs = s.length;
+      s += '.';
+    }
+    while (s.length <= rs + 2) {
+      s += '0';
+    }
+    return s;
   }
 
 }

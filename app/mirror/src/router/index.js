@@ -5,6 +5,8 @@ import RegisterLogin from '@/components/register-login'
 import NotFound from '@/components/notFound'
 import ContenIndex from '@/components/layout'
 import Kanban from '@/components/layout/kanban'
+import Team from '@/components/layout/team'
+import TeamAdd from '@/components/layout/team/add'
 Vue.use(Router)
 function beforeEnter (to, from, next){
   if(commenMotheds.getCookie('userInfo')){
@@ -28,6 +30,9 @@ export default new Router({
       name: 'RegisterLogin',
       component: RegisterLogin,
       beforeEnter:beforeEnters,
+      meta: {
+        title: '登录与注册'
+      }
     },
     {
       path:"/",
@@ -35,8 +40,18 @@ export default new Router({
       component:ContenIndex,
         beforeEnter:beforeEnter,
       children:[
-        {path:'/overview/kanban',component:Kanban,beforeEnter:beforeEnter,},
-        {path:'/behavior/pageOverView',component:Kanban,beforeEnter:beforeEnter,}
+        {path:'/overview/kanban',component:Kanban,beforeEnter:beforeEnter,meta: {
+          title: '数据概况'
+        }},
+        {path:'/behavior/pageOverView',component:Kanban,beforeEnter:beforeEnter,meta: {
+          title: '页面分析'
+        }},
+        {path:'/team/iteam',component:Team,beforeEnter:beforeEnter,meta: {
+          title: '我的团队'
+        }},
+        {path:'/team/creatteam',component:TeamAdd,beforeEnter:beforeEnter,meta: {
+          title: '创建团队'
+        }}
       ] 
     },
     {

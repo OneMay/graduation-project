@@ -1,0 +1,96 @@
+<template>
+  <div
+    class="content-width-right content-flex"
+    :class="{ 'content-flex-center': teamList.length <= 0 }"
+  >
+    <div v-if="teamList.length > 0" class="content-flex">
+      <Card class="ivu-my-card" v-for="item in teamList" :key="item._id">
+        <div style="text-align:center" @click="chooseTeam(item.teamEn)">
+          <Icon type="md-thunderstorm" style="font-size:50px;" />
+          <h3>{{ item.teamZn }}</h3>
+          <h4 style="font-size: 12px;color: #e0dbdb;">
+            {{ item.teamEn }}
+          </h4>
+        </div>
+      </Card>
+    </div>
+    <Card class="ivu-team-card" v-else>
+      <div style="text-align:center">
+        <Icon type="md-thunderstorm" style="font-size:50px;" />
+        <h3>还没有团员哟o(╥﹏╥)o</h3>
+        <a href="/team/creatteam">
+          <span class="ivu-team-add"
+            ><Icon type="md-add" style="font-size:24px" />快去创建一个吧</span
+          >
+        </a>
+      </div>
+    </Card>
+  </div>
+</template>
+<script>
+import commenMotheds from "./../../../assets/commen";
+export default {
+  name: "Team",
+  data() {
+    return {
+      teamList: [
+        {
+          teamZn: "魔镜",
+          teamEn: "mirror",
+          _id:'25'
+        }
+      ]
+    };
+  },
+  methods: {
+    chooseTeam(teamName) {
+      commenMotheds.setCookie("teamEn", teamName);
+      this.$store.dispatch("setTeam", teamName);
+      location.href = "http://localhost:8080/overview/kanban";
+    }
+  }
+};
+</script>
+<style lang="less">
+.ivu-my-card {
+  width: 332px;
+  height: 280px;
+  background: #59e4de;
+  border-radius: 20px;
+  display: flex;
+  color: #fff;
+  cursor: pointer;
+  flex-direction: column;
+  justify-content: center;
+  .ivu-card-body:hover {
+    color: #8d9613;
+  }
+}
+.ivu-team-card {
+  width: 332px;
+  height: 280px;
+  border-radius: 20px;
+  display: flex;
+  color: #000;
+  cursor: pointer;
+  flex-direction: column;
+  justify-content: center;
+}
+.ivu-team-add {
+  height: 50px;
+  display: inline-block;
+  background: #3ad0d7;
+  line-height: 50px;
+  border-radius: 5px;
+  color: #fff;
+  padding: 0 5px;
+  &:hover {
+    color: #e4ecec;
+  }
+}
+.content-flex-center {
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+}
+</style>
