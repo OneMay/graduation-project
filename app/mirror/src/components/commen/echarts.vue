@@ -1,5 +1,5 @@
 <template>
-<v-chart class="echarts" :options="ops"/>
+<v-chart class="echarts" :options="ops" :autoresize="true" :ref="'nn'"showLoading/>
 </template>
 
 <style>
@@ -17,6 +17,9 @@
 
 export default {
 name:'VueEchartsComponent',
-  props:['ops']
+  props:['ops'],
+  // mounted() {
+  //   console.log(this.$refs.nn.showLoading())
+  // },
 }
 </script>

@@ -31,7 +31,7 @@
 export default {
   data() {
     return {
-      text: "loading",
+      text: "等一等(づ￣3￣)づ╭❤～",
       duration: "2s"
     };
   }
@@ -50,7 +50,7 @@ export default {
   top: 0;
   left: 0;
   opacity: 0.9;
-  z-index: 9999;
+  z-index: 10;
   box-shadow: 0 1px 6px #2dca93;
   border-color: #2dca93;
   border-radius: 5px;
@@ -60,7 +60,7 @@ export default {
   text-align: center;
 
   height: 50px;
-  width: 100px;
+  width: 150px;
   -webkit-box-pack: justify;
   -ms-flex-pack: justify;
   justify-content: space-between;

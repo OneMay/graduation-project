@@ -7,6 +7,8 @@ import ContenIndex from '@/components/layout'
 import Kanban from '@/components/layout/kanban'
 import Team from '@/components/layout/team'
 import TeamAdd from '@/components/layout/team/add'
+import EventDeatil from '@/components/layout/eventView/detail'
+import EventOverView from '@/components/layout/eventView'
 Vue.use(Router)
 function beforeEnter (to, from, next){
   if(commenMotheds.getCookie('userInfo')){
@@ -51,6 +53,12 @@ export default new Router({
         }},
         {path:'/team/creatteam',component:TeamAdd,beforeEnter:beforeEnter,meta: {
           title: '创建团队'
+        }},
+        {path:'/behavior/eventOverView/detail',component:EventDeatil,beforeEnter:beforeEnter,meta: {
+          title: '事件分析'
+        }},
+        {path:'/behavior/eventOverView',component:EventOverView,beforeEnter:beforeEnter,meta: {
+          title: '事件分析'
         }}
       ] 
     },

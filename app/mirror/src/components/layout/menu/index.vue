@@ -32,7 +32,7 @@
           <MenuItem name="pageOverView" to="/behavior/pageOverView"
             >页面分析</MenuItem
           >
-          <MenuItem name="eventOverView">事件分析</MenuItem>
+          <MenuItem name="eventOverView"to="/behavior/eventOverView">事件分析</MenuItem>
         </Submenu>
         <Submenu name="user">
           <template slot="title">
