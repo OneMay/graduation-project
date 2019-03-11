@@ -1,5 +1,6 @@
 const Router = require('koa-router');
 const User = require('../controllers/user');
+const SDK = require('../controllers/sdk');
 module.exports = function () {
     let router = new Router({
         prefix: '/api'
@@ -38,6 +39,39 @@ module.exports = function () {
     //     }
 
     // })
+    // router.post('*',async(ctx,next)=>{
+    //     const ip =   ctx.req.headers['x-forwarded-for'] ||
+    //        ctx.req.connection.remoteAddress ||
+    //        ctx.req.socket.remoteAddress ||
+    //        ctx.req.connection.socket.remoteAddress;
+    //        console.log( ctx.req.headers['x-forwarded-for']);
+    //        next()
+         
+    //    })
+    // var getIpInfo = function(ip, cb) {
+    //     var sina_server = 'http://api.map.baidu.com/location/ip?ip='+ip+'&ak=ia6HfFL660Bvh43exmH9LrI6&coor=bd09ll';
+    //     var url = sina_server + ip;
+    //     http.get(url, function(res) {
+    //         var code = res.statusCode;
+    //         if (code == 200) {
+    //             res.on('data', function(data) {
+    //                 try {
+    //                     cb(null, JSON.parse(data));
+    //                 } catch (err) {
+    //                     cb(err);
+    //                 }
+    //             });
+    //         } else {
+    //             cb({ code: code });
+    //         }
+    //     }).on('error', function(e) { cb(e); });
+    //   };
+      
+    //   getIpInfo('220.181.111.85', function(err, msg) {
+    //     console.log(msg)
+    //     //console.log('城市: ' + msg.city);
+    //     //console.log('msg: ' + util.inspect(msg, true, 8));
+    //   })
     //注册
     router.post('/user/add', async (ctx, next) => {
         return new Promise(function (resolve, reject) {
@@ -58,6 +92,15 @@ module.exports = function () {
     router.post('/user/logout', async (ctx, next) => {
         return new Promise(function (resolve, reject) {
             User.userLogout(ctx, next, resolve);
+        });
+    }, function (ctx, next) {
+        ctx.body = ctx.body;
+    });
+    //sdk
+     //登出
+     router.post('/report/send_message/EP_EVENT_BUS', async (ctx, next) => {
+        return new Promise(function (resolve, reject) {
+            SDK.EP_EVENT_BUS(ctx, next, resolve);
         });
     }, function (ctx, next) {
         ctx.body = ctx.body;

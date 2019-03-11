@@ -9,6 +9,10 @@ import Team from '@/components/layout/team'
 import TeamAdd from '@/components/layout/team/add'
 import EventDeatil from '@/components/layout/eventView/detail'
 import EventOverView from '@/components/layout/eventView'
+import PageOverView from '@/components/layout/pageView'
+import PageOverViewDeatil from '@/components/layout/pageView/detail'
+import UserFeatures from '@/components/layout/userFeatures'
+
 Vue.use(Router)
 function beforeEnter (to, from, next){
   if(commenMotheds.getCookie('userInfo')){
@@ -41,11 +45,15 @@ export default new Router({
       name:'ContenIndex',
       component:ContenIndex,
         beforeEnter:beforeEnter,
+        redirect: '/team/iteam',
       children:[
         {path:'/overview/kanban',component:Kanban,beforeEnter:beforeEnter,meta: {
           title: '数据概况'
         }},
-        {path:'/behavior/pageOverView',component:Kanban,beforeEnter:beforeEnter,meta: {
+        {path:'/behavior/pageOverView',component:PageOverView,beforeEnter:beforeEnter,meta: {
+          title: '页面分析'
+        }},
+        {path:'/behavior/pageOverView/detail',component:PageOverViewDeatil,beforeEnter:beforeEnter,meta: {
           title: '页面分析'
         }},
         {path:'/team/iteam',component:Team,beforeEnter:beforeEnter,meta: {
@@ -58,6 +66,9 @@ export default new Router({
           title: '事件分析'
         }},
         {path:'/behavior/eventOverView',component:EventOverView,beforeEnter:beforeEnter,meta: {
+          title: '事件分析'
+        }},
+        {path:'/user/userFeatures',component:UserFeatures,beforeEnter:beforeEnter,meta: {
           title: '事件分析'
         }}
       ] 

@@ -124,6 +124,7 @@ export default {
         mobileReg.test(this.Login.mobile) &&
         passwordReg.test(this.Login.password)
       ) {
+        
         const params = {
           mobile: this.Login.mobile,
           password: this.Login.password
@@ -131,7 +132,13 @@ export default {
         let data = await Fetcher.login(this,params);
         if (data.code === 200) {
               this.$Message.success("登录成功");
-               this.$store.dispatch("setUser",this.Login.mobile)
+               this.$store.dispatch("setUser",this.Login.mobile);
+               
+               window.postData.entities.user=this.Login.mobile;
+               Fetcher.postEventViewData({
+                action:'登录与注册',
+                category:'登录'
+              })
                this.$store.getters.getTeam?this.$router.push('/overview/kanban'):this.$router.push('/team/iteam');
             } else {
               this.$Message.error(data.message);

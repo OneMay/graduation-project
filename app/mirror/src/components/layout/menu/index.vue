@@ -39,7 +39,7 @@
             <Icon type="md-contact" />
             用户分析
           </template>
-          <MenuItem name="userFeatures">用户特征</MenuItem>
+          <MenuItem name="userFeatures" to="/user/userFeatures">用户特征</MenuItem>
         </Submenu>
       </vue-scroll>
     </Menu>
@@ -106,6 +106,7 @@ export default {
       if (data.code === 200) {
         this.$Message.success("退出成功");
         this.$store.dispatch("setUser", null);
+        window.postData.entities.user='';
         this.$store.dispatch("setTeam", "");
         this.$router.push("/registerAndLogin");
       } else {

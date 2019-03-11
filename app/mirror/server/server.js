@@ -5,7 +5,7 @@ const path = require('path');
 const koaBody = require('koa-body');
 const staticFiles = require('koa-static')
 const session = require('koa-session');
-
+const http = require('http')
 
 const app = new Koa();
 app.use(cors());
@@ -37,7 +37,7 @@ const CONFIG = {
    renew: false,  //(boolean) renew session when session is nearly expired,
 };
 app.use(session(CONFIG, app));
-
-app.use(router.routes());
+ app.use(router.routes());
 app.use(router.allowedMethods());
+
 module.exports = app;

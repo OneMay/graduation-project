@@ -62,5 +62,9 @@ export default {
                  return data;
              });
              return result;
+     },
+     postEventViewData: (data)=>{
+        window.postEvent(data)
+        
      }
 }
