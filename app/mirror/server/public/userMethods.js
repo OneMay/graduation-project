@@ -3,8 +3,8 @@ const User = require('../models/user');
 
 module.exports={
      async addUser(user){
-        user = await user.save();
-        return user
+      let  ruser = await user.save();
+        return ruser
     },
     async findUser(user){
         let query =   await User.find({
@@ -21,6 +21,17 @@ module.exports={
         });
         let res = null;
         query && query[0] ? res = query[0] :res = null
+        return res
+    },
+    /**
+     * 所有用户 
+     */
+    async findAllUser(mobile){
+        let query =   await User.find({
+            mobile: { $ne:mobile}
+        },"mobile _id");
+        let res = [];
+        query && query[0] ? res = query :res = []
         return res
     }
 }

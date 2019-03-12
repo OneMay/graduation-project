@@ -8,9 +8,13 @@ const UserSchema = new mongoose.Schema({
     //用户名
     mobile: {
         unique: true,
+        trim: true,
         type: String
     },
-    password: String,
+    password:  {
+        trim: true,
+        type: String
+    },
     adminCode: {
         type: Number,
         default: 50

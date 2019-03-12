@@ -1,6 +1,7 @@
 const Router = require('koa-router');
 const User = require('../controllers/user');
 const SDK = require('../controllers/sdk');
+const Team = require('../controllers/team');
 module.exports = function () {
     let router = new Router({
         prefix: '/api'
@@ -96,11 +97,34 @@ module.exports = function () {
     }, function (ctx, next) {
         ctx.body = ctx.body;
     });
+    //所有用户
+    router.post('/user/all', async (ctx, next) => {
+        return new Promise(function (resolve, reject) {
+            User.findAllUser(ctx, next, resolve);
+        });
+    }, function (ctx, next) {
+        ctx.body = ctx.body;
+    });
     //sdk
-     //登出
      router.post('/report/send_message/EP_EVENT_BUS', async (ctx, next) => {
         return new Promise(function (resolve, reject) {
             SDK.EP_EVENT_BUS(ctx, next, resolve);
+        });
+    }, function (ctx, next) {
+        ctx.body = ctx.body;
+    });
+     //添加团队
+     router.post('/team/add', async (ctx, next) => {
+        return new Promise(function (resolve, reject) {
+            Team.teamAdd(ctx, next, resolve);
+        });
+    }, function (ctx, next) {
+        ctx.body = ctx.body;
+    });
+    //所在的所有团队
+    router.post('/team/allIn', async (ctx, next) => {
+        return new Promise(function (resolve, reject) {
+            Team.findTeamByUser(ctx, next, resolve);
         });
     }, function (ctx, next) {
         ctx.body = ctx.body;

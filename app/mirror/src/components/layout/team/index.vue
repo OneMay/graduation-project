@@ -15,39 +15,57 @@
       </Card>
     </div>
     <Card class="ivu-team-card" v-else>
-      <div style="text-align:center">
+      <Loading v-if="loading"></Loading>
+      <div style="text-align:center" v-else>
         <Icon type="md-thunderstorm" style="font-size:50px;" />
         <h3>还没有团员哟o(╥﹏╥)o</h3>
-        <a href="/team/creatteam">
+        <router-link to="/team/creatteam">
           <span class="ivu-team-add"
             ><Icon type="md-add" style="font-size:24px" />快去创建一个吧</span
           >
-        </a>
+        </router-link>
       </div>
     </Card>
   </div>
 </template>
 <script>
 import commenMotheds from "./../../../assets/commen";
+import Fetcher from '../../../assets/fetcher';
+import Loading from "./../../commen/loading";
 export default {
   name: "Team",
   data() {
     return {
       teamList: [
-        {
-          teamZn: "魔镜",
-          teamEn: "mirror",
-          _id:'25'
-        }
-      ]
+      ],
+      loading:false
     };
   },
   methods: {
     chooseTeam(teamName) {
       commenMotheds.setCookie("teamEn", teamName);
       this.$store.dispatch("setTeam", teamName);
-      location.href = "http://localhost:8080/overview/kanban";
+      this.$router.push('/overview/kanban');
+    },
+    async findAllTeamIn(){
+      this.loading = true;
+        let params ={
+          mobile:this.$store.getters.getUser
+        };
+        let data = await Fetcher.findAllTeamIn(this,params);
+        this.loading = false;
+        if (data.code === 200) {
+              this.teamList = data.data;
+            } else {
+              this.$Message.error(data.message);
+            }
     }
+  },
+  created() {
+    this.findAllTeamIn.call(this)
+  },
+  components:{
+    Loading
   }
 };
 </script>

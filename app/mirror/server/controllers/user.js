@@ -48,7 +48,7 @@ module.exports = {
      */
     async addUser(ctx, next, resolve) {
         let newObj = ctx.request.body, newUser;
-        let userInfo = await userMethods.login(newObj);
+        let userInfo = await userMethods.findUser(newObj);
         if (userInfo) {
             //数据库有此用户，已经被注册
             Object.assign(responseData, {
@@ -144,6 +144,21 @@ module.exports = {
             resolve(next())
             return;
         }
+    },
+    /**
+     * 查找所有用户
+     */
+    async findAllUser(ctx,next,resolve){
+        let userObj = ctx.request.body;
+        let userList = await userMethods.findAllUser(userObj.mobile);
+        Object.assign(responseData,{
+            code:200,
+            message:'ok',
+            data:userList
+        })
+        ctx.body = responseData;
+        resolve(next())
+        return;
     }
 }
 

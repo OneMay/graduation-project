@@ -134,7 +134,7 @@ export default {
               this.$Message.success("登录成功");
                this.$store.dispatch("setUser",this.Login.mobile);
                
-               window.postData.entities.user=this.Login.mobile;
+               window.postMirrorData.entities.user=this.Login.mobile;
                Fetcher.postEventViewData({
                 action:'登录与注册',
                 category:'登录'
@@ -154,6 +154,10 @@ export default {
         mobileReg.test(this.Register.mobile) &&
         passwordReg.test(this.Register.password)
       ) {
+        Fetcher.postEventViewData({
+                action:'登录与注册',
+                category:'注册'
+              })
         const params = {
           mobile: this.Register.mobile,
           password: this.Register.password

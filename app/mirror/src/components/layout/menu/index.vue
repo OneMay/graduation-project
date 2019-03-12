@@ -48,12 +48,9 @@
         <div class="layout-logo">魔镜-精细化运营工具</div>
         <div class="layout-logo layout-team">
           当前团队：{{ this.$store.getters.getTeam }}
-          <!-- <router-link :to="'/team/iteam'" >
-              <span class="ivu-team">切换团队</span>
-            </router-link> -->
-          <a href="/team/iteam">
+          <router-link to="/team/iteam">
             <span class="ivu-team">切换团队</span>
-          </a>
+          </router-link >
         </div>
         <div class="layout-nav">
           <Dropdown
@@ -106,7 +103,7 @@ export default {
       if (data.code === 200) {
         this.$Message.success("退出成功");
         this.$store.dispatch("setUser", null);
-        window.postData.entities.user='';
+        window.postMirrorData.entities.user='';
         this.$store.dispatch("setTeam", "");
         this.$router.push("/registerAndLogin");
       } else {
@@ -126,12 +123,31 @@ export default {
       this.$refs.activeName.updateOpened();
       this.$refs.activeName.updateActiveName();
     });
+  },
+  
+watch: {
+  $route: {
+    handler: function(val, oldVal){
+      this.menu = {
+      activeName: val.path.slice(1).split("/")[1],
+      activeopenNames: val.path.slice(1).split("/")[0]
+    };
+    setTimeout(()=>{
+      this.$refs.activeName.updateOpened();
+      this.$refs.activeName.updateActiveName();
+    },0)
+    },
+    // 深度观察监听
+    deep: true
   }
+}
 };
 </script>
 <style lang="less">
 #mirror {
   width: 20%;
+  align-self: center; 
+
 }
 .meta-title {
   font-size: 24px;
@@ -163,6 +179,8 @@ export default {
   position: fixed;
   top: 0;
   left: 0;
+  display: flex;
+  flex-direction: column;
   padding: 0 0 50px;
   transition: width 0.2s, left 0.2s;
   box-shadow: 2px 0 10px 0 rgba(166, 166, 166, 0.5);

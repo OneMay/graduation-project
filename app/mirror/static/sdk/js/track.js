@@ -1,5 +1,5 @@
 (function (window) {
-    
+
     var Ajax = {
         get: function (url, fn) {
             // XMLHttpRequest对象用于在后台与服务器交换数据  
@@ -251,7 +251,7 @@
 
     //url变化监听器
     var oldLocation = window.location.href;
-    var postData = {
+    var postMirrorData = {
         type: 'pageview',
         timeFormat: '',
         time: '',
@@ -276,29 +276,35 @@
 
 
     var firstEnter = setInterval(function () {
-        if (postData.entities.system) {
-            postData.entities.pageTitle=document.title;
-            var newTime1 = new Date();
-            postData.time = newTime1.getTime();
-            postData.timeFormat = Format(newTime1, 'yyyy-MM-dd HH:mm:ss');
-            postPageView(postData)
+        if (postMirrorData.entities.system) {
+            postMirrorData.entities.pageTitle = document.title;
+            var data = getNewSomethings()
+            postMirrorData.time = data.time;
+            postMirrorData.timeFormat = data.timeFormat;
+            postPageView(postMirrorData)
             clearInterval(firstEnter)
         }
         setInterval(function () {
             if (window.location.href != oldLocation) {
-                postData.type = 'pageView';
-                var newTime = new Date();
-                postData.time = newTime.getTime();
-                postData.timeFormat = Format(newTime, 'yyyy-MM-dd HH:mm:ss');
-                postData.entities.pageTitle=document.title
-                postData.entities.pageUrl = window.location.href;
-                postData.entities.previousPageUrl = oldLocation;
+                postMirrorData.type = 'pageView';
+                var data = getNewSomethings()
+                postMirrorData.time = data.time;
+                postMirrorData.timeFormat = data.timeFormat;
+                postMirrorData.entities.pageTitle = document.title
+                postMirrorData.entities.pageUrl = window.location.href;
+                postMirrorData.entities.previousPageUrl = oldLocation;
                 oldLocation = window.location.href;
-                postPageView(postData)
+                postPageView(postMirrorData)
             }
         }, 50)
     }, 150)
-
+    function getNewSomethings() {
+        var newTime = new Date();
+        return {
+            time: newTime.getTime(),
+            timeFormat: Format(newTime, 'yyyy-MM-dd HH:mm:ss')
+        }
+    }
     function Format(date, fmt) {
         var o = {
             "M+": date.getMonth() + 1, //月份         
@@ -338,18 +344,18 @@
 
         });
     }
-    function postEvent(data) {
-        var newdata = JSON.parse(JSON.stringify(postData))
+    function postMirrorEvent(data) {
+        var newdata = JSON.parse(JSON.stringify(postMirrorData))
         newdata.type = 'eventView';
-        var newTime2 = new Date();
-        newdata.time = newTime2.getTime();
-        newdata.timeFormat = Format(newTime2, 'yyyy-MM-dd HH:mm:ss');
+        var odata = getNewSomethings()
+        newdata.time = odata.time;
+        newdata.timeFormat = odata.timeFormat;
         newdata.entities.action = data.action;
         newdata.entities.category = data.category;
         Ajax.post(url, newdata, function (msg) {
 
         });
     }
-    window.postData = postData;
-    window.postEvent = postEvent;
+    window.postMirrorData = postMirrorData;
+    window.postMirrorEvent = postMirrorEvent;
 }(window))

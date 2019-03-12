@@ -11,10 +11,10 @@ import {store} from './store/store.js'
 import vuescroll from 'vuescroll';
 import ECharts from 'vue-echarts'
 import 'echarts'
-window.postData.entities.system='mirror';
+window.postMirrorData.entities.system='mirror';
 let userInfo=commenMotheds.getCookie('userInfo')
 let username = userInfo?commenMotheds.parserDataToJson(userInfo).mobile:'';
-window.postData.entities.user=username;
+window.postMirrorData.entities.user=username;
 // 配置Vue原型 (在任何组件中都可以正常使用axios)
 Vue.prototype.$http = axios
 axios.defaults.baseURL='http://localhost:8080/'
