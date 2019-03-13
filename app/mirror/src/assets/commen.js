@@ -24,9 +24,9 @@ export default {
     return "";
   },
   setCookie(name, value) {
-    const Days = 30;
+    const Days = 2;
     let exp = new Date();
-    exp.setTime(exp.getTime() + Days * 24 * 60 * 60 * 1000);
+    exp.setTime(exp.getTime() + Days  * 60 * 60 * 1000);
     document.cookie = name + "=" + escape(value) + ";expires=" + exp.toGMTString() + ";path=/";
   },
   //强制保留几位位小数

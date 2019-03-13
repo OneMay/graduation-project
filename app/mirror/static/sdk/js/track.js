@@ -252,7 +252,7 @@
     //url变化监听器
     var oldLocation = window.location.href;
     var postMirrorData = {
-        type: 'pageview',
+        eventType: "pageView",
         timeFormat: '',
         time: '',
         entities: {
@@ -286,7 +286,7 @@
         }
         setInterval(function () {
             if (window.location.href != oldLocation) {
-                postMirrorData.type = 'pageView';
+                postMirrorData.eventType = 'pageView';
                 var data = getNewSomethings()
                 postMirrorData.time = data.time;
                 postMirrorData.timeFormat = data.timeFormat;
@@ -346,7 +346,7 @@
     }
     function postMirrorEvent(data) {
         var newdata = JSON.parse(JSON.stringify(postMirrorData))
-        newdata.type = 'eventView';
+        newdata.eventType = 'eventView';
         var odata = getNewSomethings()
         newdata.time = odata.time;
         newdata.timeFormat = odata.timeFormat;

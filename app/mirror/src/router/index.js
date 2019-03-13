@@ -69,7 +69,7 @@ export default new Router({
           title: '事件分析'
         }},
         {path:'/user/userFeatures',component:UserFeatures,beforeEnter:beforeEnter,meta: {
-          title: '事件分析'
+          title: '用户特征'
         }}
       ] 
     },

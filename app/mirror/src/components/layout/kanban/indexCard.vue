@@ -19,7 +19,7 @@
               <div class="inner">
                 <div class="main-number-content">
                   <div class="">
-                    <div>合计</div>
+                    <div>今日</div>
                     <div class="number-content clearfix">
                       <span class="number" :title="index.number">{{
                         index.numbertoDecimal
@@ -31,7 +31,7 @@
                 <div class="second-number-content">
                   <div>
                     <div class="mom-yoy-content">
-                      <Tooltip :content="'对比昨天'" placement="top-start">
+                      <Tooltip :content="'对比'+yesterday" placement="top-start">
                         <span class="measuresUnit">环比</span>
                         <span class="kpi-rise">
                           <Icon
@@ -46,7 +46,7 @@
                           <span>{{ index.ratio.number }}</span>
                         </span>
                       </Tooltip>
-                      <Tooltip :content="'对比上周'" placement="top-start">
+                      <Tooltip :content="'对比'+lastWeekDay" placement="top-start">
                         <span class="measuresUnit">同比</span>
                         <span class="kpi-rise">
                           <Icon
@@ -73,12 +73,25 @@
 </template>
 <script>
 import Loading from "./../../commen/loading";
+import commenMotheds from "./../../../assets/commen";
 export default {
     name:'IndexCard',
     props:['index'],
     components:{
         Loading
-    }
+    },
+    data() {
+      return {
+         yesterday: commenMotheds.Format(
+      new Date(commenMotheds.changeForDate(commenMotheds.Format(new Date(), "yyyy-MM-dd"),  - 1)),
+      "yyyy-MM-dd"
+    ),
+    lastWeekDay:commenMotheds.Format(
+      new Date(commenMotheds.changeForDate(commenMotheds.Format(new Date(), "yyyy-MM-dd"),  - 6)),
+      "yyyy-MM-dd"
+    ),
+      }
+    },
 }
 </script>
 <style lang="less" scoped>
@@ -171,7 +184,7 @@ export default {
     float: left;
     border: 0;
     border-top: 1px solid #e9f0f7;
-    padding: 28px 0 0;
+    padding: 10px 0 0;
     margin-top: 28px;
     div span:nth-of-type(1) {
       font-size: 12px;

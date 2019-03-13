@@ -1,7 +1,5 @@
 const Team = require('../models/team');
 const teamMethods = require('../public/teamMethods');
-const User = require('../models/user');
-const userMethods = require('../public/userMethods');
 //统一返回格式
 let responseData = {
     code: 200,

@@ -1,7 +1,9 @@
 <template>
   <div class="content-width-right content-flex">
-    <IndexCard v-for="item in dataList" :key="item._id" :index="item">
-    </IndexCard>
+    <IndexCard :index="user"></IndexCard>
+    <IndexCard :index="newUser"></IndexCard>
+    <IndexCard :index="uv"></IndexCard>
+    <IndexCard :index="pv"></IndexCard>
     <DetailedCardBig
       v-for="item in detailList"
       :key="item._id"
@@ -30,8 +32,7 @@ export default {
   name: "Kanban",
   data() {
     return {
-      dataList: [
-        {
+  user:{
           loading: false,
           name: "累计用户量",
           _id: 'allUser',
@@ -47,8 +48,8 @@ export default {
             number: "1.2%"
           }
         },
-        {
-          loading: false,
+        newUser:{
+          loading: true,
           name: "新增用户数",
           _id: 'newUser',
           number: 233.2565,
@@ -63,7 +64,7 @@ export default {
             number: "1.2%"
           }
         },
-        {
+        uv:{
           loading: false,
           name: "日活",
           _id: 'nikkatsu',
@@ -79,7 +80,7 @@ export default {
             number: "1.2%"
           }
         },
-        {
+        pv:{
           loading: false,
           name: "PV",
           _id: 'pv',
@@ -94,8 +95,7 @@ export default {
             trend: 1,
             number: "1.2%"
           }
-        }
-      ],
+        },
       detailList: [
         {
           number: 233.2565,
