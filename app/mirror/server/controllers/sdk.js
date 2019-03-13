@@ -1,6 +1,6 @@
 const sdkMethods = require('../public/sdkMethods')
 const Pageview = require('../models/pageView');
-const Eventview = require('../models/eventview');
+const Eventview = require('../models/eventView');
 const moment = require('moment');
 
 let responseData = {
