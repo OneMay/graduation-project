@@ -38,9 +38,7 @@ module.exports = function () {
     //         next()
     //         return;
     //     }
-
     // })
-
     //注册
     router.post('/user/add', async (ctx, next) => {
         return new Promise(function (resolve, reject) {

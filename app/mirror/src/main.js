@@ -17,7 +17,7 @@ let username = userInfo?commenMotheds.parserDataToJson(userInfo).mobile:'';
 window.postMirrorData.entities.user=username;
 // 配置Vue原型 (在任何组件中都可以正常使用axios)
 Vue.prototype.$http = axios
-axios.defaults.baseURL='http://localhost:8080/'
+axios.defaults.baseURL='/'
 Vue.config.productionTip = false
 
 

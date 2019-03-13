@@ -5,11 +5,16 @@ const path = require('path');
 const koaBody = require('koa-body');
 const staticFiles = require('koa-static')
 const session = require('koa-session');
-const http = require('http')
+const historyApiFallback = require('./middleware/koa2-connect-history-api-fallback');
 
 const app = new Koa();
+
 app.use(cors());
-app.use(staticFiles(path.resolve(__dirname, ".."),'static'));
+app.use(historyApiFallback({
+  //verbose: true//打出转发日志
+  }));
+  
+app.use(staticFiles(__dirname+ '/../dist'));
 app.use(koaBody({
     multipart:true, // 支持文件上传
    // encoding:'gzip',
@@ -17,7 +22,7 @@ app.use(koaBody({
     json:true,
     urlencoded:true,
     formidable:{
-      uploadDir:path.join(__dirname,'../static/upload/'), // 设置文件上传目录
+      uploadDir:path.join(__dirname,'../dist/static/upload/'), // 设置文件上传目录
       keepExtensions: true,    // 保持文件的后缀
       maxFieldsSize:2 * 1024 * 1024, // 文件上传大小
       onFileBegin:(name,file) => { // 文件上传前的设置
