@@ -85,14 +85,16 @@
                     style="width:30%;font-size:16px"
                     >注册</Button
                   >
+                  
                 </FormItem>
+        
               </Form>
             </TabPane>
           </Tabs>
         </Col>
       </Row>
       <div slot="footer" style="text-align:center">
-        <p></p>
+        <p>@2019 魔镜数据 <a href="//www.miitbeian.gov.cn" target="_blank" class="beian">蜀ICP备17011354号</a></p>
       </div>
     </Modal>
   </div>
@@ -176,6 +178,12 @@ export default {
 };
 </script>
 <style lang="less">
+.beian{
+  color: #504b4b;
+  &:hover{
+    color: #f90;
+  }
+}
 // /这里加上scoped就不起作用/
 .ivu-tabs-nav {
   left: 50%;

@@ -18,7 +18,7 @@ module.exports = {
            ctx.req.connection.remoteAddress ||
            ctx.req.socket.remoteAddress ||
            ctx.req.connection.socket.remoteAddress;
-        //const ip = '59.68.33.24';
+       //const ip = '59.68.33.24';
         let ipData = await sdkMethods.getIpInfo(ip);
         if(msg.eventType==="pageView" && msg.entities.system){
            
