@@ -10,6 +10,7 @@
               <router-link :to="'/behavior/eventOverView/detail?id=' + index._id+'&name='+index.name+'&day=1'">
                 {{ index.name }}
               </router-link>
+              <div class="range">{{this.$store.getters.getTeam.buildTime}}<span>~</span>{{this.$moment().format('YYYY-MM-DD')}}| 上线至今</div>
             </div>
           </div>
         </div>
@@ -19,7 +20,7 @@
               <div class="inner">
                 <div class="main-number-content">
                   <div class="">
-                    <div>今日</div>
+                    <div>{{index.conf}}</div>
                     <div class="number-content clearfix">
                       <span class="number" :title="index.number">{{
                         index.numbertoDecimal
@@ -29,7 +30,7 @@
                   </div>
                 </div>
                 <div class="second-number-content">
-                  <div>
+                  <div v-if="index._id!=='allUser'">
                     <div class="mom-yoy-content">
                       <Tooltip :content="'对比'+yesterday" placement="top-start">
                         <span class="measuresUnit">环比</span>
@@ -74,6 +75,7 @@
 <script>
 import Loading from "./../../commen/loading";
 import commenMotheds from "./../../../assets/commen";
+
 export default {
     name:'IndexCard',
     props:['index'],
@@ -184,8 +186,8 @@ export default {
     float: left;
     border: 0;
     border-top: 1px solid #e9f0f7;
-    padding: 10px 0 0;
-    margin-top: 28px;
+    padding: 15px 0 0;
+    margin-top: 0px;
     div span:nth-of-type(1) {
       font-size: 12px;
     }

@@ -16,7 +16,7 @@
         <MenuItem name="iteam" to="/team/iteam">我的团队</MenuItem>
         <MenuItem name="creatteam" to="/team/creatteam">创建团队</MenuItem>
       </Submenu>
-      <vue-scroll :ops="ops" v-if="this.$store.getters.getTeam">
+      <vue-scroll :ops="ops" v-if="this.$store.getters.getTeam.teamEn">
         <Submenu name="overview">
           <template slot="title">
             <Icon type="ios-eye-outline" />
@@ -47,7 +47,7 @@
       <Menu mode="horizontal" theme="light" active-name="1">
         <div class="layout-logo">魔镜-精细化运营工具</div>
         <div class="layout-logo layout-team">
-          当前团队：{{ this.$store.getters.getTeam }}
+          当前团队：{{ this.$store.getters.getTeam.teamEn }}
           <router-link to="/team/iteam">
             <span class="ivu-team">切换团队</span>
           </router-link >
@@ -103,7 +103,10 @@ export default {
       if (data.code === 200) {
         this.$Message.success("退出成功");
         this.$store.dispatch("setUser", null);
-        window.postMirrorData.entities.user='';
+        window.mirrorCommandQueue = {
+            system: "mirror",
+            user: ""
+          };
         this.$store.dispatch("setTeam", "");
         this.$router.push("/registerAndLogin");
       } else {

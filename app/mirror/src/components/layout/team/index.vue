@@ -5,7 +5,7 @@
   >
     <div v-if="teamList.length > 0" class="content-flex">
       <Card class="ivu-my-card" v-for="item in teamList" :key="item._id">
-        <div style="text-align:center" @click="chooseTeam(item.teamEn)">
+        <div style="text-align:center" @click="chooseTeam(item.teamEn,item.buildTime)">
           <Icon type="md-thunderstorm" style="font-size:50px;" />
           <h3>{{ item.teamZn }}</h3>
           <h4 style="font-size: 12px;color: #e0dbdb;">
@@ -42,9 +42,13 @@ export default {
     };
   },
   methods: {
-    chooseTeam(teamName) {
-      commenMotheds.setCookie("teamEn", teamName);
-      this.$store.dispatch("setTeam", teamName);
+    chooseTeam(teamName,buildTime) {
+      let team = {
+        teamEn:teamName,
+        buildTime:buildTime
+      }
+      commenMotheds.setCookie("team", JSON.stringify(team));
+      this.$store.dispatch("setTeam", team);
       this.$router.push('/overview/kanban');
     },
     async findAllTeamIn(){

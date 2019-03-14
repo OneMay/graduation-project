@@ -2,6 +2,7 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import iView from 'iview';
+import moment from 'moment'
 import 'iview/dist/styles/iview.css';
 import axios from 'axios'
 import  commenMotheds from "./assets/commen";
@@ -11,12 +12,15 @@ import ECharts from 'vue-echarts'
 import 'echarts'
 import App from './App'
 import router from './router'
-window.postMirrorData.entities.system='mirror';
 let userInfo=commenMotheds.getCookie('userInfo')
 let username = userInfo?commenMotheds.parserDataToJson(userInfo).mobile:'';
-window.postMirrorData.entities.user=username;
+window.mirrorCommandQueue={
+  system:'mirror',
+  user:username
+}
 // 配置Vue原型 (在任何组件中都可以正常使用axios)
-Vue.prototype.$http = axios
+Vue.prototype.$http = axios;
+Vue.prototype.$moment = moment;
 axios.defaults.baseURL='/'
 Vue.config.productionTip = false
 

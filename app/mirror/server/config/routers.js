@@ -2,6 +2,8 @@ const Router = require('koa-router');
 const User = require('../controllers/user');
 const SDK = require('../controllers/sdk');
 const Team = require('../controllers/team');
+const EventView = require('../controllers/eventView');
+
 module.exports = function () {
     let router = new Router({
         prefix: '/api'
@@ -91,6 +93,14 @@ module.exports = function () {
     router.post('/team/allIn', async (ctx, next) => {
         return new Promise(function (resolve, reject) {
             Team.findTeamByUser(ctx, next, resolve);
+        });
+    }, function (ctx, next) {
+        ctx.body = ctx.body;
+    });
+    //概览-累计用户数
+    router.post('/overview/userTotal', async (ctx, next) => {
+        return new Promise(function (resolve, reject) {
+            EventView.overviewUser(ctx, next, resolve);
         });
     }, function (ctx, next) {
         ctx.body = ctx.body;

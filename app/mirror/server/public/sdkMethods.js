@@ -28,7 +28,7 @@ module.exports = {
                     resolve({ code: code });
                 }
             }).on('error', function(e) { 
-                console.log(err)
+                console.log(e)
                return resolve(null);
              });
         });

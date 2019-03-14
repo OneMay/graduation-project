@@ -1,5 +1,6 @@
 const Team = require('../models/team');
 const teamMethods = require('../public/teamMethods');
+const moment = require('moment');
 //统一返回格式
 let responseData = {
     code: 200,
@@ -51,7 +52,8 @@ module.exports = {
         teamArr.map((item)=>{
             teamList.push({
                 teamEn:item.teamEn,
-                teamZn:item.teamZn
+                teamZn:item.teamZn,
+                buildTime:moment(item.meta.buildTime).add(8, 'hours').format('YYYY-MM-DD')
             })
         })
         Object.assign(responseData, {

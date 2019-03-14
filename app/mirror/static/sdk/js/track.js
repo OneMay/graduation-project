@@ -276,8 +276,10 @@
 
 
     var firstEnter = setInterval(function () {
-        if (postMirrorData.entities.system) {
+        if (window.mirrorCommandQueue && JSON.stringify(window.mirrorCommandQueue)!=="{}") {
             postMirrorData.entities.pageTitle = document.title;
+            postMirrorData.entities.system  = window.mirrorCommandQueue.system?window.mirrorCommandQueue.system:'';
+            postMirrorData.entities.user  = window.mirrorCommandQueue.user?window.mirrorCommandQueue.user:'';
             var data = getNewSomethings()
             postMirrorData.time = data.time;
             postMirrorData.timeFormat = data.timeFormat;
@@ -287,6 +289,8 @@
         setInterval(function () {
             if (window.location.href != oldLocation) {
                 postMirrorData.eventType = 'pageView';
+                postMirrorData.entities.system  = window.mirrorCommandQueue&&window.mirrorCommandQueue.system?window.mirrorCommandQueue.system:'';
+                postMirrorData.entities.user  = window.mirrorCommandQueue&&window.mirrorCommandQueue.user?window.mirrorCommandQueue.user:'';
                 var data = getNewSomethings()
                 postMirrorData.time = data.time;
                 postMirrorData.timeFormat = data.timeFormat;
@@ -348,6 +352,8 @@
     function postMirrorEvent(data) {
         var newdata = JSON.parse(JSON.stringify(postMirrorData))
         newdata.eventType = 'eventView';
+        newdata.entities.system  = window.mirrorCommandQueue&&window.mirrorCommandQueue.system?window.mirrorCommandQueue.system:'';
+        newdata.entities.user  = window.mirrorCommandQueue&&window.mirrorCommandQueue.user?window.mirrorCommandQueue.user:'';
         var odata = getNewSomethings()
         newdata.time = odata.time;
         newdata.timeFormat = odata.timeFormat;
@@ -357,6 +363,5 @@
 
         });
     }
-    window.postMirrorData = postMirrorData;
     window.postMirrorEvent = postMirrorEvent;
 }(window))

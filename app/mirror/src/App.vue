@@ -15,7 +15,7 @@ export default {
 
   },
    created: function () {
-     let userInfo="",teamEn="";
+     let userInfo="",team="";
      if(userInfo=commenMotheds.getCookie('userInfo')){
        this.username = commenMotheds.parserDataToJson(userInfo).mobile;
        this.$store.dispatch("setUser",this.username)
@@ -23,11 +23,16 @@ export default {
        this.username=null;
        this.$store.dispatch("setUser",this.username)
      }
-     if(teamEn=commenMotheds.getCookie('teamEn')){
-       this.$store.dispatch("setTeam",teamEn)
+     if(team=commenMotheds.getCookie('team')){
+       let teamCookie = commenMotheds.parserDataToJson(team);
+       let teamInfo = {
+         teamEn:teamCookie.teamEn,
+         buildTime:teamCookie.buildTime
+       }
+       this.$store.dispatch("setTeam",teamInfo)
      }else{
-       teamEn="";
-       this.$store.dispatch("setTeam",teamEn)
+       team="";
+       this.$store.dispatch("setTeam",team)
      }
   }
 }

@@ -24,7 +24,7 @@
                     v-model="Login.mobile"
                     placeholder="输入11位手机号"
                     :autofocus="true"
-                     @on-keyup.enter="loginSubmit"
+                    @on-keyup.enter="loginSubmit"
                   >
                     <Icon type="ios-call" slot="prepend"></Icon>
                   </Input>
@@ -35,7 +35,7 @@
                     v-model="Login.password"
                     placeholder="输入6位以上的字母+数字密码"
                     :autofocus="false"
-                     @on-keyup.enter="loginSubmit"
+                    @on-keyup.enter="loginSubmit"
                   >
                     <Icon type="md-lock" slot="prepend"></Icon>
                   </Input>
@@ -73,7 +73,7 @@
                     type="password"
                     v-model="Register.password"
                     placeholder="输入6位以上的字母+数字密码"
-                     @on-keyup.enter="registerSubmit"
+                    @on-keyup.enter="registerSubmit"
                   >
                     <Icon type="md-lock" slot="prepend"></Icon>
                   </Input>
@@ -85,23 +85,26 @@
                     style="width:30%;font-size:16px"
                     >注册</Button
                   >
-                  
                 </FormItem>
-        
               </Form>
             </TabPane>
           </Tabs>
         </Col>
       </Row>
       <div slot="footer" style="text-align:center">
-        <p>@2019 魔镜数据 <a href="//www.miitbeian.gov.cn" target="_blank" class="beian">蜀ICP备17011354号</a></p>
+        <p>
+          @2019 魔镜数据
+          <a href="//www.miitbeian.gov.cn" target="_blank" class="beian"
+            >蜀ICP备17011354号</a
+          >
+        </p>
       </div>
     </Modal>
   </div>
 </template>
 
 <script>
-import  Fetcher from "../../assets/fetcher";
+import Fetcher from "../../assets/fetcher";
 export default {
   name: "RegiterLogin",
   data() {
@@ -117,7 +120,7 @@ export default {
       }
     };
   },
- 
+
   methods: {
     async loginSubmit() {
       const mobileReg = /^[1][3,4,5,7,8][0-9]{9}$/;
@@ -126,28 +129,32 @@ export default {
         mobileReg.test(this.Login.mobile) &&
         passwordReg.test(this.Login.password)
       ) {
-        
         const params = {
           mobile: this.Login.mobile,
           password: this.Login.password
         };
-        let data = await Fetcher.login(this,params);
+        let data = await Fetcher.login(this, params);
         if (data.code === 200) {
-              this.$Message.success("登录成功");
-               this.$store.dispatch("setUser",this.Login.mobile);
-               
-               window.postMirrorData.entities.user=this.Login.mobile;
-               Fetcher.postEventViewData({
-                action:'登录与注册',
-                category:'登录'
-              })
-               this.$store.getters.getTeam?this.$router.push('/overview/kanban'):this.$router.push('/team/iteam');
-            } else {
-              this.$Message.error(data.message);
-            }
-       } else {
+          this.$Message.success("登录成功");
+          this.$store.dispatch("setUser", this.Login.mobile);
+
+          window.mirrorCommandQueue = {
+            system: "mirror",
+            user: this.Login.mobile
+          };
+          Fetcher.postEventViewData({
+            action: "登录与注册",
+            category: "登录"
+          });
+          this.$store.getters.getTeam.teamEn
+            ? this.$router.push("/overview/kanban")
+            : this.$router.push("/team/iteam");
+        } else {
+          this.$Message.error(data.message);
+        }
+      } else {
         this.$Message.error("手机号或者密码输入有问题");
-       }
+      }
     },
     async registerSubmit() {
       const mobileReg = /^[1][3,4,5,7,8][0-9]{9}$/;
@@ -157,19 +164,19 @@ export default {
         passwordReg.test(this.Register.password)
       ) {
         Fetcher.postEventViewData({
-                action:'登录与注册',
-                category:'注册'
-              })
+          action: "登录与注册",
+          category: "注册"
+        });
         const params = {
           mobile: this.Register.mobile,
           password: this.Register.password
         };
-        let data = await Fetcher.register(this,params);
+        let data = await Fetcher.register(this, params);
         if (data.code === 200) {
-              this.$Message.success("注册成功");
-            } else {
-              this.$Message.error(data.message);
-            }
+          this.$Message.success("注册成功");
+        } else {
+          this.$Message.error(data.message);
+        }
       } else {
         this.$Message.error("手机号或者密码输入有问题");
       }
@@ -178,9 +185,9 @@ export default {
 };
 </script>
 <style lang="less">
-.beian{
+.beian {
   color: #504b4b;
-  &:hover{
+  &:hover {
     color: #f90;
   }
 }
