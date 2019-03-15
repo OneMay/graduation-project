@@ -14,11 +14,11 @@ module.exports = {
      */
     async EP_EVENT_BUS(ctx, next, resolve) {
         let msg = ctx.request.body;
-        const ip =   ctx.req.headers['x-forwarded-for'] ||
-           ctx.req.connection.remoteAddress ||
-           ctx.req.socket.remoteAddress ||
-           ctx.req.connection.socket.remoteAddress;
-       //const ip = '59.68.33.24';
+        // const ip =   ctx.req.headers['x-forwarded-for'] ||ctx.req.headers['x-real-ip']||
+        //    ctx.req.connection.remoteAddress ||
+        //    ctx.req.socket.remoteAddress ||
+        //    ctx.req.connection.socket.remoteAddress;
+       const ip = '59.68.33.24';
         let ipData = await sdkMethods.getIpInfo(ip);
         if(msg.eventType==="pageView" && msg.entities.system){
            

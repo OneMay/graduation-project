@@ -105,6 +105,7 @@
 
 <script>
 import Fetcher from "../../assets/fetcher";
+import commen from '../../assets/commen';
 export default {
   name: "RegiterLogin",
   data() {
@@ -146,9 +147,9 @@ export default {
             action: "登录与注册",
             category: "登录"
           });
-          this.$store.getters.getTeam.teamEn
-            ? this.$router.push("/overview/kanban")
-            : this.$router.push("/team/iteam");
+         
+          
+             this.$router.push("/team/iteam");
         } else {
           this.$Message.error(data.message);
         }

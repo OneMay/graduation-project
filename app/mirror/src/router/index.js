@@ -16,14 +16,23 @@ import UserFeatures from '@/components/layout/userFeatures'
 Vue.use(Router)
 function beforeEnter (to, from, next){
   if(commenMotheds.getCookie('userInfo')){
-    next();
-  }else{
+    if(to.path==='/team/iteam'||to.path==='/team/creatteam'){
+      next();
+    }
+    else{
+      if(commenMotheds.getCookie('team')){
+        next();
+      }else{
+        window.location.href="/team/iteam"
+      }
+    }
+  }else {
     next('/registerAndLogin');
   }
 }
 function beforeEnters (to, from, next){
   if(commenMotheds.getCookie('userInfo')){
-    next('/overview/kanban');
+    next('/team/iteam');
   }else{
     next();
   }

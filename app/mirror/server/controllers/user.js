@@ -95,7 +95,7 @@ module.exports = {
                 'httpOnly': false,
                 'path': '/'
             });
-            ctx.cookies.set('teamEn', null, {
+            ctx.cookies.set('team', null, {
                 'httpOnly': false,
                 'path': '/'
             });

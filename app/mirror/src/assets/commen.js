@@ -1,3 +1,12 @@
+function round(num, decimal) {
+  if (isNaN(num)) {
+    return 0;
+  }
+  const p1 = Math.pow(10, decimal + 1);
+  const p2 = Math.pow(10, decimal);
+  return Math.round(num * p1 / 10) / p2;
+}
+
 
 export default {
   parserDataToJson(data) {
@@ -26,26 +35,19 @@ export default {
   setCookie(name, value) {
     const Days = 2;
     let exp = new Date();
-    exp.setTime(exp.getTime() + Days  * 60 * 60 * 1000);
+    exp.setTime(exp.getTime() + Days * 60 * 60 * 1000);
     document.cookie = name + "=" + escape(value) + ";expires=" + exp.toGMTString() + ";path=/";
   },
+  delCookie(name) {
+    var exp = new Date();
+    exp.setTime(exp.getTime() - 1);
+    // var cval = getCookie(name);
+    // if (cval != null)
+      document.cookie = name + "=" + "" + ";expires=" + exp.toGMTString();
+  },
   //强制保留几位位小数
-  toDecimal(num, pos) {
-    let f = parseFloat(num);
-    if (isNaN(f)) {
-      return false;
-    }
-    f = Math.round(num * 10 * pos) / (10 * pos);
-    let s = f.toString();
-    let rs = s.indexOf('.');
-    if (rs < 0) {
-      rs = s.length;
-      s += '.';
-    }
-    while (s.length <= rs + 2) {
-      s += '0';
-    }
-    return s;
+  toDecimal(num, decimal) {
+    return round(num, decimal).toFixed(decimal);
   },
   //日期格式化
   Format(date, fmt) {
@@ -82,11 +84,11 @@ export default {
     return fmt;
   },
   //根据传入的日期进行加减
-  changeForDate(date,days){ 
-    var d=new Date(date); 
-    d.setDate(d.getDate()+days); 
-    var m=d.getMonth()+1; 
-    return d.getFullYear()+'-'+m+'-'+d.getDate(); 
+  changeForDate(date, days) {
+    var d = new Date(date);
+    d.setDate(d.getDate() + days);
+    var m = d.getMonth() + 1;
+    return d.getFullYear() + '-' + m + '-' + d.getDate();
   }
 
 }

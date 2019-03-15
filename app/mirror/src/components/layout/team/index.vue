@@ -60,13 +60,16 @@ export default {
         this.loading = false;
         if (data.code === 200) {
               this.teamList = data.data;
+              this.teamList.length<=0? (this.$store.dispatch("setTeam", "")):'';
+                commenMotheds.getCookie('team')?"":this.$store.dispatch("setTeam","");
             } else {
               this.$Message.error(data.message);
             }
     }
   },
   created() {
-    this.findAllTeamIn.call(this)
+    this.findAllTeamIn.call(this);
+   
   },
   components:{
     Loading

@@ -7,7 +7,10 @@
         <div class="widget-topbar">
           <div class="widget-title">
             <div class="title nav">
-              <router-link :to="'/behavior/eventOverView/detail?id=' + index._id+'&name='+index.name+'&day=1'">
+              <router-link :to="'/behavior/pageOverView'" v-if="index._id==='pv'">
+                {{ index.name }}
+              </router-link>
+              <router-link :to="'/behavior/eventOverView/detail?id=' + index._id+'&name='+index.name+'&day=1'" v-else>
                 {{ index.name }}
               </router-link>
               <div class="range">{{this.$store.getters.getTeam.buildTime}}<span>~</span>{{this.$moment().format('YYYY-MM-DD')}}| 上线至今</div>
@@ -43,7 +46,7 @@
                             type="md-arrow-dropdown"
                             v-else-if="index.ratio.trend < 0"
                           />
-                          <Icon type="ios-remove" v-else />
+                          <Icon type="ios-pause" style="transform: rotate(90deg)"  v-else/>
                           <span>{{ index.ratio.number }}</span>
                         </span>
                       </Tooltip>
@@ -58,7 +61,7 @@
                             type="md-arrow-dropdown"
                             v-else-if="index.basis.trend < 0"
                           />
-                          <Icon type="ios-remove" v-else />
+                          <Icon type="ios-pause" style="transform: rotate(90deg)"  v-else/>
                           <span>{{ index.basis.number }}</span>
                         </span>
                       </Tooltip>
@@ -89,7 +92,7 @@ export default {
       "yyyy-MM-dd"
     ),
     lastWeekDay:commenMotheds.Format(
-      new Date(commenMotheds.changeForDate(commenMotheds.Format(new Date(), "yyyy-MM-dd"),  - 6)),
+      new Date(commenMotheds.changeForDate(commenMotheds.Format(new Date(), "yyyy-MM-dd"),  - 7)),
       "yyyy-MM-dd"
     ),
       }
@@ -190,6 +193,9 @@ export default {
     margin-top: 0px;
     div span:nth-of-type(1) {
       font-size: 12px;
+    }
+    .ivu-icon{
+      vertical-align: inherit
     }
     .number {
       color: #475669;

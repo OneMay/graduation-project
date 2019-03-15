@@ -26,256 +26,20 @@ export default {
   data() {
     return {
       user: {
-        loading: true,
-        name: "累计用户量",
-        conf: "合计",
-        _id: "allUser",
-        number: 0,
-        numbertoDecimal: commenMotheds.toDecimal(233.2565, 2),
-        unit: "人"
+        loading: true
       },
       newUser: {
-        loading: false,
-        name: "新增用户数",
-        conf: "今日",
-        _id: "newUser",
-        number: 233.2565,
-        numbertoDecimal: commenMotheds.toDecimal(233.2565, 2),
-        unit: "人",
-        ratio: {
-          trend: 1,
-          number: "1.2%"
-        },
-        basis: {
-          trend: 1,
-          number: "1.2%"
-        }
+        loading: true
       },
       uv: {
-        loading: false,
-        name: "日活",
-        _id: "nikkatsu",
-        conf: "今日",
-        number: 233.2565,
-        numbertoDecimal: commenMotheds.toDecimal(233.2565, 2),
-        unit: "人",
-        ratio: {
-          trend: 1,
-          number: "1.2%"
-        },
-        basis: {
-          trend: 1,
-          number: "1.2%"
-        }
+        loading: true
       },
       pv: {
-        loading: false,
-        name: "页面浏览量",
-        conf: "今日",
-        _id: "pv",
-        number: 233.2565,
-        numbertoDecimal: commenMotheds.toDecimal(233.2565, 2),
-        unit: "人",
-        ratio: {
-          trend: 1,
-          number: "1.2%"
-        },
-        basis: {
-          trend: 1,
-          number: "1.2%"
-        }
+        loading: true
       },
       detailList: [
         {
-          number: 233.2565,
-          numbertoDecimal: commenMotheds.toDecimal(233.2565, 2),
-          unit: "人",
-          loading: false,
-          name: "每日访问趋势",
-          _id: "visit",
-          range: ["2019-02-07", "2019-03-08"],
-          all: {
-            number: 5167,
-            measuresUnit: "人"
-          },
-          average: {
-            number: 4210,
-            measuresUnit: "人"
-          },
-          ratio: {
-            trend: 1,
-            number: "1.2%"
-          },
-          basis: {
-            trend: 1,
-            number: "1.2%"
-          },
-
-          option: {
-            title: {
-              show: false,
-              text: "Web浏览页面用户的触发数",
-              textStyle: {
-                color: "#8492A6",
-                fontStyle: "normal",
-                fontWeight: "bold",
-                fontSize: "14",
-                align: "center"
-              }
-            },
-            legend: {
-              type: "scroll",
-              show: true,
-              bottom: 10,
-              // data: 'Web浏览页面用户的触发数'
-              textStyle: {
-                color: "#8492A6",
-                fontStyle: "normal",
-                fontWeight: "normal",
-                fontSize: "14",
-                align: "center"
-              }
-            },
-            color: ["#5ea6f1"],
-            tooltip: {
-              //悬浮提示层设置
-              trigger: "axis",
-              backgroundColor: "#fff",
-              borderColor: "#5ea6f1",
-              borderWidth: 1,
-              textStyle: {
-                color: "#8492A6",
-                fontStyle: "normal",
-                fontWeight: "normal",
-                fontSize: "14"
-              },
-              axisPointer: {
-                type: "line"
-              },
-              formatter:
-                '{b0}<br /><span style="width:10px;height:10px;background:#5ea6f1;border-radius:50%;display:inline-block"></span>{a}: {c}' +
-                " 人"
-            },
-            xAxis: [
-              {
-                type: "category",
-                data: [
-                  "1月",
-                  "2月",
-                  "3月",
-                  "4月",
-                  "5月",
-                  "6月",
-                  "7月",
-                  "8月",
-                  "9月",
-                  "10月",
-                  "11月",
-                  "12月",
-                  "12月",
-                  "12月",
-                  "12月",
-                  "12月",
-                  "12月",
-                  "12月",
-                  "12月",
-                  "12月",
-                  "12月",
-                  "12月",
-                  "12月",
-                  "12月",
-                  "12月",
-                  "12月",
-                  "12月",
-                  "12月",
-                  "12月",
-                  "12月"
-                ],
-                axisTick: {
-                  alignWithLabel: true
-                },
-                axisLine: {
-                  //坐标轴刻度
-                  lineStyle: {
-                    color: "#8492A6"
-                  }
-                },
-                axisLabel: {
-                  //坐标轴刻度下的字符
-                  color: "#8492A6",
-                  fontStyle: "normal",
-                  fontWeight: "light",
-                  fontSize: "14"
-                }
-              }
-            ],
-            yAxis: [
-              {
-                type: "value",
-                splitLine: {
-                  //分隔线设置
-                  show: true,
-                  lineStyle: {
-                    color: "#8492A6",
-                    type: "dashed"
-                  }
-                },
-                axisTick: {
-                  alignWithLabel: true
-                },
-                axisLine: {
-                  lineStyle: {
-                    color: "#8492A6"
-                  }
-                },
-                axisLabel: {
-                  color: "#8492A6",
-                  fontStyle: "normal",
-                  fontWeight: "light",
-                  fontSize: "14"
-                }
-              }
-            ],
-            series: [
-              {
-                name: "Web浏览页面用户的触发数",
-                type: "line",
-                barWidth: "60%",
-                data: [
-                  995,
-                  666,
-                  444,
-                  858,
-                  654,
-                  236,
-                  645,
-                  546,
-                  846,
-                  225,
-                  547,
-                  356,
-                  547,
-                  547,
-                  547,
-                  547,
-                  547,
-                  547,
-                  547,
-                  547,
-                  547,
-                  547,
-                  547,
-                  547,
-                  547,
-                  547,
-                  547,
-                  547,
-                  547,
-                  547
-                ]
-              }
-            ]
-          }
+          loading: true
         }
       ],
       Nikkatsu: {
@@ -714,9 +478,176 @@ export default {
           conf: "合计",
           _id: "allUser",
           number: data.data,
-          numbertoDecimal: commenMotheds.toDecimal(data.data, 2),
+          numbertoDecimal: commenMotheds.toDecimal(data.data, 0),
           unit: "人"
         };
+      } else {
+        this.$Message.error(data.message);
+      }
+    },
+    async getNewUserTotal() {
+      const params = {
+        time: [
+          this.$moment().format("YYYY-MM-DD"),
+          this.$moment().format("YYYY-MM-DD")
+        ],
+        teamEn: this.$store.getters.getTeam.teamEn,
+        buildTime:this.$store.getters.getTeam.buildTime
+      };
+      let data = await Fetcher.getNewUserTotal(this, params);
+      if (data.code === 200) {
+        this.newUser =data.data;
+      } else {
+        this.$Message.error(data.message);
+      }
+    },
+    async getUserViewTotal() {
+      const params = {
+        time: [
+          this.$moment().format("YYYY-MM-DD"),
+          this.$moment().format("YYYY-MM-DD")
+        ],
+        teamEn: this.$store.getters.getTeam.teamEn
+      };
+      let data = await Fetcher.getUserViewTotal(this, params);
+      if (data.code === 200) {
+        this.uv =data.data;
+      } else {
+        this.$Message.error(data.message);
+      }
+    },
+    async getPageViewTotal() {
+      const params = {
+        time: [
+          this.$moment().format("YYYY-MM-DD"),
+          this.$moment().format("YYYY-MM-DD")
+        ],
+        teamEn: this.$store.getters.getTeam.teamEn
+      };
+      let data = await Fetcher.getPageViewTotal(this, params);
+      if (data.code === 200) {
+        this.pv=data.data
+      } else {
+        this.$Message.error(data.message);
+      }
+    },
+    async getPageViewByDayTotal() {
+      const params = {
+        time: [
+          this.$moment().subtract(30, 'days').format("YYYY-MM-DD"),this.$moment().subtract(1, 'days').format("YYYY-MM-DD")
+        ],
+        teamEn: this.$store.getters.getTeam.teamEn
+      };
+      let data = await Fetcher.getPageViewByDayTotal(this, params);
+      if (data.code === 200) {
+        this.detailList=[
+        {
+          loading: false,
+          name: "过去30天页面浏览量",
+          _id: "visit",
+          range: [this.$moment().subtract(30, 'days').format("YYYY-MM-DD"),this.$moment().subtract(1, 'days').format("YYYY-MM-DD")],
+          all: {
+            number: data.data.sum,
+            measuresUnit: "次"
+          },
+          average: {
+            number: data.data.average,
+            measuresUnit: "次"
+          },
+          option: {
+            legend: {
+              type: "scroll",
+              show: true,
+              top: 0,
+              textStyle: {
+                color: "#8492A6",
+                fontStyle: "normal",
+                fontWeight: "normal",
+                fontSize: "14",
+                align: "center"
+              }
+            },
+            color: ["#5ea6f1"],
+            tooltip: {
+              //悬浮提示层设置
+              trigger: "axis",
+              backgroundColor: "#fff",
+              borderColor: "#5ea6f1",
+              borderWidth: 1,
+              textStyle: {
+                color: "#8492A6",
+                fontStyle: "normal",
+                fontWeight: "normal",
+                fontSize: "14"
+              },
+              axisPointer: {
+                type: "line"
+              },
+              formatter:
+                '{b0}<br /><span style="width:10px;height:10px;background:#5ea6f1;border-radius:50%;display:inline-block"></span>{a}: {c}' +
+                " 次"
+            },
+            xAxis: [
+              {
+                type: "category",
+                data:data.data.xAxisData,
+                axisTick: {
+                  alignWithLabel: true
+                },
+                axisLine: {
+                  //坐标轴刻度
+                  lineStyle: {
+                    color: "#8492A6"
+                  }
+                },
+                axisLabel: {
+                  //坐标轴刻度下的字符
+                  color: "#8492A6",
+                  fontStyle: "normal",
+                  fontWeight: "light",
+                  fontSize: "14",
+                  rotate:45
+                }
+              }
+            ],
+            yAxis: [
+              {
+                type: "value",
+                splitLine: {
+                  //分隔线设置
+                  show: true,
+                  lineStyle: {
+                    color: "#8492A6",
+                    type: "dashed"
+                  }
+                },
+                axisTick: {
+                  alignWithLabel: true
+                },
+                axisLine: {
+                  lineStyle: {
+                    color: "#8492A6"
+                  }
+                },
+                axisLabel: {
+                  color: "#8492A6",
+                  fontStyle: "normal",
+                  fontWeight: "light",
+                  fontSize: "14"
+                }
+              }
+            ],
+            series: [
+              {
+                name: "Web浏览页面的触发数",
+                type: "line",
+                barWidth: "60%",
+                data: data.data.seriesData
+              }
+            ]
+          }
+        }
+      ]
       } else {
         this.$Message.error(data.message);
       }
@@ -724,6 +655,10 @@ export default {
   },
   created() {
     this.getUserTotal();
+    this.getNewUserTotal();
+    this.getUserViewTotal();
+    this.getPageViewTotal();
+    this.getPageViewByDayTotal();
   },
   components: {
     IndexCard,

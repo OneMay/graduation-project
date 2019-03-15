@@ -105,5 +105,37 @@ module.exports = function () {
     }, function (ctx, next) {
         ctx.body = ctx.body;
     });
+     //概览-新增用户数
+     router.post('/overview/newuserTotal', async (ctx, next) => {
+        return new Promise(function (resolve, reject) {
+            EventView.overviewNewUser(ctx, next, resolve);
+        });
+    }, function (ctx, next) {
+        ctx.body = ctx.body;
+    });
+    //概览-日活
+    router.post('/overview/userviewTotal', async (ctx, next) => {
+        return new Promise(function (resolve, reject) {
+            EventView.overviewUserView(ctx, next, resolve);
+        });
+    }, function (ctx, next) {
+        ctx.body = ctx.body;
+    });
+    //概览-页面浏览量
+    router.post('/overview/pageviewTotal', async (ctx, next) => {
+        return new Promise(function (resolve, reject) {
+            EventView.overviewPageView(ctx, next, resolve);
+        });
+    }, function (ctx, next) {
+        ctx.body = ctx.body;
+    });
+     //页面分析-每日页面浏览量
+     router.post('/pageview/pageviewTotal', async (ctx, next) => {
+        return new Promise(function (resolve, reject) {
+            EventView.pageViewByDay(ctx, next, resolve);
+        });
+    }, function (ctx, next) {
+        ctx.body = ctx.body;
+    });
     return router
 };
