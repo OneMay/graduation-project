@@ -27,41 +27,41 @@ export default {
     return {
       user: {
         loading: true,
-        text:'等一等啊o(╥﹏╥)o'
+        text: "等一等啊o(╥﹏╥)o"
       },
       newUser: {
         loading: true,
-        text:'等一等啊o(╥﹏╥)o'
+        text: "等一等啊o(╥﹏╥)o"
       },
       uv: {
         loading: true,
-        text:'等一等啊o(╥﹏╥)o'
+        text: "等一等啊o(╥﹏╥)o"
       },
       pv: {
         loading: true,
-        text:'等一等啊o(╥﹏╥)o'
+        text: "等一等啊o(╥﹏╥)o"
       },
       detailList: [
         {
           loading: true,
-          text:'等一等啊o(╥﹏╥)o'
+          text: "等一等啊o(╥﹏╥)o"
         }
       ],
       Nikkatsu: {
         loading: true,
-        text:'等一等啊o(╥﹏╥)o'
+        text: "等一等啊o(╥﹏╥)o"
       },
       newUserByDay: {
         loading: true,
-        text:'等一等啊o(╥﹏╥)o'
+        text: "等一等啊o(╥﹏╥)o"
       },
       visitTime: {
         loading: true,
-        text:'等一等啊o(╥﹏╥)o'
+        text: "等一等啊o(╥﹏╥)o"
       },
       provinceDistribution: {
         loading: true,
-        text:'等一等啊o(╥﹏╥)o'
+        text: "等一等啊o(╥﹏╥)o"
       }
     };
   },
@@ -78,7 +78,7 @@ export default {
       if (data.code === 200) {
         this.user = {
           loading: false,
-          text:'等一等啊o(╥﹏╥)o',
+          text: "等一等啊o(╥﹏╥)o",
           name: "累计用户量",
           conf: "合计",
           _id: "allUser",
@@ -102,7 +102,7 @@ export default {
       let data = await Fetcher.getNewUserTotal(this, params);
       if (data.code === 200) {
         this.newUser = data.data;
-         this.newUser.text='等一等啊o(╥﹏╥)o';
+        this.newUser.text = "等一等啊o(╥﹏╥)o";
       } else {
         this.$Message.error(data.message);
       }
@@ -118,7 +118,7 @@ export default {
       let data = await Fetcher.getUserViewTotal(this, params);
       if (data.code === 200) {
         this.uv = data.data;
-        this.uv.text='等一等啊o(╥﹏╥)o';
+        this.uv.text = "等一等啊o(╥﹏╥)o";
       } else {
         this.$Message.error(data.message);
       }
@@ -134,7 +134,7 @@ export default {
       let data = await Fetcher.getPageViewTotal(this, params);
       if (data.code === 200) {
         this.pv = data.data;
-        this.pv.text='等一等啊o(╥﹏╥)o';
+        this.pv.text = "等一等啊o(╥﹏╥)o";
       } else {
         this.$Message.error(data.message);
       }
@@ -156,7 +156,7 @@ export default {
         this.detailList = [
           {
             loading: false,
-            text:'等一等啊o(╥﹏╥)o',
+            text: "等一等啊o(╥﹏╥)o",
             name: "过去30天页面浏览量",
             _id: "visit",
             range: [
@@ -289,7 +289,7 @@ export default {
       if (data.code === 200) {
         this.Nikkatsu = {
           loading: false,
-          text:'等一等啊o(╥﹏╥)o',
+          text: "等一等啊o(╥﹏╥)o",
           name: "过去7天日活",
           _id: "uv",
           range: [
@@ -422,7 +422,7 @@ export default {
       if (data.code === 200) {
         this.newUserByDay = {
           loading: false,
-          text:'等一等啊o(╥﹏╥)o',
+          text: "等一等啊o(╥﹏╥)o",
           name: "过去7天新增用户数",
           _id: "uv",
           range: [
@@ -541,19 +541,30 @@ export default {
     async getAverageUserPageView() {
       const params = {
         time: [
-          this.$moment().subtract(7, 'days').format("YYYY-MM-DD"),this.$moment().subtract(1, 'days').format("YYYY-MM-DD")
+          this.$moment()
+            .subtract(7, "days")
+            .format("YYYY-MM-DD"),
+          this.$moment()
+            .subtract(1, "days")
+            .format("YYYY-MM-DD")
         ],
         teamEn: this.$store.getters.getTeam.teamEn
       };
       let data = await Fetcher.getAverageUserPageView(this, params);
       if (data.code === 200) {
-        this.visitTime=
-        {
+        this.visitTime = {
           loading: false,
-          text:'等一等啊o(╥﹏╥)o',
+          text: "等一等啊o(╥﹏╥)o",
           name: "过去7天人均页面访问量",
           _id: "averagePv",
-          range: [this.$moment().subtract(7, 'days').format("YYYY-MM-DD"),this.$moment().subtract(1, 'days').format("YYYY-MM-DD")],
+          range: [
+            this.$moment()
+              .subtract(7, "days")
+              .format("YYYY-MM-DD"),
+            this.$moment()
+              .subtract(1, "days")
+              .format("YYYY-MM-DD")
+          ],
           all: {
             number: data.data.sum,
             measuresUnit: "次"
@@ -598,7 +609,7 @@ export default {
             xAxis: [
               {
                 type: "category",
-                data:data.data.xAxisData,
+                data: data.data.xAxisData,
                 axisTick: {
                   alignWithLabel: true
                 },
@@ -614,7 +625,7 @@ export default {
                   fontStyle: "normal",
                   fontWeight: "light",
                   fontSize: "14",
-                  rotate:45
+                  rotate: 45
                 }
               }
             ],
@@ -654,8 +665,7 @@ export default {
               }
             ]
           }
-        }
-      
+        };
       } else {
         this.$Message.error(data.message);
       }
@@ -663,74 +673,76 @@ export default {
     async getProvinceData() {
       const params = {
         time: [
-          this.$moment().subtract(7, 'days').format("YYYY-MM-DD"),this.$moment().subtract(1, 'days').format("YYYY-MM-DD")
+          this.$moment()
+            .subtract(7, "days")
+            .format("YYYY-MM-DD"),
+          this.$moment()
+            .subtract(1, "days")
+            .format("YYYY-MM-DD")
         ],
         teamEn: this.$store.getters.getTeam.teamEn
       };
       let data = await Fetcher.getProvinceData(this, params);
       if (data.code === 200) {
-        this.provinceDistribution= {
-        text:data.data.seriesData.length>0?'等一等啊o(╥﹏╥)o':'暂无数据o(╥﹏╥)o',
-        loading: data.data.seriesData.length>0?false:true,
-        name: "过去7天Web 访问省份分布",
-        _id: "provinceDistribution",
-        range: [this.$moment().subtract(7, 'days').format("YYYY-MM-DD"),this.$moment().subtract(1, 'days').format("YYYY-MM-DD")],
-        all: {
-          number:  data.data.sum,
-          measuresUnit: "个"
-        },
-        average: {
-          number:  data.data.average,
-          measuresUnit: "个"
-        },
-        option: {
-          color: ["#5ea6f1"],
-          visualMap: {
-            show: false,
-            min: 80,
-            max: 400,
-            color: [
-              "#d94e5d",
-              "#eac736",
-              "#50a3ba",
-              "#5ea6f1",
-              "#000",
-              "#49b91c",
-              "#20231f"
-            ],
-            textStyle: {
-              color: "#fff"
-            }
+        this.provinceDistribution = {
+          text:
+            data.data.seriesData.length > 0
+              ? "等一等啊o(╥﹏╥)o"
+              : "暂无数据o(╥﹏╥)o",
+          loading: data.data.seriesData.length > 0 ? false : true,
+          name: "过去7天Web 访问省份分布",
+          _id: "provinceDistribution",
+          range: [
+            this.$moment()
+              .subtract(7, "days")
+              .format("YYYY-MM-DD"),
+            this.$moment()
+              .subtract(1, "days")
+              .format("YYYY-MM-DD")
+          ],
+          all: {
+            number: data.data.sum,
+            measuresUnit: "个"
           },
-          tooltip: {
-            //悬浮提示层设置
-            trigger: "item",
-            backgroundColor: "#fff",
-            borderColor: "#5ea6f1",
-            borderWidth: 1,
-            textStyle: {
-              color: "#8492A6",
-              fontStyle: "normal",
-              fontWeight: "normal",
-              fontSize: "14"
-            },
-            axisPointer: {
-              type: "line"
-            },
-            formatter: "{a} <br/>{b0} : {c} (占{d}%)"
+          average: {
+            number: data.data.average,
+            measuresUnit: "个"
           },
+          option: {
+            visualMap: {
+              show: false,
+              min: 10,
+              max: 400,
+              inRange: {}
+            },
+            tooltip: {
+              //悬浮提示层设置
+              trigger: "item",
+              backgroundColor: "#fff",
+              borderColor: "#5ea6f1",
+              borderWidth: 1,
+              textStyle: {
+                color: "#8492A6",
+                fontStyle: "normal",
+                fontWeight: "normal",
+                fontSize: "14"
+              },
+              axisPointer: {
+                type: "line"
+              },
+              formatter: "{a} <br/>{b0} : {c} (占{d}%)"
+            },
 
-          series: [
-            {
-              name: "Web 访问省份分布",
-              type: "pie",
-              barWidth: "60%",
-              data: data.data.seriesData
-            }
-          ]
-        }
-      }
-        } else {
+            series: [
+              {
+                name: "访问来源",
+                type: "pie",
+                data: data.data.seriesData
+              }
+            ]
+          }
+        };
+      } else {
         this.$Message.error(data.message);
       }
     }
