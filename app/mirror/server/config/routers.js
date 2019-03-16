@@ -3,6 +3,7 @@ const User = require('../controllers/user');
 const SDK = require('../controllers/sdk');
 const Team = require('../controllers/team');
 const EventView = require('../controllers/eventView');
+const PageView = require('../controllers/pageView');
 
 module.exports = function () {
     let router = new Router({
@@ -124,7 +125,7 @@ module.exports = function () {
     //概览-页面浏览量
     router.post('/overview/pageviewTotal', async (ctx, next) => {
         return new Promise(function (resolve, reject) {
-            EventView.overviewPageView(ctx, next, resolve);
+            PageView.overviewPageView(ctx, next, resolve);
         });
     }, function (ctx, next) {
         ctx.body = ctx.body;
@@ -132,7 +133,39 @@ module.exports = function () {
      //页面分析-每日页面浏览量
      router.post('/pageview/pageviewTotal', async (ctx, next) => {
         return new Promise(function (resolve, reject) {
-            EventView.pageViewByDay(ctx, next, resolve);
+            PageView.pageViewByDay(ctx, next, resolve);
+        });
+    }, function (ctx, next) {
+        ctx.body = ctx.body;
+    });
+    //事件分析-日活
+    router.post('/event/userview', async (ctx, next) => {
+        return new Promise(function (resolve, reject) {
+            EventView.userViewByDay(ctx, next, resolve);
+        });
+    }, function (ctx, next) {
+        ctx.body = ctx.body;
+    });
+    //事件分析-新增用户数
+    router.post('/event/newuser', async (ctx, next) => {
+        return new Promise(function (resolve, reject) {
+            EventView.newUserByDay(ctx, next, resolve);
+        });
+    }, function (ctx, next) {
+        ctx.body = ctx.body;
+    });
+    //事件分析-人均页面访问量
+    router.post('/event/pageaveragebyuser', async (ctx, next) => {
+        return new Promise(function (resolve, reject) {
+            EventView.pageViewByDayAverage(ctx, next, resolve);
+        });
+    }, function (ctx, next) {
+        ctx.body = ctx.body;
+    });
+    //事件分析-访问省份分布
+    router.post('/event/province', async (ctx, next) => {
+        return new Promise(function (resolve, reject) {
+            EventView.provinceByDay(ctx, next, resolve);
         });
     }, function (ctx, next) {
         ctx.body = ctx.body;

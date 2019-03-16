@@ -2,7 +2,7 @@
      <Card
       style="width:24.5%;text-align: left; margin-left: 5px;height:222px;"
     >
-    <Loading v-if="index.loading"></Loading>
+    <Loading v-if="index.loading"  :text="index.text"></Loading>
       <div class="widget-content-container" v-else>
         <div class="widget-topbar">
           <div class="widget-title">

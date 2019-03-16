@@ -1,6 +1,6 @@
 <template>
     <Card class="ivu-card-body-flex" style="min-height:400px">
-        <Loading v-if="detail.loading"></Loading>
+        <Loading v-if="detail.loading"  :text="detail.text"></Loading>
         <div class="ivu-card-bodys" v-else>
       <div
         class="widget-content-container"

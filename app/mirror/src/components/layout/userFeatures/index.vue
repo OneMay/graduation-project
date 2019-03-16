@@ -14,6 +14,7 @@ export default {
     return {
       provinceDistribution: {
         loading: false,
+        text:'等一等啊o(╥﹏╥)o',
         name: "Web 访问省份分布",
         _id: "provinceDistribution",
         range: ["2019-02-07", "2019-03-08"],
@@ -80,6 +81,7 @@ export default {
       },
       cityDistribution: {
         loading: false,
+        text:'等一等啊o(╥﹏╥)o',
         name: "Web 访问城市分布",
         _id: "cityDistribution",
         range: ["2019-02-07", "2019-03-08"],
@@ -146,6 +148,7 @@ export default {
       },
       dosDistribution: {
         loading: false,
+        text:'等一等啊o(╥﹏╥)o',
         name: "Web 访问操作系统",
         _id: "dosDistribution",
         range: ["2019-02-07", "2019-03-08"],
@@ -212,6 +215,7 @@ export default {
       },
       userDistribution: {
         loading: false,
+        text:'等一等啊o(╥﹏╥)o',
         name: "Web 新/非新用户",
         _id: "user",
         range: ["2019-02-07", "2019-03-08"],

@@ -20,7 +20,7 @@
           <span class="my-span">{{ params.url }}</span>
         </div>
         <div style="position:relative;height:100%">
-          <Loading v-if="loading"></Loading>
+          <Loading v-if="loading" :text="'等一等啊o(╥﹏╥)o'"></Loading>
           <VueEchartsComponent :ops="data" v-else></VueEchartsComponent>
         </div>
       </div>

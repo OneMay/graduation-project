@@ -29,9 +29,9 @@
  
 <script>
 export default {
+  props:['text'],
   data() {
     return {
-      text: "等一等(づ￣3￣)づ╭❤～",
       duration: "2s"
     };
   }

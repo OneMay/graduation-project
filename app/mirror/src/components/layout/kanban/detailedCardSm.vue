@@ -1,6 +1,6 @@
 <template>
     <Card class="ivu-card-body-flex" style="min-height:400px">
-        <Loading v-if="detail.loading"></Loading>
+        <Loading v-if="detail.loading" :text="detail.text"></Loading>
         <div class="ivu-card-bodys" v-else>
       <div
         class="widget-content-container"
@@ -16,8 +16,7 @@
                 </router-link>
               </div>
               <div class="range">
-                {{ detail.range[0] }}<span>~</span>{{ detail.range[1] }} | 过去 30
-                天
+                {{ detail.range[0] }}<span>~</span>{{ detail.range[1] }} 
               </div>
             </div>
           </div>

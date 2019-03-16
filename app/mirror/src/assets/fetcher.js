@@ -1,4 +1,5 @@
 import commenMotheds from "./commen";
+
 export default {
     login: async (ctx, params) => {
         ctx.$Loading.start();
@@ -258,5 +259,102 @@ export default {
                 return data;
             });
         return result;
+    },
+    /**
+    * 事件分析-日活
+    */
+    getUserViewByDayTotal: async (ctx, params) => {
+        ctx.$Loading.start();
+        let result = await ctx.$http
+            .post("api/event/userview", params)
+            .then(res => {
+                let data = commenMotheds.parserDataToJson(res.data);
+                ctx.$Loading.finish();
+                return data;
+            })
+            .catch(err => {
+                console.log(err);
+                let data = {
+                    code: 4444,
+                    data: null,
+                    message: '好像出错了哟o(╥﹏╥)o'
+                }
+                ctx.$Loading.error();
+                return data;
+            });
+        return result;
+    },
+    /**
+    * 事件分析-新增用户数
+    */
+    getNewUserByDayTotal: async (ctx, params) => {
+        ctx.$Loading.start();
+        let result = await ctx.$http
+            .post("api/event/newuser", params)
+            .then(res => {
+                let data = commenMotheds.parserDataToJson(res.data);
+                ctx.$Loading.finish();
+                return data;
+            })
+            .catch(err => {
+                console.log(err);
+                let data = {
+                    code: 4444,
+                    data: null,
+                    message: '好像出错了哟o(╥﹏╥)o'
+                }
+                ctx.$Loading.error();
+                return data;
+            });
+        return result;
+    },
+    /**
+    * 事件分析-人均页面访问量
+    */
+    getAverageUserPageView: async (ctx, params) => {
+        ctx.$Loading.start();
+        let result = await ctx.$http
+            .post("api/event/pageaveragebyuser", params)
+            .then(res => {
+                let data = commenMotheds.parserDataToJson(res.data);
+                ctx.$Loading.finish();
+                return data;
+            })
+            .catch(err => {
+                console.log(err);
+                let data = {
+                    code: 4444,
+                    data: null,
+                    message: '好像出错了哟o(╥﹏╥)o'
+                }
+                ctx.$Loading.error();
+                return data;
+            });
+        return result;
+    },
+    /**
+    * 事件分析-访问省份分布
+    */
+   getProvinceData: async (ctx, params) => {
+        ctx.$Loading.start();
+        let result = await ctx.$http
+            .post("api/event/province", params)
+            .then(res => {
+                let data = commenMotheds.parserDataToJson(res.data);
+                ctx.$Loading.finish();
+                return data;
+            })
+            .catch(err => {
+                console.log(err);
+                let data = {
+                    code: 4444,
+                    data: null,
+                    message: '好像出错了哟o(╥﹏╥)o'
+                }
+                ctx.$Loading.error();
+                return data;
+            });
+        return result;
     }
+    
 }

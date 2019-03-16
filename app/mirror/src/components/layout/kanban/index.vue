@@ -10,7 +10,7 @@
       :detail="item"
     ></DetailedCardBig>
     <DetailedCardSm :detail="Nikkatsu"></DetailedCardSm>
-    <DetailedCardSm :detail="newuser"></DetailedCardSm>
+    <DetailedCardSm :detail="newUserByDay"></DetailedCardSm>
     <DetailedCardSm :detail="visitTime"></DetailedCardSm>
     <DetailedCardSm :detail="provinceDistribution"></DetailedCardSm>
   </div>
@@ -26,438 +26,42 @@ export default {
   data() {
     return {
       user: {
-        loading: true
+        loading: true,
+        text:'等一等啊o(╥﹏╥)o'
       },
       newUser: {
-        loading: true
+        loading: true,
+        text:'等一等啊o(╥﹏╥)o'
       },
       uv: {
-        loading: true
+        loading: true,
+        text:'等一等啊o(╥﹏╥)o'
       },
       pv: {
-        loading: true
+        loading: true,
+        text:'等一等啊o(╥﹏╥)o'
       },
       detailList: [
         {
-          loading: true
+          loading: true,
+          text:'等一等啊o(╥﹏╥)o'
         }
       ],
       Nikkatsu: {
-        loading: false,
-        name: "过去7天日活",
-        _id: "nikkatsu",
-        range: ["2019-02-07", "2019-03-08"],
-        all: {
-          number: 5167,
-          measuresUnit: "人"
-        },
-        average: {
-          number: 4210,
-          measuresUnit: "人"
-        },
-        option: {
-          title: {
-            show: false,
-            text: "过去7天日活",
-            textStyle: {
-              color: "#8492A6",
-              fontStyle: "normal",
-              fontWeight: "bold",
-              fontSize: "14",
-              align: "center"
-            }
-          },
-          legend: {
-            type: "scroll",
-            show: true,
-            bottom: 10,
-            // data: 'Web浏览页面用户的触发数'
-            textStyle: {
-              color: "#8492A6",
-              fontStyle: "normal",
-              fontWeight: "normal",
-              fontSize: "14",
-              align: "center"
-            }
-          },
-          color: ["#5ea6f1"],
-          tooltip: {
-            //悬浮提示层设置
-            trigger: "axis",
-            backgroundColor: "#fff",
-            borderColor: "#5ea6f1",
-            borderWidth: 1,
-            textStyle: {
-              color: "#8492A6",
-              fontStyle: "normal",
-              fontWeight: "normal",
-              fontSize: "14"
-            },
-            axisPointer: {
-              type: "line"
-            },
-            formatter:
-              '{b0}<br /><span style="width:10px;height:10px;background:#5ea6f1;border-radius:50%;display:inline-block"></span>{a}: {c}' +
-              " 人"
-          },
-          xAxis: [
-            {
-              type: "category",
-              data: ["1月", "2月", "3月", "4月", "5月", "6月", "7月"],
-              axisTick: {
-                alignWithLabel: true
-              },
-              axisLine: {
-                //坐标轴刻度
-                lineStyle: {
-                  color: "#8492A6"
-                }
-              },
-              axisLabel: {
-                //坐标轴刻度下的字符
-                color: "#8492A6",
-                fontStyle: "normal",
-                fontWeight: "light",
-                fontSize: "14"
-              }
-            }
-          ],
-          yAxis: [
-            {
-              type: "value",
-              splitLine: {
-                //分隔线设置
-                show: true,
-                lineStyle: {
-                  color: "#8492A6",
-                  type: "dashed"
-                }
-              },
-              axisTick: {
-                alignWithLabel: true
-              },
-              axisLine: {
-                lineStyle: {
-                  color: "#8492A6"
-                }
-              },
-              axisLabel: {
-                color: "#8492A6",
-                fontStyle: "normal",
-                fontWeight: "light",
-                fontSize: "14"
-              }
-            }
-          ],
-          series: [
-            {
-              name: "访问全站的用户数",
-              type: "line",
-              barWidth: "60%",
-              data: [995, 666, 444, 858, 654, 236, 645]
-            }
-          ]
-        }
+        loading: true,
+        text:'等一等啊o(╥﹏╥)o'
       },
-      newuser: {
-        loading: false,
-        name: "去过7天新用户数",
-        _id: "newUser",
-        range: ["2019-02-07", "2019-03-08"],
-        all: {
-          number: 5167,
-          measuresUnit: "人"
-        },
-        average: {
-          number: 4210,
-          measuresUnit: "人"
-        },
-        option: {
-          title: {
-            show: false,
-            text: "去过7天新用户数",
-            textStyle: {
-              color: "#8492A6",
-              fontStyle: "normal",
-              fontWeight: "bold",
-              fontSize: "14",
-              align: "center"
-            }
-          },
-          legend: {
-            type: "scroll",
-            show: true,
-            bottom: 10,
-            // data: 'Web浏览页面用户的触发数'
-            textStyle: {
-              color: "#8492A6",
-              fontStyle: "normal",
-              fontWeight: "normal",
-              fontSize: "14",
-              align: "center"
-            }
-          },
-          color: ["#5ea6f1"],
-          tooltip: {
-            //悬浮提示层设置
-            trigger: "axis",
-            backgroundColor: "#fff",
-            borderColor: "#5ea6f1",
-            borderWidth: 1,
-            textStyle: {
-              color: "#8492A6",
-              fontStyle: "normal",
-              fontWeight: "normal",
-              fontSize: "14"
-            },
-            axisPointer: {
-              type: "line"
-            },
-            formatter:
-              '{b0}<br /><span style="width:10px;height:10px;background:#5ea6f1;border-radius:50%;display:inline-block"></span>{a}: {c}' +
-              " 人"
-          },
-          xAxis: [
-            {
-              type: "category",
-              data: ["1月", "2月", "3月", "4月", "5月", "6月", "7月"],
-              axisTick: {
-                alignWithLabel: true
-              },
-              axisLine: {
-                //坐标轴刻度
-                lineStyle: {
-                  color: "#8492A6"
-                }
-              },
-              axisLabel: {
-                //坐标轴刻度下的字符
-                color: "#8492A6",
-                fontStyle: "normal",
-                fontWeight: "light",
-                fontSize: "14"
-              }
-            }
-          ],
-          yAxis: [
-            {
-              type: "value",
-              splitLine: {
-                //分隔线设置
-                show: true,
-                lineStyle: {
-                  color: "#8492A6",
-                  type: "dashed"
-                }
-              },
-              axisTick: {
-                alignWithLabel: true
-              },
-              axisLine: {
-                lineStyle: {
-                  color: "#8492A6"
-                }
-              },
-              axisLabel: {
-                color: "#8492A6",
-                fontStyle: "normal",
-                fontWeight: "light",
-                fontSize: "14"
-              }
-            }
-          ],
-          series: [
-            {
-              name: "访问全站的新用户数",
-              type: "line",
-              barWidth: "60%",
-              data: [995, 666, 444, 858, 654, 236, 645]
-            }
-          ]
-        }
+      newUserByDay: {
+        loading: true,
+        text:'等一等啊o(╥﹏╥)o'
       },
       visitTime: {
-        loading: false,
-        name: "平均访问时长",
-        _id: "visitTime",
-        range: ["2019-02-07", "2019-03-08"],
-        all: {
-          number: 5167,
-          measuresUnit: "人"
-        },
-        average: {
-          number: 4210,
-          measuresUnit: "人"
-        },
-        option: {
-          title: {
-            show: false,
-            text: "平均访问时长",
-            textStyle: {
-              color: "#8492A6",
-              fontStyle: "normal",
-              fontWeight: "bold",
-              fontSize: "14",
-              align: "center"
-            }
-          },
-          legend: {
-            type: "scroll",
-            show: true,
-            bottom: 10,
-            // data: 'Web浏览页面用户的触发数'
-            textStyle: {
-              color: "#8492A6",
-              fontStyle: "normal",
-              fontWeight: "normal",
-              fontSize: "14",
-              align: "center"
-            }
-          },
-          color: ["#5ea6f1"],
-          tooltip: {
-            //悬浮提示层设置
-            trigger: "axis",
-            backgroundColor: "#fff",
-            borderColor: "#5ea6f1",
-            borderWidth: 1,
-            textStyle: {
-              color: "#8492A6",
-              fontStyle: "normal",
-              fontWeight: "normal",
-              fontSize: "14"
-            },
-            axisPointer: {
-              type: "line"
-            },
-            formatter:
-              '{b0}<br /><span style="width:10px;height:10px;background:#5ea6f1;border-radius:50%;display:inline-block"></span>{a}: {c}' +
-              " 秒"
-          },
-          xAxis: [
-            {
-              type: "category",
-              data: ["1月", "2月", "3月", "4月", "5月", "6月", "7月"],
-              axisTick: {
-                alignWithLabel: true
-              },
-              axisLine: {
-                //坐标轴刻度
-                lineStyle: {
-                  color: "#8492A6"
-                }
-              },
-              axisLabel: {
-                //坐标轴刻度下的字符
-                color: "#8492A6",
-                fontStyle: "normal",
-                fontWeight: "light",
-                fontSize: "14"
-              }
-            }
-          ],
-          yAxis: [
-            {
-              type: "value",
-              splitLine: {
-                //分隔线设置
-                show: true,
-                lineStyle: {
-                  color: "#8492A6",
-                  type: "dashed"
-                }
-              },
-              axisTick: {
-                alignWithLabel: true
-              },
-              axisLine: {
-                lineStyle: {
-                  color: "#8492A6"
-                }
-              },
-              axisLabel: {
-                color: "#8492A6",
-                fontStyle: "normal",
-                fontWeight: "light",
-                fontSize: "14"
-              }
-            }
-          ],
-          series: [
-            {
-              name: "平均访问时长",
-              type: "line",
-              barWidth: "60%",
-              data: [995, 666, 444, 858, 654, 236, 645]
-            }
-          ]
-        }
+        loading: true,
+        text:'等一等啊o(╥﹏╥)o'
       },
       provinceDistribution: {
-        loading: false,
-        name: "Web 访问省份分布",
-        _id: "provinceDistribution",
-        range: ["2019-02-07", "2019-03-08"],
-        all: {
-          number: 5167,
-          measuresUnit: "人"
-        },
-        average: {
-          number: 4210,
-          measuresUnit: "人"
-        },
-        option: {
-          color: ["#5ea6f1"],
-          visualMap: {
-            show: false,
-            min: 80,
-            max: 400,
-            color: [
-              "#d94e5d",
-              "#eac736",
-              "#50a3ba",
-              "#5ea6f1",
-              "#000",
-              "#49b91c",
-              "#20231f"
-            ],
-            textStyle: {
-              color: "#fff"
-            }
-          },
-          tooltip: {
-            //悬浮提示层设置
-            trigger: "item",
-            backgroundColor: "#fff",
-            borderColor: "#5ea6f1",
-            borderWidth: 1,
-            textStyle: {
-              color: "#8492A6",
-              fontStyle: "normal",
-              fontWeight: "normal",
-              fontSize: "14"
-            },
-            axisPointer: {
-              type: "line"
-            },
-            formatter: "{a} <br/>{b0} : {c} (占{d}%)"
-          },
-
-          series: [
-            {
-              name: "Web 访问省份分布",
-              type: "pie",
-              barWidth: "60%",
-              data: [
-                { value: 335, name: "直接访问" },
-                { value: 310, name: "邮件营销" },
-                { value: 274, name: "联盟广告" },
-                { value: 235, name: "视频广告" },
-                { value: 400, name: "搜索引擎" }
-              ]
-            }
-          ]
-        }
+        loading: true,
+        text:'等一等啊o(╥﹏╥)o'
       }
     };
   },
@@ -474,6 +78,7 @@ export default {
       if (data.code === 200) {
         this.user = {
           loading: false,
+          text:'等一等啊o(╥﹏╥)o',
           name: "累计用户量",
           conf: "合计",
           _id: "allUser",
@@ -492,11 +97,12 @@ export default {
           this.$moment().format("YYYY-MM-DD")
         ],
         teamEn: this.$store.getters.getTeam.teamEn,
-        buildTime:this.$store.getters.getTeam.buildTime
+        buildTime: this.$store.getters.getTeam.buildTime
       };
       let data = await Fetcher.getNewUserTotal(this, params);
       if (data.code === 200) {
-        this.newUser =data.data;
+        this.newUser = data.data;
+         this.newUser.text='等一等啊o(╥﹏╥)o';
       } else {
         this.$Message.error(data.message);
       }
@@ -511,7 +117,8 @@ export default {
       };
       let data = await Fetcher.getUserViewTotal(this, params);
       if (data.code === 200) {
-        this.uv =data.data;
+        this.uv = data.data;
+        this.uv.text='等一等啊o(╥﹏╥)o';
       } else {
         this.$Message.error(data.message);
       }
@@ -526,7 +133,8 @@ export default {
       };
       let data = await Fetcher.getPageViewTotal(this, params);
       if (data.code === 200) {
-        this.pv=data.data
+        this.pv = data.data;
+        this.pv.text='等一等啊o(╥﹏╥)o';
       } else {
         this.$Message.error(data.message);
       }
@@ -534,18 +142,418 @@ export default {
     async getPageViewByDayTotal() {
       const params = {
         time: [
-          this.$moment().subtract(30, 'days').format("YYYY-MM-DD"),this.$moment().subtract(1, 'days').format("YYYY-MM-DD")
+          this.$moment()
+            .subtract(30, "days")
+            .format("YYYY-MM-DD"),
+          this.$moment()
+            .subtract(1, "days")
+            .format("YYYY-MM-DD")
         ],
         teamEn: this.$store.getters.getTeam.teamEn
       };
       let data = await Fetcher.getPageViewByDayTotal(this, params);
       if (data.code === 200) {
-        this.detailList=[
+        this.detailList = [
+          {
+            loading: false,
+            text:'等一等啊o(╥﹏╥)o',
+            name: "过去30天页面浏览量",
+            _id: "visit",
+            range: [
+              this.$moment()
+                .subtract(30, "days")
+                .format("YYYY-MM-DD"),
+              this.$moment()
+                .subtract(1, "days")
+                .format("YYYY-MM-DD")
+            ],
+            all: {
+              number: data.data.sum,
+              measuresUnit: "次"
+            },
+            average: {
+              number: data.data.average,
+              measuresUnit: "次"
+            },
+            option: {
+              legend: {
+                type: "scroll",
+                show: true,
+                top: 0,
+                textStyle: {
+                  color: "#8492A6",
+                  fontStyle: "normal",
+                  fontWeight: "normal",
+                  fontSize: "14",
+                  align: "center"
+                }
+              },
+              color: ["#5ea6f1"],
+              tooltip: {
+                //悬浮提示层设置
+                trigger: "axis",
+                backgroundColor: "#fff",
+                borderColor: "#5ea6f1",
+                borderWidth: 1,
+                textStyle: {
+                  color: "#8492A6",
+                  fontStyle: "normal",
+                  fontWeight: "normal",
+                  fontSize: "14"
+                },
+                axisPointer: {
+                  type: "line"
+                },
+                formatter:
+                  '{b0}<br /><span style="width:10px;height:10px;background:#5ea6f1;border-radius:50%;display:inline-block"></span>{a}: {c}' +
+                  " 次"
+              },
+              xAxis: [
+                {
+                  type: "category",
+                  data: data.data.xAxisData,
+                  axisTick: {
+                    alignWithLabel: true
+                  },
+                  axisLine: {
+                    //坐标轴刻度
+                    lineStyle: {
+                      color: "#8492A6"
+                    }
+                  },
+                  axisLabel: {
+                    //坐标轴刻度下的字符
+                    color: "#8492A6",
+                    fontStyle: "normal",
+                    fontWeight: "light",
+                    fontSize: "14",
+                    rotate: 45
+                  }
+                }
+              ],
+              yAxis: [
+                {
+                  type: "value",
+                  splitLine: {
+                    //分隔线设置
+                    show: true,
+                    lineStyle: {
+                      color: "#8492A6",
+                      type: "dashed"
+                    }
+                  },
+                  axisTick: {
+                    alignWithLabel: true
+                  },
+                  axisLine: {
+                    lineStyle: {
+                      color: "#8492A6"
+                    }
+                  },
+                  axisLabel: {
+                    color: "#8492A6",
+                    fontStyle: "normal",
+                    fontWeight: "light",
+                    fontSize: "14"
+                  }
+                }
+              ],
+              series: [
+                {
+                  name: "Web浏览页面的触发数",
+                  type: "line",
+                  barWidth: "60%",
+                  data: data.data.seriesData
+                }
+              ]
+            }
+          }
+        ];
+      } else {
+        this.$Message.error(data.message);
+      }
+    },
+    async getUserViewByDay() {
+      const params = {
+        time: [
+          this.$moment()
+            .subtract(7, "days")
+            .format("YYYY-MM-DD"),
+          this.$moment()
+            .subtract(1, "days")
+            .format("YYYY-MM-DD")
+        ],
+        teamEn: this.$store.getters.getTeam.teamEn
+      };
+      let data = await Fetcher.getUserViewByDayTotal(this, params);
+      if (data.code === 200) {
+        this.Nikkatsu = {
+          loading: false,
+          text:'等一等啊o(╥﹏╥)o',
+          name: "过去7天日活",
+          _id: "uv",
+          range: [
+            this.$moment()
+              .subtract(7, "days")
+              .format("YYYY-MM-DD"),
+            this.$moment()
+              .subtract(1, "days")
+              .format("YYYY-MM-DD")
+          ],
+          all: {
+            number: data.data.sum,
+            measuresUnit: "人"
+          },
+          average: {
+            number: data.data.average,
+            measuresUnit: "人"
+          },
+          option: {
+            legend: {
+              type: "scroll",
+              show: true,
+              top: 0,
+              textStyle: {
+                color: "#8492A6",
+                fontStyle: "normal",
+                fontWeight: "normal",
+                fontSize: "14",
+                align: "center"
+              }
+            },
+            color: ["#5ea6f1"],
+            tooltip: {
+              //悬浮提示层设置
+              trigger: "axis",
+              backgroundColor: "#fff",
+              borderColor: "#5ea6f1",
+              borderWidth: 1,
+              textStyle: {
+                color: "#8492A6",
+                fontStyle: "normal",
+                fontWeight: "normal",
+                fontSize: "14"
+              },
+              axisPointer: {
+                type: "line"
+              },
+              formatter:
+                '{b0}<br /><span style="width:10px;height:10px;background:#5ea6f1;border-radius:50%;display:inline-block"></span>{a}: {c}' +
+                " 人"
+            },
+            xAxis: [
+              {
+                type: "category",
+                data: data.data.xAxisData,
+                axisTick: {
+                  alignWithLabel: true
+                },
+                axisLine: {
+                  //坐标轴刻度
+                  lineStyle: {
+                    color: "#8492A6"
+                  }
+                },
+                axisLabel: {
+                  //坐标轴刻度下的字符
+                  color: "#8492A6",
+                  fontStyle: "normal",
+                  fontWeight: "light",
+                  fontSize: "14",
+                  rotate: 45
+                }
+              }
+            ],
+            yAxis: [
+              {
+                type: "value",
+                splitLine: {
+                  //分隔线设置
+                  show: true,
+                  lineStyle: {
+                    color: "#8492A6",
+                    type: "dashed"
+                  }
+                },
+                axisTick: {
+                  alignWithLabel: true
+                },
+                axisLine: {
+                  lineStyle: {
+                    color: "#8492A6"
+                  }
+                },
+                axisLabel: {
+                  color: "#8492A6",
+                  fontStyle: "normal",
+                  fontWeight: "light",
+                  fontSize: "14"
+                }
+              }
+            ],
+            series: [
+              {
+                name: "过去7天日活",
+                type: "line",
+                barWidth: "60%",
+                data: data.data.seriesData
+              }
+            ]
+          }
+        };
+      } else {
+        this.$Message.error(data.message);
+      }
+    },
+    async getNewUserByDay() {
+      const params = {
+        time: [
+          this.$moment()
+            .subtract(7, "days")
+            .format("YYYY-MM-DD"),
+          this.$moment()
+            .subtract(1, "days")
+            .format("YYYY-MM-DD")
+        ],
+        teamEn: this.$store.getters.getTeam.teamEn,
+        buildTime: this.$store.getters.getTeam.buildTime
+      };
+      let data = await Fetcher.getNewUserByDayTotal(this, params);
+      if (data.code === 200) {
+        this.newUserByDay = {
+          loading: false,
+          text:'等一等啊o(╥﹏╥)o',
+          name: "过去7天新增用户数",
+          _id: "uv",
+          range: [
+            this.$moment()
+              .subtract(7, "days")
+              .format("YYYY-MM-DD"),
+            this.$moment()
+              .subtract(1, "days")
+              .format("YYYY-MM-DD")
+          ],
+          all: {
+            number: data.data.sum,
+            measuresUnit: "人"
+          },
+          average: {
+            number: data.data.average,
+            measuresUnit: "人"
+          },
+          option: {
+            legend: {
+              type: "scroll",
+              show: true,
+              top: 0,
+              textStyle: {
+                color: "#8492A6",
+                fontStyle: "normal",
+                fontWeight: "normal",
+                fontSize: "14",
+                align: "center"
+              }
+            },
+            color: ["#5ea6f1"],
+            tooltip: {
+              //悬浮提示层设置
+              trigger: "axis",
+              backgroundColor: "#fff",
+              borderColor: "#5ea6f1",
+              borderWidth: 1,
+              textStyle: {
+                color: "#8492A6",
+                fontStyle: "normal",
+                fontWeight: "normal",
+                fontSize: "14"
+              },
+              axisPointer: {
+                type: "line"
+              },
+              formatter:
+                '{b0}<br /><span style="width:10px;height:10px;background:#5ea6f1;border-radius:50%;display:inline-block"></span>{a}: {c}' +
+                " 人"
+            },
+            xAxis: [
+              {
+                type: "category",
+                data: data.data.xAxisData,
+                axisTick: {
+                  alignWithLabel: true
+                },
+                axisLine: {
+                  //坐标轴刻度
+                  lineStyle: {
+                    color: "#8492A6"
+                  }
+                },
+                axisLabel: {
+                  //坐标轴刻度下的字符
+                  color: "#8492A6",
+                  fontStyle: "normal",
+                  fontWeight: "light",
+                  fontSize: "14",
+                  rotate: 45
+                }
+              }
+            ],
+            yAxis: [
+              {
+                type: "value",
+                splitLine: {
+                  //分隔线设置
+                  show: true,
+                  lineStyle: {
+                    color: "#8492A6",
+                    type: "dashed"
+                  }
+                },
+                axisTick: {
+                  alignWithLabel: true
+                },
+                axisLine: {
+                  lineStyle: {
+                    color: "#8492A6"
+                  }
+                },
+                axisLabel: {
+                  color: "#8492A6",
+                  fontStyle: "normal",
+                  fontWeight: "light",
+                  fontSize: "14"
+                }
+              }
+            ],
+            series: [
+              {
+                name: "过去7天新增用户数",
+                type: "line",
+                barWidth: "60%",
+                data: data.data.seriesData
+              }
+            ]
+          }
+        };
+      } else {
+        this.$Message.error(data.message);
+      }
+    },
+    async getAverageUserPageView() {
+      const params = {
+        time: [
+          this.$moment().subtract(7, 'days').format("YYYY-MM-DD"),this.$moment().subtract(1, 'days').format("YYYY-MM-DD")
+        ],
+        teamEn: this.$store.getters.getTeam.teamEn
+      };
+      let data = await Fetcher.getAverageUserPageView(this, params);
+      if (data.code === 200) {
+        this.visitTime=
         {
           loading: false,
-          name: "过去30天页面浏览量",
-          _id: "visit",
-          range: [this.$moment().subtract(30, 'days').format("YYYY-MM-DD"),this.$moment().subtract(1, 'days').format("YYYY-MM-DD")],
+          text:'等一等啊o(╥﹏╥)o',
+          name: "过去7天人均页面访问量",
+          _id: "averagePv",
+          range: [this.$moment().subtract(7, 'days').format("YYYY-MM-DD"),this.$moment().subtract(1, 'days').format("YYYY-MM-DD")],
           all: {
             number: data.data.sum,
             measuresUnit: "次"
@@ -639,7 +647,7 @@ export default {
             ],
             series: [
               {
-                name: "Web浏览页面的触发数",
+                name: "过去7天人均页面访问量",
                 type: "line",
                 barWidth: "60%",
                 data: data.data.seriesData
@@ -647,8 +655,82 @@ export default {
             ]
           }
         }
-      ]
+      
       } else {
+        this.$Message.error(data.message);
+      }
+    },
+    async getProvinceData() {
+      const params = {
+        time: [
+          this.$moment().subtract(7, 'days').format("YYYY-MM-DD"),this.$moment().subtract(1, 'days').format("YYYY-MM-DD")
+        ],
+        teamEn: this.$store.getters.getTeam.teamEn
+      };
+      let data = await Fetcher.getProvinceData(this, params);
+      if (data.code === 200) {
+        this.provinceDistribution= {
+        text:data.data.seriesData.length>0?'等一等啊o(╥﹏╥)o':'暂无数据o(╥﹏╥)o',
+        loading: data.data.seriesData.length>0?false:true,
+        name: "过去7天Web 访问省份分布",
+        _id: "provinceDistribution",
+        range: [this.$moment().subtract(7, 'days').format("YYYY-MM-DD"),this.$moment().subtract(1, 'days').format("YYYY-MM-DD")],
+        all: {
+          number:  data.data.sum,
+          measuresUnit: "个"
+        },
+        average: {
+          number:  data.data.average,
+          measuresUnit: "个"
+        },
+        option: {
+          color: ["#5ea6f1"],
+          visualMap: {
+            show: false,
+            min: 80,
+            max: 400,
+            color: [
+              "#d94e5d",
+              "#eac736",
+              "#50a3ba",
+              "#5ea6f1",
+              "#000",
+              "#49b91c",
+              "#20231f"
+            ],
+            textStyle: {
+              color: "#fff"
+            }
+          },
+          tooltip: {
+            //悬浮提示层设置
+            trigger: "item",
+            backgroundColor: "#fff",
+            borderColor: "#5ea6f1",
+            borderWidth: 1,
+            textStyle: {
+              color: "#8492A6",
+              fontStyle: "normal",
+              fontWeight: "normal",
+              fontSize: "14"
+            },
+            axisPointer: {
+              type: "line"
+            },
+            formatter: "{a} <br/>{b0} : {c} (占{d}%)"
+          },
+
+          series: [
+            {
+              name: "Web 访问省份分布",
+              type: "pie",
+              barWidth: "60%",
+              data: data.data.seriesData
+            }
+          ]
+        }
+      }
+        } else {
         this.$Message.error(data.message);
       }
     }
@@ -659,6 +741,10 @@ export default {
     this.getUserViewTotal();
     this.getPageViewTotal();
     this.getPageViewByDayTotal();
+    this.getUserViewByDay();
+    this.getNewUserByDay();
+    this.getAverageUserPageView();
+    this.getProvinceData();
   },
   components: {
     IndexCard,

@@ -15,7 +15,7 @@
       </Card>
     </div>
     <Card class="ivu-team-card" v-else>
-      <Loading v-if="loading"></Loading>
+      <Loading v-if="loading" :text="'等一等啊o(╥﹏╥)o'"></Loading>
       <div style="text-align:center" v-else>
         <Icon type="md-thunderstorm" style="font-size:50px;" />
         <h3>还没有团员哟o(╥﹏╥)o</h3>
