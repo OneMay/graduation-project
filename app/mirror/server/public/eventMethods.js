@@ -54,13 +54,16 @@ module.exports = {
         let query = [];
         let agoData = agoDataObj.map(v => v._id);
         let nowData = nowDataObj.map(v => v._id);
-       
-        nowDataObj.map(v=>{ });
-        query = nowData.filter((val) => {
-            return !agoData.includes(val)
-        })
+        if (msg.buildTime === msg.time[0]) {
+            query = nowData
+        } else {
+            query = nowData.filter((val) => {
+                return !agoData.includes(val)
+            })
+        }
+
         let nowDataInObj = {
-            [msg.time[0]]:query.length
+            [msg.time[0]]: query.length
         };
         return nowDataInObj;
     },
@@ -100,10 +103,12 @@ module.exports = {
             { $sort: { _id: 1 } },
             { "$limit": 10000000000 }
         ])
-        let Data ={};
-        query.map(v=>{ Object.assign(Data,{
-            [v._id]:parseInt(v.num_tutorial)
-        })});
+        let Data = {};
+        query.map(v => {
+            Object.assign(Data, {
+                [v._id]: parseInt(v.num_tutorial)
+            })
+        });
         return Data;
     },
     //事件分析-访问省份分布
@@ -116,16 +121,16 @@ module.exports = {
                 }
             },
             {
-                $group:  { _id:{province:"$province",ip:"$ip"}}
-            } ,{
-                $group:  { _id:"$_id.province",num_tutorial: { $sum: 1 }}
-            } , 
+                $group: { _id: { province: "$province", ip: "$ip" } }
+            }, {
+                $group: { _id: "$_id.province", num_tutorial: { $sum: 1 } }
+            },
             { "$limit": 10000000000 }
         ])
-        let Data =query.map(v=>{ 
+        let Data = query.map(v => {
             return {
-                value:v.num_tutorial,
-                name:v._id
+                value: v.num_tutorial,
+                name: v._id
             }
         });
         return Data;
