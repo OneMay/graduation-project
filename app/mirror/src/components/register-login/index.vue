@@ -140,7 +140,7 @@ export default {
           this.$store.dispatch("setUser", this.Login.mobile);
 
           window.mirrorCommandQueue = {
-            system: "mirrortest",
+            system: "mirror",
             user: this.Login.mobile
           };
           Fetcher.postEventViewData({

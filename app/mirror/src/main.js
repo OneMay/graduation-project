@@ -15,7 +15,7 @@ import router from './router'
 let userInfo=commenMotheds.getCookie('userInfo')
 let username = userInfo?commenMotheds.parserDataToJson(userInfo).mobile:'';
 window.mirrorCommandQueue={
-  system:'mirrortest',
+  system:'mirror',
   user:username
 }
 // 配置Vue原型 (在任何组件中都可以正常使用axios)

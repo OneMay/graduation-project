@@ -117,7 +117,7 @@ export default {
         this.$Message.success("退出成功");
         this.$store.dispatch("setUser", null);
         window.mirrorCommandQueue = {
-            system: "mirrortest",
+            system: "mirror",
             user: ""
           };
         this.$store.dispatch("setTeam", "");
