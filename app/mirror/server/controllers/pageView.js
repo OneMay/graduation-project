@@ -91,5 +91,69 @@ module.exports = {
         })
         ctx.body = responseData;
         resolve(next())
-    }
+    },
+    /**
+     * 页面分析-每个页面浏览量
+     */
+    async pageViewByPage(ctx, next, resolve) {
+        const msg = ctx.request.body;
+        const pvData = await pageMethods.getPageViewByPage(msg);
+        const result = pvData.map(v=>{
+            return {
+                url:v._id,
+                pv:v.num_tutorial
+            }
+        })
+
+        Object.assign(responseData, {
+            code: 200,
+            message: 'ok',
+            data: result
+        })
+        ctx.body = responseData;
+        resolve(next())
+    },
+    /**
+     * 页面分析-单个url的pv
+     */
+    async pageViewByUrl(ctx, next, resolve) {
+        const msg = ctx.request.body;
+        const start_date = moment(msg.time[0]);
+        const end_date = moment(msg.time[1]);
+        let number = end_date.diff(start_date, "day") + 1;
+        const xAxisData = commen.curryArrPushByTime(number)(msg.time[1]);
+
+        const pvData = await pageMethods.getPageViewByUrl(msg);
+        const seriesData = xAxisData.map(v => {
+            
+            return pvData[v] ? pvData[v] : 0;
+        })
+        let pageViewData = {
+            xAxisData: xAxisData,
+            seriesData: seriesData,
+        }
+
+        Object.assign(responseData, {
+            code: 200,
+            message: 'ok',
+            data: pageViewData
+        })
+        ctx.body = responseData;
+        resolve(next())
+    },
+    /**
+     * 页面数据
+     */
+    async pageData(ctx, next, resolve) {
+        const msg = ctx.request.body;
+        const data = await pageMethods.getPageData(msg);
+
+        Object.assign(responseData, {
+            code: 200,
+            message: 'ok',
+            data: data
+        })
+        ctx.body = responseData;
+        resolve(next())
+    },
 }

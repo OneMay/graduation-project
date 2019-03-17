@@ -12,16 +12,26 @@ import EventOverView from '@/components/layout/eventView'
 import PageOverView from '@/components/layout/pageView'
 import PageOverViewDeatil from '@/components/layout/pageView/detail'
 import UserFeatures from '@/components/layout/userFeatures'
+import PageData from '@/components/layout/constantlyData/pageData'
+import EventData from '@/components/layout/constantlyData/eventData'
+import Member from '@/components/layout/team/member'
 
 Vue.use(Router)
 function beforeEnter (to, from, next){
-  if(commenMotheds.getCookie('userInfo')){
+  let user,team;
+  if(user =commenMotheds.getCookie('userInfo')){
     if(to.path==='/team/iteam'||to.path==='/team/creatteam'){
       next();
     }
     else{
-      if(commenMotheds.getCookie('team')){
-        next();
+      if(team =commenMotheds.getCookie('team')){
+        user = commenMotheds.parserDataToJson(user);
+        team = commenMotheds.parserDataToJson(team);
+        if(to.path==='/my-team/member'){
+          user.mobile===team.teamOwner?next():next("/team/iteam")
+        }else{
+          next()
+        }
       }else{
         window.location.href="/team/iteam"
       }
@@ -79,6 +89,15 @@ export default new Router({
         }},
         {path:'/user/userFeatures',component:UserFeatures,beforeEnter:beforeEnter,meta: {
           title: '用户特征'
+        }},
+        {path:'/data/pageview',component:PageData,beforeEnter:beforeEnter,meta: {
+          title: '页面数据'
+        }},
+        {path:'/data/eventview',component:EventData,beforeEnter:beforeEnter,meta: {
+          title: '事件数据'
+        }},
+        {path:'/my-team/member',component:Member,beforeEnter:beforeEnter,meta: {
+          title: '成员管理'
         }}
       ] 
     },

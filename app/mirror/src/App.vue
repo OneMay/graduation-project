@@ -27,7 +27,8 @@ export default {
        let teamCookie = commenMotheds.parserDataToJson(team);
        let teamInfo = {
          teamEn:teamCookie.teamEn,
-         buildTime:teamCookie.buildTime
+         buildTime:teamCookie.buildTime,
+         teamOwner:teamCookie.teamOwner
        }
        this.$store.dispatch("setTeam",teamInfo)
      }else{

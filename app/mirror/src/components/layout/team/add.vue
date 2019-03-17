@@ -109,6 +109,7 @@ export default {
             let data = await Fetcher.teamAdd(ctx, params);
             if (data.code === 200) {
               ctx.$Message.success("添加成功");
+              this.handleReset();
             } else {
               ctx.$Message.error(data.message);
             }

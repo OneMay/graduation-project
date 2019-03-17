@@ -7,10 +7,13 @@
         <div class="widget-topbar">
           <div class="widget-title">
             <div class="title nav">
-              <router-link :to="'/behavior/pageOverView'" v-if="index._id==='pv'">
+              <router-link :to="'/behavior/pageOverView?day=0'" v-if="index._id==='pv'">
                 {{ index.name }}
               </router-link>
-              <router-link :to="'/behavior/eventOverView/detail?id=' + index._id+'&name='+index.name+'&day=1'" v-else>
+              <a  v-else-if="index._id==='allUser'">
+                {{ index.name }}
+              </a>
+               <router-link :to="'/behavior/eventOverView/detail?id=' + index._id+'&name='+index.name+'&day=0'" v-else>
                 {{ index.name }}
               </router-link>
               <div class="range">{{this.$store.getters.getTeam.buildTime}}<span>~</span>{{this.$moment().format('YYYY-MM-DD')}}| 上线至今</div>

@@ -32,5 +32,10 @@ module.exports = {
        let query = [...query1,...query2];
         query && query[0] ? res = query :res = []
         return res;
+    },
+    async updateTeamMember(msg){
+  
+     let res =   await Team.update({teamEn: msg.teamEn}, {$set: {teamMember: msg.member}}, {multi: false});
+        return res;
     }
 }

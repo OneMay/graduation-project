@@ -17,7 +17,7 @@
             @on-ok="choosed"
             
           ></DatePicker>
-          <span class="my-span">{{ params.url }}</span>
+          <span class="my-span">{{ this.$route.query.url?this.$route.query.url:'' }}</span>
         </div>
         <div style="position:relative;height:100%">
           <Loading v-if="loading" :text="'等一等啊o(╥﹏╥)o'"></Loading>
@@ -31,6 +31,7 @@
 import commenMotheds from "./../../../assets/commen";
 import VueEchartsComponent from "./../../commen/echarts";
 import Loading from "./../../commen/loading";
+import Fetcher from "../../../assets/fetcher";
 export default {
   name: "EventDetail",
   data() {
@@ -44,114 +45,7 @@ export default {
           }
         }
       },
-      data: {
-        title: {
-          show: false,
-          text: "PV",
-          textStyle: {
-            color: "#8492A6",
-            fontStyle: "normal",
-            fontWeight: "bold",
-            fontSize: "14",
-            align: "center"
-          }
-        },
-        legend: {
-          type: "scroll",
-          show: true,
-          bottom: 10,
-          // data: 'Web浏览页面用户的触发数'
-          textStyle: {
-            color: "#8492A6",
-            fontStyle: "normal",
-            fontWeight: "normal",
-            fontSize: "14",
-            align: "center"
-          }
-        },
-        color: ["#5ea6f1"],
-        tooltip: {
-          //悬浮提示层设置
-          trigger: "axis",
-          backgroundColor: "#fff",
-          borderColor: "#5ea6f1",
-          borderWidth: 1,
-          textStyle: {
-            color: "#8492A6",
-            fontStyle: "normal",
-            fontWeight: "normal",
-            fontSize: "14"
-          },
-          axisPointer: {
-            type: "line"
-          },
-          formatter:
-            '{b0}<br /><span style="width:10px;height:10px;background:#5ea6f1;border-radius:50%;display:inline-block"></span>{a}: {c}' +
-            " 人"
-        },
-        xAxis: [
-          {
-            type: "category",
-            data: ["1月", "2月", "3月", "4月", "5月", "6月", "7月"],
-            axisTick: {
-              alignWithLabel: true
-            },
-            axisLine: {
-              //坐标轴刻度
-              lineStyle: {
-                color: "#8492A6"
-              }
-            },
-            axisLabel: {
-              //坐标轴刻度下的字符
-              color: "#8492A6",
-              fontStyle: "normal",
-              fontWeight: "light",
-              fontSize: "14"
-            }
-          }
-        ],
-        yAxis: [
-          {
-            type: "value",
-            splitLine: {
-              //分隔线设置
-              show: true,
-              lineStyle: {
-                color: "#8492A6",
-                type: "dashed"
-              }
-            },
-            axisTick: {
-              alignWithLabel: true
-            },
-            axisLine: {
-              lineStyle: {
-                color: "#8492A6"
-              }
-            },
-            axisLabel: {
-              color: "#8492A6",
-              fontStyle: "normal",
-              fontWeight: "light",
-              fontSize: "14"
-            }
-          }
-        ],
-        series: [
-          {
-            name: "PV",
-            type: "line",
-            barWidth: "60%",
-            data: [995, 666, 444, 858, 654, 236, 645]
-          }
-        ]
-      },
-      params: {
-        _id: "",
-        name: "",
-        day: 1
-      }
+      data: {},
     };
   },
   methods: {
@@ -159,20 +53,126 @@ export default {
       this.date = val;
     },
     choosed() {
-      this.loading = false;
-      console.log(this.loading)
-      //console.log(this.date)
+      this.getPageViewUrl()
+    },
+    async getPageViewUrl(){
+     this.loading=true;
+      const params = {
+        time: [this.$moment(this.date[0]).format("YYYY-MM-DD"),this.$moment(this.date[1]).format("YYYY-MM-DD")],
+        teamEn: this.$store.getters.getTeam.teamEn,
+        pageUrl:this.$route.query.url?this.$route.query.url:'/'
+      };
+      Fetcher.postEventViewData({
+          action: "页面分析",
+          category: "单个页面pv"
+        });
+      let data = await Fetcher.getPageViewUrl(this, params);
+      if (data.code === 200) {
+        this.loading=false;
+        this.data =
+          {
+              legend: {
+                type: "scroll",
+                show: true,
+                top: 0,
+                textStyle: {
+                  color: "#8492A6",
+                  fontStyle: "normal",
+                  fontWeight: "normal",
+                  fontSize: "14",
+                  align: "center"
+                }
+              },
+              color: ["#5ea6f1"],
+              tooltip: {
+                //悬浮提示层设置
+                trigger: "axis",
+                backgroundColor: "#fff",
+                borderColor: "#5ea6f1",
+                borderWidth: 1,
+                textStyle: {
+                  color: "#8492A6",
+                  fontStyle: "normal",
+                  fontWeight: "normal",
+                  fontSize: "14"
+                },
+                axisPointer: {
+                  type: "line"
+                },
+                formatter:
+                  '{b0}<br /><span style="width:10px;height:10px;background:#5ea6f1;border-radius:50%;display:inline-block"></span>{a}: {c}' +
+                  " 次"
+              },
+              xAxis: [
+                {
+                  type: "category",
+                  data: data.data.xAxisData,
+                  axisTick: {
+                    alignWithLabel: true
+                  },
+                  axisLine: {
+                    //坐标轴刻度
+                    lineStyle: {
+                      color: "#8492A6"
+                    }
+                  },
+                  axisLabel: {
+                    //坐标轴刻度下的字符
+                    color: "#8492A6",
+                    fontStyle: "normal",
+                    fontWeight: "light",
+                    fontSize: "14",
+                    rotate: 45
+                  }
+                }
+              ],
+              yAxis: [
+                {
+                  type: "value",
+                  splitLine: {
+                    //分隔线设置
+                    show: true,
+                    lineStyle: {
+                      color: "#8492A6",
+                      type: "dashed"
+                    }
+                  },
+                  axisTick: {
+                    alignWithLabel: true
+                  },
+                  axisLine: {
+                    lineStyle: {
+                      color: "#8492A6"
+                    }
+                  },
+                  axisLabel: {
+                    color: "#8492A6",
+                    fontStyle: "normal",
+                    fontWeight: "light",
+                    fontSize: "14"
+                  }
+                }
+              ],
+              series: [
+                {
+                  name: "Web浏览页面的触发数",
+                  type: "line",
+                  barWidth: "60%",
+                  data: data.data.seriesData
+                }
+              ]
+            }
+          
+      } else {
+        this.$Message.error(data.message);
+      }
     }
   },
   created() {
-    Object.assign(this.params, this.$route.query);
-    let dayNow = commenMotheds.Format(new Date(), "yyyy-MM-dd");
-    let agoDay = commenMotheds.Format(
-      new Date(commenMotheds.changeForDate(dayNow, -(this.params.day - 1))),
-      "yyyy-MM-dd"
-    );
+    let dayNow = this.$moment().subtract(0, "days").format("YYYY-MM-DD");
+    let agoDay = this.$moment().subtract(0, "days").format("YYYY-MM-DD");
     this.date = [agoDay, dayNow];
-    console.log(this.date);
+    this.getPageViewUrl();
   },
   components: {
     VueEchartsComponent,

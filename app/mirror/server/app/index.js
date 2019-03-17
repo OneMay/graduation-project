@@ -2,6 +2,7 @@ const app = require('../server');
 const mongoose = require('mongoose');
 const debug = require('debug')('server:server');
 const mongodbUrl = 'mongodb://root:adminpwd@localhost:8088/project?authSource=admin';
+//const mongodbUrl = 'mongodb://root:adminpwd@106.13.107.119:8088/project?authSource=admin';
 const port = 8000;
 app.listen(port);
 console.log('started on http://localhost:' + port);

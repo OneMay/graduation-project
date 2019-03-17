@@ -98,6 +98,30 @@ module.exports = function () {
     }, function (ctx, next) {
         ctx.body = ctx.body;
     });
+    //不在此团队的用户
+    router.post('/user/user_no_in', async (ctx, next) => {
+        return new Promise(function (resolve, reject) {
+            User.findNoMemberUser(ctx, next, resolve);
+        });
+    }, function (ctx, next) {
+        ctx.body = ctx.body;
+    });
+    //在此团队的用户
+    router.post('/user/user_in', async (ctx, next) => {
+        return new Promise(function (resolve, reject) {
+            User.findemberUser(ctx, next, resolve);
+        });
+    }, function (ctx, next) {
+        ctx.body = ctx.body;
+    });
+    //更新此团队的用户
+    router.post('/team/update_member', async (ctx, next) => {
+        return new Promise(function (resolve, reject) {
+            Team.updateMember(ctx, next, resolve);
+        });
+    }, function (ctx, next) {
+        ctx.body = ctx.body;
+    });
     //概览-累计用户数
     router.post('/overview/userTotal', async (ctx, next) => {
         return new Promise(function (resolve, reject) {
@@ -170,5 +194,78 @@ module.exports = function () {
     }, function (ctx, next) {
         ctx.body = ctx.body;
     });
+    //事件分析-访问城市分布
+    router.post('/event/city', async (ctx, next) => {
+        return new Promise(function (resolve, reject) {
+            EventView.cityByDay(ctx, next, resolve);
+        });
+    }, function (ctx, next) {
+        ctx.body = ctx.body;
+    });
+    //事件分析-访问城市分布
+    router.post('/event/OS', async (ctx, next) => {
+        return new Promise(function (resolve, reject) {
+            EventView.OSByDay(ctx, next, resolve);
+        });
+    }, function (ctx, next) {
+        ctx.body = ctx.body;
+    });
+    //事件分析-用户访问时间段分布
+    router.post('/event/uservisit_time', async (ctx, next) => {
+        return new Promise(function (resolve, reject) {
+            EventView.userVisitTimeByDay(ctx, next, resolve);
+        });
+    }, function (ctx, next) {
+        ctx.body = ctx.body;
+    });
+    //页面分析-每个页面的pv
+    router.post('/page/pageUrl_pageview', async (ctx, next) => {
+        return new Promise(function (resolve, reject) {
+            PageView.pageViewByPage(ctx, next, resolve);
+        });
+    }, function (ctx, next) {
+        ctx.body = ctx.body;
+    });
+    //页面分析-单个URL的pv
+    router.post('/page/pageUrl_pageview_url', async (ctx, next) => {
+        return new Promise(function (resolve, reject) {
+            PageView.pageViewByUrl(ctx, next, resolve);
+        });
+    }, function (ctx, next) {
+        ctx.body = ctx.body;
+    });
+    //事件分析-用户自定义事件
+    router.post('/event/userEvents', async (ctx, next) => {
+        return new Promise(function (resolve, reject) {
+            EventView.userEvent(ctx, next, resolve);
+        });
+    }, function (ctx, next) {
+        ctx.body = ctx.body;
+    });
+    //事件分析-单个用户自定义事件使用数
+    router.post('/event/userEvent_use', async (ctx, next) => {
+        return new Promise(function (resolve, reject) {
+            EventView.userEventByOne(ctx, next, resolve);
+        });
+    }, function (ctx, next) {
+        ctx.body = ctx.body;
+    });
+    //页面数据
+    router.post('/data/sdk_page_data', async (ctx, next) => {
+        return new Promise(function (resolve, reject) {
+            PageView.pageData(ctx, next, resolve);
+        });
+    }, function (ctx, next) {
+        ctx.body = ctx.body;
+    });
+    //事件数据
+    router.post('/data/sdk_event_data', async (ctx, next) => {
+        return new Promise(function (resolve, reject) {
+            EventView.eventData(ctx, next, resolve);
+        });
+    }, function (ctx, next) {
+        ctx.body = ctx.body;
+    });
+
     return router
 };

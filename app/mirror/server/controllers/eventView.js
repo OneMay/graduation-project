@@ -148,6 +148,8 @@ module.exports = {
         const average = averageFunc(number, sum);
         let userViewData = {
             loading: false,
+            name: "日活",
+            unit: '人',
             xAxisData: xAxisData,
             seriesData: seriesData,
             average: average,
@@ -173,8 +175,8 @@ module.exports = {
         const xAxisData = commen.curryArrPushByTime(number)(msg.time[1]);
 
         const seriesData = await new Promise(function (resolve, reject) {
-            const arr= []
-            xAxisData.map(async (v,index) => {
+            const arr = []
+            xAxisData.map(async (v, index) => {
                 let params = {
                     teamEn: msg.teamEn,
                     time: [v, v],
@@ -182,15 +184,17 @@ module.exports = {
                 };
                 let data = await eventMethods.getoverviewNewUser(params);
                 arr[index] = data[v];
-  
-                !arr.includes() && arr.length === number? resolve(arr):''
-            })         
+
+                !arr.includes() && arr.length === number ? resolve(arr) : ''
+            })
         });
         const sum = seriesData.reduce((total, currentValue) => total + currentValue, 0);
         const averageFunc = commen.compose(Math.ceil, commen.curryDiv);
         const average = averageFunc(number, sum);
         let newUserData = {
             loading: false,
+            name: "新增用户数",
+            unit: '人',
             xAxisData: xAxisData,
             seriesData: seriesData,
             average: average,
@@ -224,16 +228,18 @@ module.exports = {
         const pvData = await pageMethods.getPageViewByDay(msg);
         const averageFunc = commen.compose(Math.ceil, commen.curryDiv);
         const seriesDataPV = xAxisData.map(v => {
-            
+
             return pvData[v] ? pvData[v] : 0;
         })
-        const averagePUV = seriesDataPV.map((v,index)=>{
-            return   seriesDataUV[index] >0?averageFunc(seriesDataUV[index],v):0;
+        const averagePUV = seriesDataPV.map((v, index) => {
+            return seriesDataUV[index] > 0 ? averageFunc(seriesDataUV[index], v) : 0;
         })
         const sum = averagePUV.reduce((total, currentValue) => total + currentValue, 0);
         const average = averageFunc(number, sum);
         let userViewData = {
             loading: false,
+            name: "人均页面浏览量",
+            unit: '次',
             xAxisData: xAxisData,
             seriesData: averagePUV,
             average: average,
@@ -249,7 +255,7 @@ module.exports = {
         resolve(next())
     },
     /**
-    * 事件分析-日活
+    * 事件分析-省份分布
     */
     async provinceByDay(ctx, next, resolve) {
         const msg = ctx.request.body;
@@ -263,6 +269,8 @@ module.exports = {
         const average = averageFunc(number, sum);
         let data = {
             loading: false,
+            name: "Web访问省份分布",
+            unit: '个',
             seriesData: provinceData,
             average: average,
             sum: sum
@@ -275,5 +283,152 @@ module.exports = {
         })
         ctx.body = responseData;
         resolve(next())
-    }
+    },
+    /**
+    * 事件分析-城市分布
+    */
+    async cityByDay(ctx, next, resolve) {
+        const msg = ctx.request.body;
+        const start_date = moment(msg.time[0]);
+        const end_date = moment(msg.time[1]);
+        let number = end_date.diff(start_date, "day") + 1;
+
+        const cityData = await eventMethods.getCityByDay(msg);
+        const sum = cityData.length;
+        const averageFunc = commen.compose(Math.ceil, commen.curryDiv);
+        const average = averageFunc(number, sum);
+        let data = {
+            loading: false,
+            name: "Web访问城市分布",
+            unit: '个',
+            seriesData: cityData,
+            average: average,
+            sum: sum
+        }
+
+        Object.assign(responseData, {
+            code: 200,
+            message: 'ok',
+            data: data
+        })
+        ctx.body = responseData;
+        resolve(next())
+    },
+    /**
+    * 事件分析-操作系统分布
+    */
+    async OSByDay(ctx, next, resolve) {
+        const msg = ctx.request.body;
+        const start_date = moment(msg.time[0]);
+        const end_date = moment(msg.time[1]);
+        let number = end_date.diff(start_date, "day") + 1;
+
+        const OSData = await eventMethods.getOsByDay(msg);
+        const sum = OSData.length;
+        const averageFunc = commen.compose(Math.ceil, commen.curryDiv);
+        const average = averageFunc(number, sum);
+        let data = {
+            loading: false,
+            name: "Web访问操作系统分布",
+            unit: '种',
+            seriesData: OSData,
+            average: average,
+            sum: sum
+        }
+
+        Object.assign(responseData, {
+            code: 200,
+            message: 'ok',
+            data: data
+        })
+        ctx.body = responseData;
+        resolve(next())
+    },
+    /**
+    * 事件分析-用户访问时间段分布
+    */
+    async userVisitTimeByDay(ctx, next, resolve) {
+        const msg = ctx.request.body;
+        const start_date = moment(msg.time[0]);
+        const end_date = moment(msg.time[1]);
+        let number = end_date.diff(start_date, "day") + 1;
+
+        const timeData = await eventMethods.getuserVisitTimeByDay(msg);
+        const sum = timeData.length;
+        const averageFunc = commen.compose(Math.ceil, commen.curryDiv);
+        const average = averageFunc(number, sum);
+        let data = {
+            loading: false,
+            name: "用户访问时间段分布",
+            unit: '时间段',
+            seriesData: timeData,
+            average: average,
+            sum: sum
+        }
+
+        Object.assign(responseData, {
+            code: 200,
+            message: 'ok',
+            data: data
+        })
+        ctx.body = responseData;
+        resolve(next())
+    },
+    /**
+    * 事件分析-获取用户自定义事件
+    */
+    async userEvent(ctx, next, resolve) {
+        const msg = ctx.request.body;
+        const event = await eventMethods.getUserEvent(msg);
+        Object.assign(responseData, {
+            code: 200,
+            message: 'ok',
+            data: event
+        })
+        ctx.body = responseData;
+        resolve(next())
+    },
+    /**
+     * 事件分析-单个用户自定义事件使用量
+     */
+    async userEventByOne(ctx, next, resolve) {
+        const msg = ctx.request.body;
+        const start_date = moment(msg.time[0]);
+        const end_date = moment(msg.time[1]);
+        let number = end_date.diff(start_date, "day") + 1;
+        const xAxisData = commen.curryArrPushByTime(number)(msg.time[1]);
+
+        const Data = await eventMethods.getUserEventByOne(msg);
+        const seriesData = xAxisData.map(v => {
+
+            return Data[v] ? Data[v] : 0;
+        })
+        let userEventData = {
+            xAxisData: xAxisData,
+            seriesData: seriesData,
+        }
+
+        Object.assign(responseData, {
+            code: 200,
+            message: 'ok',
+            data: userEventData
+        })
+        ctx.body = responseData;
+        resolve(next())
+    },
+    /**
+     * 事件数据
+     */
+    async eventData(ctx, next, resolve) {
+        const msg = ctx.request.body;
+        const data = await eventMethods.getEventData(msg);
+
+        Object.assign(responseData, {
+            code: 200,
+            message: 'ok',
+            data: data
+        })
+        ctx.body = responseData;
+        resolve(next())
+    },
 }

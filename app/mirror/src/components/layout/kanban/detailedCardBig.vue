@@ -11,7 +11,7 @@
           <div class="widget-topbar">
             <div class="widget-title">
               <div class="title nav">
-                <router-link :to="'/behavior/eventOverView/detail?id=' + detail._id+'&name='+detail.name+'&day=30'">
+                <router-link :to="'/behavior/pageOverView/?&day=30'">
                   {{ detail.name }}
                 </router-link>
               </div>

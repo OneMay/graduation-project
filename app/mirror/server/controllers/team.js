@@ -53,7 +53,8 @@ module.exports = {
             teamList.push({
                 teamEn:item.teamEn,
                 teamZn:item.teamZn,
-                buildTime:moment(item.meta.buildTime).add(8, 'hours').format('YYYY-MM-DD')
+                buildTime:moment(item.meta.buildTime).format('YYYY-MM-DD'),
+                teamOwner:item.teamOwner
             })
             teamNameList.push(item.teamEn)
         })
@@ -89,5 +90,28 @@ module.exports = {
         
         ctx.body = responseData;
         resolve(next())
+    },
+    /**
+     * 更新此团队的成员
+     */
+    async updateMember(ctx,next,resolve){
+        let msg = ctx.request.body;
+        let data = await teamMethods.updateTeamMember(msg);
+        if(data.ok){
+            Object.assign(responseData,{
+                code:200,
+                message:'ok',
+                data:data
+            })
+        }else{
+            Object.assign(responseData,{
+                code:4444,
+                message:'失败',
+                data:null
+            })
+        }
+        ctx.body = responseData;
+        resolve(next())
+        return;
     }
 }

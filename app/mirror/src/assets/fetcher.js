@@ -93,6 +93,78 @@ export default {
         return result;
     },
     /**
+     * 查找不在此团队的用户
+     */
+    getNoMemberUser: async (ctx, params) => {
+        ctx.$Loading.start();
+        let result = await ctx.$http
+            .post("api/user/user_no_in", params)
+            .then(res => {
+                let data = commenMotheds.parserDataToJson(res.data);
+                ctx.$Loading.finish();
+                return data;
+            })
+            .catch(err => {
+                console.log(err);
+                let data = {
+                    code: 4444,
+                    data: null,
+                    message: '好像出错了哟o(╥﹏╥)o'
+                }
+                ctx.$Loading.error();
+                return data;
+            });
+        return result;
+    },
+    /**
+     * 查找在此团队的用户
+     */
+    getMemberUser: async (ctx, params) => {
+        ctx.$Loading.start();
+        let result = await ctx.$http
+            .post("api/user/user_in", params)
+            .then(res => {
+                let data = commenMotheds.parserDataToJson(res.data);
+                ctx.$Loading.finish();
+                return data;
+            })
+            .catch(err => {
+                console.log(err);
+                let data = {
+                    code: 4444,
+                    data: null,
+                    message: '好像出错了哟o(╥﹏╥)o'
+                }
+                ctx.$Loading.error();
+                return data;
+            });
+        return result;
+    },
+    /**
+     * 更新此团队的用户
+     */
+    updateMemberUser: async (ctx, params) => {
+        ctx.$Loading.start();
+        let result = await ctx.$http
+            .post("api/team/update_member", params)
+            .then(res => {
+                let data = commenMotheds.parserDataToJson(res.data);
+                ctx.$Loading.finish();
+                return data;
+            })
+            .catch(err => {
+                console.log(err);
+                let data = {
+                    code: 4444,
+                    data: null,
+                    message: '好像出错了哟o(╥﹏╥)o'
+                }
+                ctx.$Loading.error();
+                return data;
+            });
+        return result;
+    },
+    /**
      * 查找所在的所有团队
      */
     findAllTeamIn: async (ctx, params) => {
@@ -335,7 +407,7 @@ export default {
     /**
     * 事件分析-访问省份分布
     */
-   getProvinceData: async (ctx, params) => {
+    getProvinceData: async (ctx, params) => {
         ctx.$Loading.start();
         let result = await ctx.$http
             .post("api/event/province", params)
@@ -355,6 +427,222 @@ export default {
                 return data;
             });
         return result;
+    },
+    /**
+    * 事件分析-访问城市分布
+    */
+    getCityData: async (ctx, params) => {
+        ctx.$Loading.start();
+        let result = await ctx.$http
+            .post("api/event/city", params)
+            .then(res => {
+                let data = commenMotheds.parserDataToJson(res.data);
+                ctx.$Loading.finish();
+                return data;
+            })
+            .catch(err => {
+                console.log(err);
+                let data = {
+                    code: 4444,
+                    data: null,
+                    message: '好像出错了哟o(╥﹏╥)o'
+                }
+                ctx.$Loading.error();
+                return data;
+            });
+        return result;
+    },
+    /**
+   * 事件分析-访问操作系统分布
+   */
+    getOSData: async (ctx, params) => {
+        ctx.$Loading.start();
+        let result = await ctx.$http
+            .post("api/event/OS", params)
+            .then(res => {
+                let data = commenMotheds.parserDataToJson(res.data);
+                ctx.$Loading.finish();
+                return data;
+            })
+            .catch(err => {
+                console.log(err);
+                let data = {
+                    code: 4444,
+                    data: null,
+                    message: '好像出错了哟o(╥﹏╥)o'
+                }
+                ctx.$Loading.error();
+                return data;
+            });
+        return result;
+    },
+    /**
+   * 事件分析-用户访问时间段分布
+   */
+    getUserVisitTimeData: async (ctx, params) => {
+        ctx.$Loading.start();
+        let result = await ctx.$http
+            .post("api/event/uservisit_time", params)
+            .then(res => {
+                let data = commenMotheds.parserDataToJson(res.data);
+                ctx.$Loading.finish();
+                return data;
+            })
+            .catch(err => {
+                console.log(err);
+                let data = {
+                    code: 4444,
+                    data: null,
+                    message: '好像出错了哟o(╥﹏╥)o'
+                }
+                ctx.$Loading.error();
+                return data;
+            });
+        return result;
+    },
+    /**
+    * 页面分析-每个页面的pv
+    */
+    getPageViewPage: async (ctx, params) => {
+        ctx.$Loading.start();
+        let result = await ctx.$http
+            .post("api/page/pageUrl_pageview", params)
+            .then(res => {
+                let data = commenMotheds.parserDataToJson(res.data);
+                ctx.$Loading.finish();
+                return data;
+            })
+            .catch(err => {
+                console.log(err);
+                let data = {
+                    code: 4444,
+                    data: null,
+                    message: '好像出错了哟o(╥﹏╥)o'
+                }
+                ctx.$Loading.error();
+                return data;
+            });
+        return result;
+    },
+    /**
+    * 页面分析-单个url的pv
+    */
+    getPageViewUrl: async (ctx, params) => {
+        ctx.$Loading.start();
+        let result = await ctx.$http
+            .post("api/page/pageUrl_pageview_url", params)
+            .then(res => {
+                let data = commenMotheds.parserDataToJson(res.data);
+                ctx.$Loading.finish();
+                return data;
+            })
+            .catch(err => {
+                console.log(err);
+                let data = {
+                    code: 4444,
+                    data: null,
+                    message: '好像出错了哟o(╥﹏╥)o'
+                }
+                ctx.$Loading.error();
+                return data;
+            });
+        return result;
+    },
+    /**
+    * 事件分析-获取用户自定义事件
+    */
+    getUserEvents: async (ctx, params) => {
+        ctx.$Loading.start();
+        let result = await ctx.$http
+            .post("api/event/userEvents", params)
+            .then(res => {
+                let data = commenMotheds.parserDataToJson(res.data);
+                ctx.$Loading.finish();
+                return data;
+            })
+            .catch(err => {
+                console.log(err);
+                let data = {
+                    code: 4444,
+                    data: null,
+                    message: '好像出错了哟o(╥﹏╥)o'
+                }
+                ctx.$Loading.error();
+                return data;
+            });
+        return result;
+    },
+    /**
+    * 事件分析-获取单个用户自定义事件使用数
+    */
+    getUserEventByOne: async (ctx, params) => {
+        ctx.$Loading.start();
+        let result = await ctx.$http
+            .post("api/event/userEvent_use", params)
+            .then(res => {
+                let data = commenMotheds.parserDataToJson(res.data);
+                ctx.$Loading.finish();
+                return data;
+            })
+            .catch(err => {
+                console.log(err);
+                let data = {
+                    code: 4444,
+                    data: null,
+                    message: '好像出错了哟o(╥﹏╥)o'
+                }
+                ctx.$Loading.error();
+                return data;
+            });
+        return result;
+    },
+    /**
+    * 页面数据
+    */
+    getPageData: async (ctx, params) => {
+        ctx.$Loading.start();
+        let result = await ctx.$http
+            .post("api/data/sdk_page_data", params)
+            .then(res => {
+                let data = commenMotheds.parserDataToJson(res.data);
+                ctx.$Loading.finish();
+                return data;
+            })
+            .catch(err => {
+                console.log(err);
+                let data = {
+                    code: 4444,
+                    data: null,
+                    message: '好像出错了哟o(╥﹏╥)o'
+                }
+                ctx.$Loading.error();
+                return data;
+            });
+        return result;
+    },
+    /**
+    * 事件数据
+    */
+    getEventData: async (ctx, params) => {
+        ctx.$Loading.start();
+        let result = await ctx.$http
+            .post("api/data/sdk_event_data", params)
+            .then(res => {
+                let data = commenMotheds.parserDataToJson(res.data);
+                ctx.$Loading.finish();
+                return data;
+            })
+            .catch(err => {
+                console.log(err);
+                let data = {
+                    code: 4444,
+                    data: null,
+                    message: '好像出错了哟o(╥﹏╥)o'
+                }
+                ctx.$Loading.error();
+                return data;
+            });
+        return result;
     }
-    
+
 }

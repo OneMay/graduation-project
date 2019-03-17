@@ -140,7 +140,7 @@ export default {
           this.$store.dispatch("setUser", this.Login.mobile);
 
           window.mirrorCommandQueue = {
-            system: "mirror",
+            system: "mirrortest",
             user: this.Login.mobile
           };
           Fetcher.postEventViewData({
@@ -175,6 +175,9 @@ export default {
         let data = await Fetcher.register(this, params);
         if (data.code === 200) {
           this.$Message.success("注册成功");
+          this.Login.mobile = this.Register.mobile;
+          this.Login.password = this.Register.password;
+          setTimeout(this.loginSubmit,1000,this);
         } else {
           this.$Message.error(data.message);
         }

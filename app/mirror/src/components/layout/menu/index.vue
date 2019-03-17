@@ -41,6 +41,15 @@
           </template>
           <MenuItem name="userFeatures" to="/user/userFeatures">用户特征</MenuItem>
         </Submenu>
+        <Submenu name="data">
+          <template slot="title">
+            <Icon type="md-desktop" />
+            实时数据
+          </template>
+          <MenuItem name="pageview" to="/data/pageview">页面数据</MenuItem>
+          <MenuItem name="eventview" to="/data/eventview">事件数据</MenuItem>
+        </Submenu>
+        <MenuItem name="member" to="/my-team/member" v-if="this.$store.getters.getTeam.teamOwner===this.$store.getters.getUser"> <Icon type="md-person" />成员管理</MenuItem>
       </vue-scroll>
     </Menu>
     <Header class="layout-header">
@@ -100,11 +109,15 @@ export default {
   methods: {
     async logout() {
       let data = await Fetcher.logout(this);
+       Fetcher.postEventViewData({
+          action: "用户退出",
+          category: "退出"
+        });
       if (data.code === 200) {
         this.$Message.success("退出成功");
         this.$store.dispatch("setUser", null);
         window.mirrorCommandQueue = {
-            system: "mirror",
+            system: "mirrortest",
             user: ""
           };
         this.$store.dispatch("setTeam", "");
