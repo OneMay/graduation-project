@@ -69,7 +69,7 @@ export default {
       let funcName='',funcNamePie='';
       if(this.params.id){
         switch(this.params.id){
-          case 'uewUser':
+          case 'newUser':
             funcName = 'getNewUserByDayTotal';
             break;
           case 'uv':

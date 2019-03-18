@@ -56,7 +56,7 @@ module.exports = {
         let newUserData = {
             loading: false,
             name: "新增用户数",
-            _id: "uewUser",
+            _id: "newUser",
             conf: "今日",
             number: newUserNum,
             numbertoDecimal: commen.currytoDecimal(0, newUserNum),
