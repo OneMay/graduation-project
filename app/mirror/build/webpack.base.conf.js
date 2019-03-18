@@ -4,7 +4,7 @@ const utils = require('./utils')
 const config = require('../config')
 const vueLoaderConfig = require('./vue-loader.conf')
 
-function resolve (dir) {
+function resolve(dir) {
   return path.join(__dirname, '..', dir)
 }
 
@@ -13,7 +13,7 @@ function resolve (dir) {
 module.exports = {
   context: path.resolve(__dirname, '../'),
   entry: {
-    app: './src/main.js'
+     app: ["babel-polyfill", "./src/main.js"]
   },
   output: {
     path: config.build.assetsRoot,
@@ -42,11 +42,17 @@ module.exports = {
         include: [
           resolve('src'),
           resolve('test'),
+          resolve('static'),
           resolve('node_modules/vue-echarts'),
           resolve('node_modules/resize-detector'),
+          resolve('node_modules/vue-concise-slider'),
+          resolve('node_modules/vuescroll'),
+          resolve('node_modules/iview'),
+          resolve('node_modules/vuex'),
+          resolve('node_modules/echarts'),
           resolve('node_modules/webpack-dev-server/client')
-      ],
-      // include: [resolve('src'), resolve('test'), resolve('node_modules/webpack-dev-server/client')]
+        ],
+        // include: [resolve('src'), resolve('test'), resolve('node_modules/webpack-dev-server/client')]
       },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
@@ -64,9 +70,9 @@ module.exports = {
           name: utils.assetsPath('media/[name].[hash:7].[ext]')
         }
       },
-      {  
+      {
         test: /\.scss$/,
-        loaders: ["style", "css", "sass","style-loader!css-loader!less-loader"]
+        loaders: ["style", "css", "sass", "style-loader!css-loader!less-loader"]
       },
       {
         test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
