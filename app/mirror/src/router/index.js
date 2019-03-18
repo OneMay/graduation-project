@@ -15,6 +15,7 @@ import UserFeatures from '@/components/layout/userFeatures'
 import PageData from '@/components/layout/constantlyData/pageData'
 import EventData from '@/components/layout/constantlyData/eventData'
 import Member from '@/components/layout/team/member'
+import Userguidance from '@/components/userguidance'
 
 Vue.use(Router)
 function beforeEnter (to, from, next){
@@ -57,6 +58,14 @@ export default new Router({
       beforeEnter:beforeEnters,
       meta: {
         title: '登录与注册'
+      }
+    },
+    {
+      path: '/userguidance',
+      name: 'userguidance',
+      component: Userguidance,
+      meta: {
+        title: 'SDK使用指南'
       }
     },
     {

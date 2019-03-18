@@ -29,6 +29,7 @@
     "moment": "^2.24.0",
     "mongoose": "^5.4.17",
     "vue": "^2.5.2",
+    "vue-concise-slider": "^3.3.8",
     "vue-echarts": "^4.0.1",
     "vue-router": "^3.0.1",
     "vuescroll": "^4.11.1",

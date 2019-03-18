@@ -55,6 +55,9 @@
     <Header class="layout-header">
       <Menu mode="horizontal" theme="light" active-name="1">
         <div class="layout-logo">魔镜-精细化运营工具</div>
+         <router-link to="/userguidance" target="_blank">
+            <span class="ivu-team">SDK使用指南</span>
+          </router-link >
         <div class="layout-logo layout-team">
           当前团队：{{ this.$store.getters.getTeam.teamEn }}
           <router-link to="/team/iteam">
