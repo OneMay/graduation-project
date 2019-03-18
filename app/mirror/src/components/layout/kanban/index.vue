@@ -424,7 +424,7 @@ export default {
           loading: false,
           text: "等一等啊o(╥﹏╥)o",
           name: "过去7天新增用户数",
-          _id: "uv",
+          _id: "newUser",
           range: [
             this.$moment()
               .subtract(7, "days")
