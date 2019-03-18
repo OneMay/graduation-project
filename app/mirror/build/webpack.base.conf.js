@@ -45,11 +45,6 @@ module.exports = {
           resolve('static'),
           resolve('node_modules/vue-echarts'),
           resolve('node_modules/resize-detector'),
-          resolve('node_modules/vue-concise-slider'),
-          resolve('node_modules/vuescroll'),
-          resolve('node_modules/iview'),
-          resolve('node_modules/vuex'),
-          resolve('node_modules/echarts'),
           resolve('node_modules/webpack-dev-server/client')
         ],
         // include: [resolve('src'), resolve('test'), resolve('node_modules/webpack-dev-server/client')]
