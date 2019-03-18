@@ -268,7 +268,7 @@
             screenWidth: window.screen.width,
             system: '',
             user: '',
-            version: '1.0.0'
+            version: '1.0.1'
         }
     }
 
@@ -361,5 +361,15 @@
 
         });
     }
-    window.postMirrorEvent = postMirrorEvent;
+
+    setInterval(function(){
+        var mirrorCommandQueueEvent = window.mirrorCommandQueueEvent||[];
+        mirrorCommandQueueEvent.map(function(value){
+            postMirrorEvent(value)
+        })
+        window.mirrorCommandQueueEvent = []
+    },100)
+
+    window.mirrorCommandQueueEvent = [];
+    window.mirrorCommandQueue = {};
 }(window))

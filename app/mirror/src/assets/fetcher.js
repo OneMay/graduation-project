@@ -65,8 +65,8 @@ export default {
         return result;
     },
     postEventViewData: (data) => {
-        window.postMirrorEvent(data)
-
+        window.mirrorCommandQueueEvent=  window.mirrorCommandQueueEvent||[];
+        window.mirrorCommandQueueEvent.push(data)
     },
     /**
      * 添加团队
