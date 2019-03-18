@@ -370,6 +370,4 @@
         window.mirrorCommandQueueEvent = []
     },100)
 
-    window.mirrorCommandQueueEvent = [];
-    window.mirrorCommandQueue = {};
 }(window))
