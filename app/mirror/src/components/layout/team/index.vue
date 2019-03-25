@@ -18,7 +18,7 @@
       <Loading v-if="loading" :text="'等一等啊o(╥﹏╥)o'"></Loading>
       <div style="text-align:center" v-else>
         <Icon type="md-thunderstorm" style="font-size:50px;" />
-        <h3>还没有团员哟o(╥﹏╥)o</h3>
+        <h3>还没有团队哟o(╥﹏╥)o</h3>
         <router-link to="/team/creatteam">
           <span class="ivu-team-add"
             ><Icon type="md-add" style="font-size:24px" />快去创建一个吧</span

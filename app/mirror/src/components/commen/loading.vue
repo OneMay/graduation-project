@@ -1,12 +1,12 @@
 
 <!--
  *
- * loadingGif组件--"数据请求中"
+ * Loading组件--"数据请求中"
  *
  * 使用方法：
- * <loading-gif :show-loading="showLoaddingGif"></loading-gif>
+ * <Loading  v-show="loading"></Loading>
  *
- *  通过修改showLoaddingGif的true或者false 来控制loading的显示和隐藏!
+ *  通过修改loadingf的true或者false 来控制loading的显示和隐藏!
  *
  -->
 <template>
