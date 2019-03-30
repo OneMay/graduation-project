@@ -13,7 +13,15 @@ export default {
   name: "ContenIndex",
   components: {
     Menu
-  }
+  },
+  mounted() {
+    this.$nextTick(() => {
+      let body = document.getElementsByTagName('body')[0];
+      let html = document.getElementsByTagName('html')[0];
+      body.style.minWidth = '1270px'
+      html.style.minWidth = '1270px'
+    });
+  },
   
 };
 </script>

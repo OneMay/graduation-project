@@ -185,10 +185,20 @@ export default {
         this.$Message.error("手机号或者密码输入有问题");
       }
     }
-  }
+  },
+   mounted() {
+    this.$nextTick(() => {
+      let body = document.getElementsByTagName('body')[0];
+      let html = document.getElementsByTagName('html')[0];
+      body.style.minWidth = '100%'
+      html.style.minWidth = '100%'
+    });
+  },
 };
 </script>
-<style lang="less">
+
+<style lang="less"  >
+
 .beian {
   color: #504b4b;
   &:hover {
@@ -220,6 +230,7 @@ export default {
 
   .ivu-modal {
     top: 0;
+    margin:0 !important;
   }
 }
 </style>

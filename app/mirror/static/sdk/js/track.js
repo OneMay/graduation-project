@@ -244,6 +244,11 @@
                         version: "opr/" + matchBS2[2] || "0"
                     };
                 }
+            }else{
+                return {
+                    browser:"",
+                    version: "" 
+                };
             }
         }
     };
@@ -341,7 +346,7 @@
         return fmt;
     }
     var url = '//www.onelgd.com/api/report/send_message/EP_EVENT_BUS';
-    // var url = 'http://localhost:8000/api/report/send_message/EP_EVENT_BUS';
+     //var url = 'http://localhost:8000/api/report/send_message/EP_EVENT_BUS';
     function postPageView(data) {
         Ajax.post(url, data, function (msg) {
 

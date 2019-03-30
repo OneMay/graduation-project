@@ -165,6 +165,7 @@ watch: {
 <style lang="less">
 #mirror {
   width: 20%;
+  height:80px;
   align-self: center; 
 
 }

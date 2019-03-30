@@ -9,7 +9,7 @@ import axios from 'axios'
 import  commenMotheds from "./assets/commen";
 import {store} from './store/store.js'
 import vuescroll from 'vuescroll';
-import ECharts from 'vue-echarts'
+import IEcharts from 'vue-echarts-v3'
 import 'echarts'
 import App from './App'
 import router from './router'
@@ -45,7 +45,7 @@ router.beforeEach((to, from, next) => {
 router.afterEach(route => {
   iView.LoadingBar.finish();
 });
-Vue.component('v-chart', ECharts)
+Vue.component('v-chart', IEcharts)
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

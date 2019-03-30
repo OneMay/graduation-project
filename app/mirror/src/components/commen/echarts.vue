@@ -1,5 +1,5 @@
 <template>
-<v-chart class="echarts" :options="ops" :autoresize="true" :ref="'nn'"showLoading/>
+<v-chart class="echarts" :option="ops" :resizable="true"  />
 </template>
 
 <style>

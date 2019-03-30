@@ -19,7 +19,15 @@
 </template>
 <script>
 export default {
-    name:'NotFound'
+    name:'NotFound',
+    mounted() {
+    this.$nextTick(() => {
+      let body = document.getElementsByTagName('body')[0];
+      let html = document.getElementsByTagName('html')[0];
+      body.style.minWidth = '100%'
+      html.style.minWidth = '100%'
+    });
+  }
 }
 </script>
 <style scoped>
