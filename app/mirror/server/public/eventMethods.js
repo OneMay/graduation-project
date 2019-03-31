@@ -118,6 +118,7 @@ module.exports = {
             {
                 "$match": {
                     system: msg.teamEn,
+                    user: { $nin: [""] },
                     YYMMDD: { $gte: msg.time[0], $lte: msg.time[1] }
                 }
             },
@@ -142,6 +143,7 @@ module.exports = {
             {
                 "$match": {
                     system: msg.teamEn,
+                    user: { $nin: [""] },
                     YYMMDD: { $gte: msg.time[0], $lte: msg.time[1] }
                 }
             },
@@ -167,6 +169,7 @@ module.exports = {
             {
                 "$match": {
                     system: msg.teamEn,
+                    user: { $nin: [""] },
                     YYMMDD: { $gte: msg.time[0], $lte: msg.time[1] }
                 }
             },
@@ -193,6 +196,7 @@ module.exports = {
             {
                 "$match": {
                     system: msg.teamEn,
+                    user: { $nin: [""] },
                     YYMMDD: { $gte: msg.time[0], $lte: msg.time[1] }
                 }
             },
