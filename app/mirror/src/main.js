@@ -37,7 +37,7 @@ Vue.prototype.$vuescrollConfig = {
 router.beforeEach((to, from, next) => {
   iView.LoadingBar.start();
   if (to.meta.title) {
-    document.title = to.meta.title
+    document.title = "魔镜数据-"+to.meta.title
   }
   next();
 });
