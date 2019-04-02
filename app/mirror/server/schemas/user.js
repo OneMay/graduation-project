@@ -20,5 +20,5 @@ const UserSchema = new mongoose.Schema({
         default: 50
     }
 });
-
+UserSchema.index({ mobile: 1},{unique: true});
 module.exports = UserSchema;

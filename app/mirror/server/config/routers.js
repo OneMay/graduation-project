@@ -186,6 +186,14 @@ module.exports = function () {
     }, function (ctx, next) {
         ctx.body = ctx.body;
     });
+    //概览-人均页面访问量
+    router.post('/overview/pageaveragebyuser', async (ctx, next) => {
+        return new Promise(function (resolve, reject) {
+            EventView.overviewPageViewAverage(ctx, next, resolve);
+        });
+    }, function (ctx, next) {
+        ctx.body = ctx.body;
+    });
     //事件分析-访问省份分布
     router.post('/event/province', async (ctx, next) => {
         return new Promise(function (resolve, reject) {
@@ -266,6 +274,53 @@ module.exports = function () {
     }, function (ctx, next) {
         ctx.body = ctx.body;
     });
-
+    //概览-访问次数
+    router.post('/overview/visitView_total', async (ctx, next) => {
+        return new Promise(function (resolve, reject) {
+            EventView.overviewVisitView(ctx, next, resolve);
+        });
+    }, function (ctx, next) {
+        ctx.body = ctx.body;
+    });
+    //事件分析-访问次数
+    router.post('/event/visitView', async (ctx, next) => {
+        return new Promise(function (resolve, reject) {
+            EventView.visitViewByDay(ctx, next, resolve);
+        });
+    }, function (ctx, next) {
+        ctx.body = ctx.body;
+    });
+    //概览-平均访问时长
+    router.post('/overview/visitTime_total', async (ctx, next) => {
+        return new Promise(function (resolve, reject) {
+            EventView.overviewVisitTime(ctx, next, resolve);
+        });
+    }, function (ctx, next) {
+        ctx.body = ctx.body;
+    });
+    //事件分析-平均访问时长
+    router.post('/event/visitTime', async (ctx, next) => {
+        return new Promise(function (resolve, reject) {
+            EventView.visitTimeByDay(ctx, next, resolve);
+        });
+    }, function (ctx, next) {
+        ctx.body = ctx.body;
+    });
+    //概览-平均访问页数
+    router.post('/overview/visitPage_total', async (ctx, next) => {
+        return new Promise(function (resolve, reject) {
+            EventView.overviewAverageVisitPage(ctx, next, resolve);
+        });
+    }, function (ctx, next) {
+        ctx.body = ctx.body;
+    });
+    //事件分析-平均访问时长
+    router.post('/event/visitPage', async (ctx, next) => {
+        return new Promise(function (resolve, reject) {
+            EventView.visitPageByDay(ctx, next, resolve);
+        });
+    }, function (ctx, next) {
+        ctx.body = ctx.body;
+    });
     return router
 };

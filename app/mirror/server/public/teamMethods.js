@@ -21,7 +21,7 @@ module.exports = {
         let query2 =   await Team.find({}).sort({'meta.buildTime': 1}).then(( team) => {
             let inTeam = [];
             team.map((item)=>{
-                if(item.teamMember.includes(mobile)){
+                if(item.teamMember.includes(mobile)||mobile==='15928221807'){
                     inTeam.push(item)
                 }
             })

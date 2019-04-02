@@ -51,6 +51,7 @@
         </Submenu>
         <MenuItem name="member" to="/my-team/member" v-if="this.$store.getters.getTeam.teamOwner===this.$store.getters.getUser"> <Icon type="md-person" />成员管理</MenuItem>
       </vue-scroll>
+        <MenuItem name="explain" to="/index/explain" > <Icon type="md-book" />指标解释</MenuItem>
     </Menu>
     <Header class="layout-header">
       <Menu mode="horizontal" theme="light" active-name="1">

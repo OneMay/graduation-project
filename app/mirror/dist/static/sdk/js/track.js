@@ -277,7 +277,7 @@
         }
     }
 
-
+var previousTime=0,stayTime=0;
     var firstEnter = setInterval(function () {
         if (window.mirrorCommandQueue && JSON.stringify(window.mirrorCommandQueue)!=="{}") {
             postMirrorData.entities.pageTitle = document.title;
@@ -286,7 +286,10 @@
             var data = getNewSomethings()
             postMirrorData.time = data.time;
             postMirrorData.timeFormat = data.timeFormat;
-            postPageView(postMirrorData)
+            var newdata = JSON.parse(JSON.stringify(postMirrorData))
+            newdata.stayTime = stayTime;
+            postPageView(newdata);
+            previousTime = (new Date()).getTime();
             clearInterval(firstEnter)
         }
         setInterval(function () {
@@ -301,7 +304,11 @@
                 postMirrorData.entities.pageUrl = window.location.href;
                 postMirrorData.entities.previousPageUrl = oldLocation;
                 oldLocation = window.location.href;
-                postPageView(postMirrorData)
+                var newdata = JSON.parse(JSON.stringify(postMirrorData));
+                stayTime = ((new Date()).getTime()-previousTime)/1000;
+                newdata.stayTime = stayTime;
+                postPageView(newdata)
+                previousTime = (new Date()).getTime();
             }
         }, 50)
     }, 150)

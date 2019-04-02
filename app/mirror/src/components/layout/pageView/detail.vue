@@ -71,6 +71,15 @@ export default {
         this.loading=false;
         this.data =
           {
+            toolbox: {
+              show: true,
+              feature: {
+                magicType: {
+                  type: ["line", "bar"]
+                },
+                restore: {}
+              }
+            },
               legend: {
                 type: "scroll",
                 show: true,

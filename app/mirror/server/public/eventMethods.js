@@ -118,8 +118,8 @@ module.exports = {
             {
                 "$match": {
                     system: msg.teamEn,
+                    YYMMDD: { $gte: msg.time[0], $lte: msg.time[1] },
                     user: { $nin: [""] },
-                    YYMMDD: { $gte: msg.time[0], $lte: msg.time[1] }
                 }
             },
             {
@@ -143,8 +143,8 @@ module.exports = {
             {
                 "$match": {
                     system: msg.teamEn,
-                    user: { $nin: [""] },
-                    YYMMDD: { $gte: msg.time[0], $lte: msg.time[1] }
+                    YYMMDD: { $gte: msg.time[0], $lte: msg.time[1] },
+                    user: { $nin: [""] }
                 }
             },
             {
@@ -169,8 +169,8 @@ module.exports = {
             {
                 "$match": {
                     system: msg.teamEn,
-                    user: { $nin: [""] },
-                    YYMMDD: { $gte: msg.time[0], $lte: msg.time[1] }
+                    YYMMDD: { $gte: msg.time[0], $lte: msg.time[1] },
+                    user: { $nin: [""] }
                 }
             },
             {
@@ -196,8 +196,8 @@ module.exports = {
             {
                 "$match": {
                     system: msg.teamEn,
-                    user: { $nin: [""] },
-                    YYMMDD: { $gte: msg.time[0], $lte: msg.time[1] }
+                    YYMMDD: { $gte: msg.time[0], $lte: msg.time[1] },
+                    user: { $nin: [""] }
                 }
             },
             {
@@ -308,5 +308,96 @@ module.exports = {
         ])
 
         return query;
-    }
+    },
+    //事件分析-访问次数
+    /**
+     * 
+     * 从访客来到您特产到最终关闭特产的所有页面离开，计为1次访问。若访客连续30分钟没有新开和刷新页面，或者访客关闭了浏览器，则被计算为本次访问结束。
+     */
+    async getVisitView(msg) {
+        let query = await PageView.aggregate([
+            {
+                "$match": {
+                    system: msg.teamEn,
+                    YYMMDD: { $gte: msg.time[0], $lte: msg.time[1] },
+                    user: { $nin: ["", "mirror-anonymous"] }
+                }
+            },
+            {
+                $project: { YYMMDD:"$YYMMDD",user: "$user", time:"$time"  }
+            },
+            { $sort: { "YYMMDD": 1 ,"user":1,"time":1} },
+            { "$limit": 10000000000 }
+        ])
+      
+        let Data = {},result={};
+        query.map(v => {
+            if(Data[v.YYMMDD]){
+                if( Data[v.YYMMDD][v.user]){
+                    (Data[v.YYMMDD][v.user]).push(v.time)
+                }else{
+                    Data[v.YYMMDD][v.user]=[];
+                (Data[v.YYMMDD][v.user]).push(v.time)
+                }
+            }else{
+                Data[v.YYMMDD]={};
+                Data[v.YYMMDD][v.user]=[];
+                (Data[v.YYMMDD][v.user]).push(v.time)
+
+            }
+        });
+    
+       let keys = Object.keys(Data)
+      keys.map(v=>{
+          let userKey =  Object.keys(Data[v]),visitView = 0;
+          
+          userKey.map(value=>{
+            visitView++;
+            let date = null;
+            for(let i = 0;i<(Data[v][value]).length-1;i++){
+                const pos = 30*60*1000;
+                date = (Data[v][value])[i];
+                if(date+pos<(Data[v][value])[i+1]){
+                    visitView++;
+                }
+            }
+          })
+          Object.assign(result, {
+            [v]: parseInt(visitView)
+        })
+      })
+        return result;
+    },
+      //事件分析-平均访问时长
+    /**
+     * 平均访问时长=总访问时长/访问次数
+     * 用户一次访问中涉及到n(n≥1)个页面，其中第n个页面的关闭时间无法收到，则系统将前 (n-1)个页面的平均访问时长作为第n个页面的访问时长;
+     */
+    async getAverageVisitTime(msg) {
+        let query = await PageView.aggregate([
+            {
+                "$match": {
+                    system: msg.teamEn,
+                    YYMMDD: { $gte: msg.time[0], $lte: msg.time[1] },
+                    user: { $nin: ["", "mirror-anonymous"] }
+                }
+            },
+            {
+                $group: {_id:"$YYMMDD", total:{$sum:"$stayTime"} ,num:{$sum:1} }
+            },
+            { $sort: { "_id": 1 } },
+            { "$limit": 10000000000 }
+        ])
+      
+        let Data = {};
+        query.map(v => {
+            Object.assign(Data, {
+                [v._id]: {
+                    total:v.total,
+                    num:v.num
+                }
+            })
+        });
+        return Data;
+    },
 }

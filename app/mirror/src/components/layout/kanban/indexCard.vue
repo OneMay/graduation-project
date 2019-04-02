@@ -1,6 +1,6 @@
 <template>
      <Card
-      style="width:24.5%;text-align: left; margin-left: 5px;height:222px;"
+      style="width:24.5%;text-align: left; margin-left: 5px;height:222px;margin-top: 15px;"
     >
     <Loading v-if="index.loading"  :text="index.text"></Loading>
       <div class="widget-content-container" v-else>
@@ -44,13 +44,15 @@
                           <Icon
                             type="md-arrow-dropup"
                             v-if="index.ratio.trend > 0"
+                            :style="'color:#2dca93'"
                           />
                           <Icon
                             type="md-arrow-dropdown"
                             v-else-if="index.ratio.trend < 0"
+                            :style="'color:#ea4634'"
                           />
-                          <Icon type="ios-pause" style="transform: rotate(90deg)"  v-else/>
-                          <span>{{ index.ratio.number }}</span>
+                          <Icon type="ios-pause" style="transform: rotate(90deg)" :style="'color:#368be4'"  v-else/>
+                          <span :style="'color:'+ (index.ratio.trend > 0?'#2dca93':(index.ratio.trend < 0?'#ea4634':'#368be4'))">{{ index.ratio.number }}</span>
                         </span>
                       </Tooltip>
                       <Tooltip :content="'对比'+lastWeekDay" placement="top-start">
@@ -59,13 +61,15 @@
                           <Icon
                             type="md-arrow-dropup"
                             v-if="index.basis.trend > 0"
+                            :style="'color:#2dca93'"
                           />
                           <Icon
                             type="md-arrow-dropdown"
                             v-else-if="index.basis.trend < 0"
+                            :style="'color:#ea4634'"
                           />
-                          <Icon type="ios-pause" style="transform: rotate(90deg)"  v-else/>
-                          <span>{{ index.basis.number }}</span>
+                          <Icon type="ios-pause" style="transform: rotate(90deg)" :style="'color:#368be4'" v-else/>
+                          <span :style="'color:'+ (index.basis.trend > 0?'#2dca93':(index.basis.trend < 0?'#ea4634':'#368be4'))">{{ index.basis.number }}</span>
                         </span>
                       </Tooltip>
                     </div>

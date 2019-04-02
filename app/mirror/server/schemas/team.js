@@ -33,5 +33,5 @@ const TeamSchema = mongoose.Schema({
         }
     }
 })
-
+TeamSchema.index({ teamZn: 1,teamOwner:1},{unique: true})
 module.exports = TeamSchema;

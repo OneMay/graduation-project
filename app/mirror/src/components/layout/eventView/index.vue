@@ -132,6 +132,15 @@ export default {
       if (data.code === 200) {
         this.loading = false;
         this.data = {
+          toolbox: {
+              show: true,
+              feature: {
+                magicType: {
+                  type: ["line", "bar"]
+                },
+                restore: {}
+              }
+            },
           legend: {
             type: "scroll",
             show: true,

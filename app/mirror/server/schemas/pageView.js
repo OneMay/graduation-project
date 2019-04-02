@@ -9,6 +9,10 @@ const PageViewSchema = mongoose.Schema({
     },
     timeFormat:String,
     time:Number,
+    stayTime:{
+        type:Number,
+        default:0
+    },
     YYMMDD:String,
     hour:Number,
     browserName:String,
@@ -32,5 +36,5 @@ const PageViewSchema = mongoose.Schema({
     province:String,
     city:String
 })
-
+PageViewSchema.index({ system:1,timeFormat: 1,YYMMDD:1,time:1,hour:1,operatingSystem:1,pageUrl:1,user:1,ip:1})
 module.exports = PageViewSchema;

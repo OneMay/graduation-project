@@ -11,9 +11,12 @@
           <div class="widget-topbar">
             <div class="widget-title">
               <div class="title nav">
-                <router-link :to="'/behavior/pageOverView/?&day=30'">
+                <router-link :to="'/behavior/pageOverView/?&day=30'" v-if="detail._id==='visit'">
                   {{ detail.name }}
                 </router-link>
+                <router-link :to="'/behavior/eventOverView/detail?id=' + detail._id+'&name='+detail.name+'&day=30'" v-else>
+                {{ detail.name }}
+              </router-link>
               </div>
               <div class="range">
                 {{ detail.range[0] }}<span>~</span>{{ detail.range[1] }} | 过去 30

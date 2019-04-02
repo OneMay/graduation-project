@@ -65,7 +65,7 @@ export default {
         return result;
     },
     postEventViewData: (data) => {
-        window.mirrorCommandQueueEvent=  window.mirrorCommandQueueEvent||[];
+        window.mirrorCommandQueueEvent = window.mirrorCommandQueueEvent || [];
         window.mirrorCommandQueueEvent.push(data)
     },
     /**
@@ -405,6 +405,30 @@ export default {
         return result;
     },
     /**
+    * 概览-人均页面访问量
+    */
+    getOverViewAverageUserPageView: async (ctx, params) => {
+        ctx.$Loading.start();
+        let result = await ctx.$http
+            .post("api/overview/pageaveragebyuser", params)
+            .then(res => {
+                let data = commenMotheds.parserDataToJson(res.data);
+                ctx.$Loading.finish();
+                return data;
+            })
+            .catch(err => {
+                console.log(err);
+                let data = {
+                    code: 4444,
+                    data: null,
+                    message: '好像出错了哟o(╥﹏╥)o'
+                }
+                ctx.$Loading.error();
+                return data;
+            });
+        return result;
+    },
+    /**
     * 事件分析-访问省份分布
     */
     getProvinceData: async (ctx, params) => {
@@ -627,6 +651,150 @@ export default {
         ctx.$Loading.start();
         let result = await ctx.$http
             .post("api/data/sdk_event_data", params)
+            .then(res => {
+                let data = commenMotheds.parserDataToJson(res.data);
+                ctx.$Loading.finish();
+                return data;
+            })
+            .catch(err => {
+                console.log(err);
+                let data = {
+                    code: 4444,
+                    data: null,
+                    message: '好像出错了哟o(╥﹏╥)o'
+                }
+                ctx.$Loading.error();
+                return data;
+            });
+        return result;
+    },
+    /**
+    * 概览-访问次数
+    */
+    getvisitViewTotalData: async (ctx, params) => {
+        ctx.$Loading.start();
+        let result = await ctx.$http
+            .post("api/overview/visitView_total", params)
+            .then(res => {
+                let data = commenMotheds.parserDataToJson(res.data);
+                ctx.$Loading.finish();
+                return data;
+            })
+            .catch(err => {
+                console.log(err);
+                let data = {
+                    code: 4444,
+                    data: null,
+                    message: '好像出错了哟o(╥﹏╥)o'
+                }
+                ctx.$Loading.error();
+                return data;
+            });
+        return result;
+    },
+    /**
+    * 事件分析-访问次数
+    */
+    getvisitViewData: async (ctx, params) => {
+        ctx.$Loading.start();
+        let result = await ctx.$http
+            .post("api/event/visitView", params)
+            .then(res => {
+                let data = commenMotheds.parserDataToJson(res.data);
+                ctx.$Loading.finish();
+                return data;
+            })
+            .catch(err => {
+                console.log(err);
+                let data = {
+                    code: 4444,
+                    data: null,
+                    message: '好像出错了哟o(╥﹏╥)o'
+                }
+                ctx.$Loading.error();
+                return data;
+            });
+        return result;
+    },
+    /**
+    * 概览-平均访问时长
+    */
+    getvisitTimeTotalData: async (ctx, params) => {
+        ctx.$Loading.start();
+        let result = await ctx.$http
+            .post("api/overview/visitTime_total", params)
+            .then(res => {
+                let data = commenMotheds.parserDataToJson(res.data);
+                ctx.$Loading.finish();
+                return data;
+            })
+            .catch(err => {
+                console.log(err);
+                let data = {
+                    code: 4444,
+                    data: null,
+                    message: '好像出错了哟o(╥﹏╥)o'
+                }
+                ctx.$Loading.error();
+                return data;
+            });
+        return result;
+    },
+    /**
+    * 事件分析-平均访问时长
+    */
+    getvisitTimeData: async (ctx, params) => {
+        ctx.$Loading.start();
+        let result = await ctx.$http
+            .post("api/event/visitTime", params)
+            .then(res => {
+                let data = commenMotheds.parserDataToJson(res.data);
+                ctx.$Loading.finish();
+                return data;
+            })
+            .catch(err => {
+                console.log(err);
+                let data = {
+                    code: 4444,
+                    data: null,
+                    message: '好像出错了哟o(╥﹏╥)o'
+                }
+                ctx.$Loading.error();
+                return data;
+            });
+        return result;
+    },
+    /**
+    * 概览-平均访问页数
+    */
+    getvisitPageTotalData: async (ctx, params) => {
+        ctx.$Loading.start();
+        let result = await ctx.$http
+            .post("api/overview/visitPage_total", params)
+            .then(res => {
+                let data = commenMotheds.parserDataToJson(res.data);
+                ctx.$Loading.finish();
+                return data;
+            })
+            .catch(err => {
+                console.log(err);
+                let data = {
+                    code: 4444,
+                    data: null,
+                    message: '好像出错了哟o(╥﹏╥)o'
+                }
+                ctx.$Loading.error();
+                return data;
+            });
+        return result;
+    },
+    /**
+    * 事件分析-平均访问页数
+    */
+    getvisitPageData: async (ctx, params) => {
+        ctx.$Loading.start();
+        let result = await ctx.$http
+            .post("api/event/visitPage", params)
             .then(res => {
                 let data = commenMotheds.parserDataToJson(res.data);
                 ctx.$Loading.finish();

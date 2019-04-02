@@ -64,6 +64,7 @@
     
     }
     function  div(arg1, arg2) {
+        arg1=arg1!==0?arg1:1
         let arg =arg2;
         arg2=arg1;
         arg1=arg;

@@ -34,5 +34,5 @@ const EventViewSchema = mongoose.Schema({
     province:String,
     city:String
 })
-
+EventViewSchema.index({ system:1,timeFormat: 1,YYMMDD:1,time:1,hour:1,operatingSystem:1,pageUrl:1,user:1,ip:1,category:1,action:1})
 module.exports = EventViewSchema;

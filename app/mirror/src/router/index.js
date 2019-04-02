@@ -16,6 +16,7 @@ import PageData from '@/components/layout/constantlyData/pageData'
 import EventData from '@/components/layout/constantlyData/eventData'
 import Member from '@/components/layout/team/member'
 import Userguidance from '@/components/userguidance'
+import Explain from '@/components/layout/explain'
 
 Vue.use(Router)
 function beforeEnter (to, from, next){
@@ -107,6 +108,9 @@ export default new Router({
         }},
         {path:'/my-team/member',component:Member,beforeEnter:beforeEnter,meta: {
           title: '成员管理'
+        }},
+        {path:'/index/explain',component:Explain,beforeEnter:beforeEnter,meta: {
+          title: '指标解释'
         }}
       ] 
     },

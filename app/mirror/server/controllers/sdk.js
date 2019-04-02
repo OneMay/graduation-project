@@ -32,6 +32,7 @@ module.exports = {
                     eventType: msg.eventType,
                     timeFormat: msg.timeFormat,
                     time: msg.time,
+                    stayTime:msg.stayTime,
                     YYMMDD: moment(msg.timeFormat).format('YYYY-MM-DD'),
                     hour: moment(msg.timeFormat).hour(),
                     browserName: msg.entities.browserName,
