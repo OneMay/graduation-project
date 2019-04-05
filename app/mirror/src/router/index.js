@@ -22,7 +22,7 @@ Vue.use(Router)
 function beforeEnter (to, from, next){
   let user,team;
   if(user =commenMotheds.getCookie('userInfo')){
-    if(to.path==='/team/iteam'||to.path==='/team/creatteam'){
+    if(to.path==='/team/iteam'||to.path==='/team/creatteam'||to.path==='/index/explain'){
       next();
     }
     else{

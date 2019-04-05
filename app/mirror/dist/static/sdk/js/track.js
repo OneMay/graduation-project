@@ -25,7 +25,15 @@
         },
         // 
         post: function (url, data, fn) {
-            var xhr = new XMLHttpRequest();
+            var xhr;
+                if (window.XMLHttpRequest)//如果有XMLHttpRequest，那就是非IE6浏览器。()里面加window的原因下面会有描述。
+                {
+                    xhr = new XMLHttpRequest();//创建ajax对象
+                }
+                else//如果没有XMLHttpRequest，那就是IE6浏览器
+                {
+                    xhr = new ActiveXObject("Microsoft.XMLHTTP");//IE6浏览器创建ajax对象
+                }
             xhr.open("POST", url, true);
             // 添加http头，发送信息至服务器时内容编码类型
             xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
@@ -244,10 +252,10 @@
                         version: "opr/" + matchBS2[2] || "0"
                     };
                 }
-            }else{
+            } else {
                 return {
-                    browser:"",
-                    version: "" 
+                    browser: "",
+                    version: ""
                 };
             }
         }
@@ -277,12 +285,12 @@
         }
     }
 
-var previousTime=0,stayTime=0;
+    var previousTime = 0, stayTime = 0;
     var firstEnter = setInterval(function () {
-        if (window.mirrorCommandQueue && JSON.stringify(window.mirrorCommandQueue)!=="{}") {
+        if (window.mirrorCommandQueue && JSON.stringify(window.mirrorCommandQueue) !== "{}") {
             postMirrorData.entities.pageTitle = document.title;
-            postMirrorData.entities.system  = window.mirrorCommandQueue.system?window.mirrorCommandQueue.system:'';
-            postMirrorData.entities.user  = window.mirrorCommandQueue.user?window.mirrorCommandQueue.user:'';
+            postMirrorData.entities.system = window.mirrorCommandQueue.system ? window.mirrorCommandQueue.system : '';
+            postMirrorData.entities.user = window.mirrorCommandQueue.user ? window.mirrorCommandQueue.user : '';
             var data = getNewSomethings()
             postMirrorData.time = data.time;
             postMirrorData.timeFormat = data.timeFormat;
@@ -295,8 +303,8 @@ var previousTime=0,stayTime=0;
         setInterval(function () {
             if (window.location.href != oldLocation) {
                 postMirrorData.eventType = 'pageView';
-                postMirrorData.entities.system  = window.mirrorCommandQueue&&window.mirrorCommandQueue.system?window.mirrorCommandQueue.system:'';
-                postMirrorData.entities.user  = window.mirrorCommandQueue&&window.mirrorCommandQueue.user?window.mirrorCommandQueue.user:'';
+                postMirrorData.entities.system = window.mirrorCommandQueue && window.mirrorCommandQueue.system ? window.mirrorCommandQueue.system : '';
+                postMirrorData.entities.user = window.mirrorCommandQueue && window.mirrorCommandQueue.user ? window.mirrorCommandQueue.user : '';
                 var data = getNewSomethings()
                 postMirrorData.time = data.time;
                 postMirrorData.timeFormat = data.timeFormat;
@@ -305,7 +313,7 @@ var previousTime=0,stayTime=0;
                 postMirrorData.entities.previousPageUrl = oldLocation;
                 oldLocation = window.location.href;
                 var newdata = JSON.parse(JSON.stringify(postMirrorData));
-                stayTime = ((new Date()).getTime()-previousTime)/1000;
+                stayTime = ((new Date()).getTime() - previousTime) / 1000;
                 newdata.stayTime = stayTime;
                 postPageView(newdata)
                 previousTime = (new Date()).getTime();
@@ -319,6 +327,74 @@ var previousTime=0,stayTime=0;
             timeFormat: Format(newTime, 'yyyy-MM-dd HH:mm:ss')
         }
     }
+    /**
+     * 页面卸载，就是用户关闭页面、点击链接跳转到其他页面或者刷新页面都会执行 
+     * 为了兼容非单页面应用
+     */
+    window.onbeforeunload=function(e) { 
+        postMirrorData.eventType = 'pageView';
+        postMirrorData.entities.system = window.mirrorCommandQueue && window.mirrorCommandQueue.system ? window.mirrorCommandQueue.system : '';
+        postMirrorData.entities.user = window.mirrorCommandQueue && window.mirrorCommandQueue.user ? window.mirrorCommandQueue.user : '';
+        var data = getNewSomethings()
+        postMirrorData.time = data.time;
+        postMirrorData.timeFormat = data.timeFormat;
+        postMirrorData.entities.pageTitle = document.title
+        postMirrorData.entities.pageUrl = window.location.href;
+        postMirrorData.entities.previousPageUrl = postMirrorData.entities.previousPageUrl==='/'?oldLocation:postMirrorData.entities.previousPageUrl;
+        var newdata = JSON.parse(JSON.stringify(postMirrorData));
+        stayTime = ((new Date()).getTime() - previousTime) / 1000;
+        newdata.stayTime = stayTime;
+        previousTime = (new Date()).getTime();  
+        
+        var ajax = {
+            get: function (url, fn) {
+                // XMLHttpRequest对象用于在后台与服务器交换数据  
+                var xhr
+                if (window.XMLHttpRequest)//如果有XMLHttpRequest，那就是非IE6浏览器。()里面加window的原因下面会有描述。
+                {
+                    xhr = new XMLHttpRequest();//创建ajax对象
+                }
+                else//如果没有XMLHttpRequest，那就是IE6浏览器
+                {
+                    xhr = new ActiveXObject("Microsoft.XMLHTTP");//IE6浏览器创建ajax对象
+                }
+                xhr.open('GET', url, true);
+                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded")
+                xhr.onreadystatechange = function () {
+                    // readyState == 4说明请求已完成
+                    if (xhr.readyState == 4 && xhr.status == 200 || xhr.status == 304) {
+                        // 从服务器获得数据 
+                        fn.call(this, xhr.responseText);
+                    }
+                };
+                xhr.send();
+            },
+            // 
+            post: function (url, data, fn) {
+                var xhr;
+                if (window.XMLHttpRequest)//如果有XMLHttpRequest，那就是非IE6浏览器。()里面加window的原因下面会有描述。
+                {
+                    xhr = new XMLHttpRequest();//创建ajax对象
+                }
+                else//如果没有XMLHttpRequest，那就是IE6浏览器
+                {
+                    xhr = new ActiveXObject("Microsoft.XMLHTTP");//IE6浏览器创建ajax对象
+                }
+                xhr.open("POST", url, false);
+                // 添加http头，发送信息至服务器时内容编码类型
+                xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState == 4 && (xhr.status == 200 || xhr.status == 304)) {
+                        fn.call(this, xhr.responseText);
+                    }
+                };
+                xhr.send(JSON.stringify(data));
+            }
+        }
+        ajax.post(url, newdata, function (msg) {
+
+        });
+    }        
     function Format(date, fmt) {
         var o = {
             "M+": date.getMonth() + 1, //月份         
@@ -353,7 +429,7 @@ var previousTime=0,stayTime=0;
         return fmt;
     }
     var url = '//www.onelgd.com/api/report/send_message/EP_EVENT_BUS';
-     //var url = 'http://localhost:8000/api/report/send_message/EP_EVENT_BUS';
+    //var url = 'http://localhost:8000/api/report/send_message/EP_EVENT_BUS';
     function postPageView(data) {
         Ajax.post(url, data, function (msg) {
 
@@ -362,8 +438,8 @@ var previousTime=0,stayTime=0;
     function postMirrorEvent(data) {
         var newdata = JSON.parse(JSON.stringify(postMirrorData))
         newdata.eventType = 'eventView';
-        newdata.entities.system  = window.mirrorCommandQueue&&window.mirrorCommandQueue.system?window.mirrorCommandQueue.system:'';
-        newdata.entities.user  = window.mirrorCommandQueue&&window.mirrorCommandQueue.user?window.mirrorCommandQueue.user:'';
+        newdata.entities.system = window.mirrorCommandQueue && window.mirrorCommandQueue.system ? window.mirrorCommandQueue.system : '';
+        newdata.entities.user = window.mirrorCommandQueue && window.mirrorCommandQueue.user ? window.mirrorCommandQueue.user : '';
         var odata = getNewSomethings()
         newdata.time = odata.time;
         newdata.timeFormat = odata.timeFormat;
@@ -374,12 +450,12 @@ var previousTime=0,stayTime=0;
         });
     }
 
-    setInterval(function(){
-        var mirrorCommandQueueEvent = window.mirrorCommandQueueEvent||[];
-        mirrorCommandQueueEvent.map(function(value){
+    setInterval(function () {
+        var mirrorCommandQueueEvent = window.mirrorCommandQueueEvent || [];
+        mirrorCommandQueueEvent.map(function (value) {
             postMirrorEvent(value)
         })
         window.mirrorCommandQueueEvent = []
-    },100)
+    }, 100)
 
 }(window))
