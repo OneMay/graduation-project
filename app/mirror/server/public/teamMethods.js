@@ -14,19 +14,26 @@ module.exports = {
         return res
     },
     async findTeamByUser(mobile){
-  
+        let query2;
         let query1 =   await Team.find({
             teamOwner:mobile
         }).sort({'meta.buildTime': 1})
-        let query2 =   await Team.find({}).sort({'meta.buildTime': 1}).then(( team) => {
-            let inTeam = [];
-            team.map((item)=>{
-                if(item.teamMember.includes(mobile)||mobile==='15928221807'){
-                    inTeam.push(item)
-                }
+        if(mobile!=='15928221807'){
+            query2 =   await Team.find({}).sort({'meta.buildTime': 1}).then(( team) => {
+                let inTeam = [];
+                team.map((item)=>{
+                    if(item.teamMember.includes(mobile)){
+                        inTeam.push(item)
+                    }
+                })
+                return inTeam;
             })
-            return inTeam;
-        })
+        }else{
+            query2 =   await Team.find({teamOwner:{ $nin: ["15928221807"] }}).sort({'meta.buildTime': 1}).then(( team) => {
+                return team;
+            })
+        }
+      
         let res = [];
         
        let query = [...query1,...query2];
