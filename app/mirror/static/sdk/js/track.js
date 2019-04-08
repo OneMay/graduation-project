@@ -285,7 +285,7 @@
         }
     }
 
-    var previousTime = 0, stayTime = 0;
+    var previousTime = (new Date()).getTime(), stayTime = 0;
     var firstEnter = setInterval(function () {
         if (window.mirrorCommandQueue && JSON.stringify(window.mirrorCommandQueue) !== "{}") {
             postMirrorData.entities.pageTitle = document.title;
@@ -428,7 +428,7 @@
         }
         return fmt;
     }
-    var url = '//www.onelgd.com/api/report/send_message/EP_EVENT_BUS';
+    var url = 'http://106.13.107.119:8000/api/report/send_message/EP_EVENT_BUS';
     //var url = 'http://localhost:8000/api/report/send_message/EP_EVENT_BUS';
     function postPageView(data) {
         Ajax.post(url, data, function (msg) {

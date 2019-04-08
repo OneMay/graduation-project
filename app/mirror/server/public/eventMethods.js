@@ -132,7 +132,7 @@ module.exports = {
         let Data = query.map(v => {
             return {
                 value: v.num_tutorial,
-                name: v._id
+                name: v._id||'未知'
             }
         });
         return Data;
@@ -158,7 +158,7 @@ module.exports = {
         let Data = query.map(v => {
             return {
                 value: v.num_tutorial,
-                name: v._id
+                name: v._id||'未知'
             }
         });
         return Data;
