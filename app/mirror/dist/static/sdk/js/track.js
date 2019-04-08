@@ -428,8 +428,8 @@
         }
         return fmt;
     }
-    var url = 'http://106.13.107.119:8000/api/report/send_message/EP_EVENT_BUS';
-    //var url = 'http://localhost:8000/api/report/send_message/EP_EVENT_BUS';
+    //var url = 'http://106.13.107.119:8000/api/report/send_message/EP_EVENT_BUS';
+    var url = 'http://106.13.107.119:8080/api/report/send_message/EP_EVENT_BUS';
     function postPageView(data) {
         Ajax.post(url, data, function (msg) {
 
