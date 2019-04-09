@@ -314,6 +314,7 @@
                 oldLocation = window.location.href;
                 var newdata = JSON.parse(JSON.stringify(postMirrorData));
                 stayTime = ((new Date()).getTime() - previousTime) / 1000;
+                stayTime>30*60?stayTime=0:''
                 newdata.stayTime = stayTime;
                 postPageView(newdata)
                 previousTime = (new Date()).getTime();
@@ -343,6 +344,7 @@
         postMirrorData.entities.previousPageUrl = postMirrorData.entities.previousPageUrl==='/'?oldLocation:postMirrorData.entities.previousPageUrl;
         var newdata = JSON.parse(JSON.stringify(postMirrorData));
         stayTime = ((new Date()).getTime() - previousTime) / 1000;
+        stayTime>30*60?stayTime=0:''
         newdata.stayTime = stayTime;
         previousTime = (new Date()).getTime();  
         
@@ -428,8 +430,8 @@
         }
         return fmt;
     }
-    //var url = 'http://106.13.107.119:8000/api/report/send_message/EP_EVENT_BUS';
     var url = 'http://106.13.107.119:8080/api/report/send_message/EP_EVENT_BUS';
+    //var url = 'http://localhost:8000/api/report/send_message/EP_EVENT_BUS';
     function postPageView(data) {
         Ajax.post(url, data, function (msg) {
 
