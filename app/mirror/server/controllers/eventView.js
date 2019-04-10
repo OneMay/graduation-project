@@ -617,7 +617,7 @@ module.exports = {
             let sums = commen.curryAdd(seriesVTData[index],mul) 
             seriesVTData[index] =   commen.currytoDecimal(2, commen.curryDiv(value,sums) ) 
         })
-        const sum = seriesVTData.reduce((total, currentValue) =>parseFloat( total) + parseFloat(currentValue), 0);
+        const sum = seriesVTData.reduce((total, currentValue) =>commen.curryAdd(parseFloat( total),parseFloat(currentValue)), 0);
         const averageFunc = commen.compose(commen.currytoDecimal(2), commen.curryDiv);
         const average = averageFunc(number, sum);
         let visitTimeData = {
