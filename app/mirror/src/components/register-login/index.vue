@@ -94,8 +94,8 @@
       <div slot="footer" style="text-align:center">
         <p>
           @2019 魔镜数据
-          <a href="http://www.miitbeian.gov.cn" target="_blank" class="beian"
-            >蜀ICP备17011354号</a
+          <a href="http://www.beian.miit.gov.cn" target="_blank" class="beian"
+            >蜀ICP备19011391号-1</a
           >
         </p>
       </div>

@@ -284,7 +284,7 @@
             version: '1.0.1'
         }
     }
-
+    //单页面应用
     var previousTime = (new Date()).getTime(), stayTime = 0;
     var firstEnter = setInterval(function () {
         if (window.mirrorCommandQueue && JSON.stringify(window.mirrorCommandQueue) !== "{}") {
@@ -430,7 +430,7 @@
         }
         return fmt;
     }
-    var url = 'http://106.13.107.119:8080/api/report/send_message/EP_EVENT_BUS';
+    var url = '//www.onelgd.com/api/report/send_message/EP_EVENT_BUS';
     //var url = 'http://localhost:8000/api/report/send_message/EP_EVENT_BUS';
     function postPageView(data) {
         Ajax.post(url, data, function (msg) {
