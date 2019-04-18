@@ -26,14 +26,14 @@
         // 
         post: function (url, data, fn) {
             var xhr;
-                if (window.XMLHttpRequest)//如果有XMLHttpRequest，那就是非IE6浏览器。()里面加window的原因下面会有描述。
-                {
-                    xhr = new XMLHttpRequest();//创建ajax对象
-                }
-                else//如果没有XMLHttpRequest，那就是IE6浏览器
-                {
-                    xhr = new ActiveXObject("Microsoft.XMLHTTP");//IE6浏览器创建ajax对象
-                }
+            if (window.XMLHttpRequest)//如果有XMLHttpRequest，那就是非IE6浏览器。()里面加window的原因下面会有描述。
+            {
+                xhr = new XMLHttpRequest();//创建ajax对象
+            }
+            else//如果没有XMLHttpRequest，那就是IE6浏览器
+            {
+                xhr = new ActiveXObject("Microsoft.XMLHTTP");//IE6浏览器创建ajax对象
+            }
             xhr.open("POST", url, true);
             // 添加http头，发送信息至服务器时内容编码类型
             xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
@@ -314,7 +314,7 @@
                 oldLocation = window.location.href;
                 var newdata = JSON.parse(JSON.stringify(postMirrorData));
                 stayTime = ((new Date()).getTime() - previousTime) / 1000;
-                stayTime>30*60?stayTime=0:''
+                stayTime > 30 * 60 ? stayTime = 0 : ''
                 newdata.stayTime = stayTime;
                 postPageView(newdata)
                 previousTime = (new Date()).getTime();
@@ -332,7 +332,7 @@
      * 页面卸载，就是用户关闭页面、点击链接跳转到其他页面或者刷新页面都会执行 
      * 为了兼容非单页面应用
      */
-    window.onbeforeunload=function(e) { 
+    window.onbeforeunload = function (e) {
         postMirrorData.eventType = 'pageView';
         postMirrorData.entities.system = window.mirrorCommandQueue && window.mirrorCommandQueue.system ? window.mirrorCommandQueue.system : '';
         postMirrorData.entities.user = window.mirrorCommandQueue && window.mirrorCommandQueue.user ? window.mirrorCommandQueue.user : '';
@@ -341,13 +341,13 @@
         postMirrorData.timeFormat = data.timeFormat;
         postMirrorData.entities.pageTitle = document.title
         postMirrorData.entities.pageUrl = window.location.href;
-        postMirrorData.entities.previousPageUrl = postMirrorData.entities.previousPageUrl==='/'?oldLocation:postMirrorData.entities.previousPageUrl;
+        postMirrorData.entities.previousPageUrl = postMirrorData.entities.previousPageUrl === '/' ? oldLocation : postMirrorData.entities.previousPageUrl;
         var newdata = JSON.parse(JSON.stringify(postMirrorData));
         stayTime = ((new Date()).getTime() - previousTime) / 1000;
-        stayTime>30*60?stayTime=0:''
+        stayTime > 30 * 60 ? stayTime = 0 : ''
         newdata.stayTime = stayTime;
-        previousTime = (new Date()).getTime();  
-        
+        previousTime = (new Date()).getTime();
+
         var ajax = {
             get: function (url, fn) {
                 // XMLHttpRequest对象用于在后台与服务器交换数据  
@@ -396,7 +396,7 @@
         ajax.post(url, newdata, function (msg) {
 
         });
-    }        
+    }
     function Format(date, fmt) {
         var o = {
             "M+": date.getMonth() + 1, //月份         
@@ -430,7 +430,7 @@
         }
         return fmt;
     }
-    var url = '//www.onelgd.com/api/report/send_message/EP_EVENT_BUS';
+    var url = 'https://www.onelgd.com/api/report/send_message/EP_EVENT_BUS';
     //var url = 'http://localhost:8000/api/report/send_message/EP_EVENT_BUS';
     function postPageView(data) {
         Ajax.post(url, data, function (msg) {
