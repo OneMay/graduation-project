@@ -27,7 +27,7 @@
     "less": "^3.9.0",
     "less-loader": "^4.1.0",
     "moment": "^2.24.0",
-    "mongoose": "^5.4.17",
+    "mongoose": "^5.7.5",
     "vue": "^2.5.2",
     "vue-concise-slider": "^3.3.8",
     "vue-echarts-v3": "^2.0.1",
