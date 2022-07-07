@@ -26,7 +26,7 @@
     "koa2-cors": "^2.0.6",
     "less": "^3.9.0",
     "less-loader": "^4.1.0",
-    "moment": "^2.24.0",
+    "moment": "^2.29.4",
     "mongoose": "^5.4.17",
     "vue": "^2.5.2",
     "vue-concise-slider": "^3.3.8",
